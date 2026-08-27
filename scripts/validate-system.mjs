@@ -31,6 +31,7 @@ const [tokens,registry,css,generator,pptx,schema]=await Promise.all([
 const callout=registry.components?.callout||{};
 const workflow=registry.components?.workflow||{};
 const step=registry.components?.step||{};
+const teamLayout=registry.layouts?.team||{};
 check(tokens.gradients?.calloutAccent==='linear-gradient(90deg,rgba(160,169,254,.16) 0%,rgba(46,238,238,.16) 47.9%,rgba(147,252,184,.16) 100%)','Token gradients.calloutAccent drifted from the registered 16% gradient.');
 check(callout.accentPaintOpacity===0.16,'Callout accentPaintOpacity must be 0.16.');
 check(callout.blurPx===20,'Callout blurPx must be 20.');
@@ -67,6 +68,17 @@ check(pptx.includes('color:c.stepNumber'),'PPTX Step numbers must use the regist
 check(pptx.includes('fitOneLineFontSize(item.title,stepWidth,44,30)'),'PPTX workflow titles must use the one-line fitter.');
 check(pptx.includes('approximateTextWidth(metric,40)*1.35'),'PPTX Callout lead width must include the rendering safety factor.');
 check(pptx.includes("height=hasMetric||tone==='accent'?88:70"),'PPTX Callout height contract drifted.');
+
+check(JSON.stringify(teamLayout.counts)==='[3]','Team must require exactly three content items.');
+check(JSON.stringify(teamLayout.structure)==='["three-content-items","image"]','Team structure must keep three content items above one image.');
+check(teamLayout.callout===false&&teamLayout.source===false,'Team must not accept a Callout or Source footer.');
+check(teamLayout.image?.size?.[0]===1700&&teamLayout.image?.size?.[1]===340&&teamLayout.image?.position==='below-items','Team image must stay in the registered 1700×340 lower slot.');
+check(tokens.layout?.image?.team?.width===1700&&tokens.layout?.image?.team?.height===340,'Team image tokens drifted from 1700×340.');
+check(compactCss.includes('.team-point-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));'),'Runtime Team must render a three-column content row.');
+check(compactCss.includes('.team-media{width:1700px;height:340px;'),'Runtime Team image geometry drifted from 1700×340.');
+check(generator.includes("team:[3]"),'Generator must reject Team slides that do not contain exactly three items.');
+check(generator.includes("team uses three content items above one image and does not support a Callout"),'Generator must reject Team Callouts.');
+check(generator.includes("team does not render a Source footer"),'Generator must reject Team Source footers.');
 
 const slideProperties=schema.$defs?.slide?.properties||{};
 check(schema.$defs?.slide?.additionalProperties===false,'Slide schema must reject unknown fields.');

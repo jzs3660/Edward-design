@@ -127,11 +127,20 @@ function addWorkflow(slide,s,y){
 }
 function addComparison(slide,s,y){const c=colors[s.theme],positions=gridPositions(2,y,380,30);for(let i=0;i<2;i++){const p=positions[i],item=s.items[i];addBox(slide,p,item.tone==='accent'?'linear(0deg,#F3B6FF/16 0%,#6DE4F9/16 51%,#77FAB4/16 100%)':c.surface,{style:'solid',fill:item.tone==='accent'?'none':c.hair,width:item.tone==='accent'?0:1},24,'comparison-card');let ty=p.top+36;if(item.label)addText(slide,item.label,{left:p.left+38,top:ty,width:p.width-76,height:30},{fontSize:18,bold:true,color:s.theme==='dark'?'#9AFFF8':'#008C94'});ty+=40;addText(slide,item.title,{left:p.left+38,top:ty,width:p.width-76,height:70},{fontFamily:fonts.item,fontSize:50,color:c.primary});ty+=72;if(item.body){addText(slide,item.body,{left:p.left+38,top:ty,width:p.width-76,height:55},{fontSize:22,color:c.secondary});ty+=62}for(const point of item.points||[]){addText(slide,`• ${point}`,{left:p.left+38,top:ty,width:p.width-76,height:36},{fontSize:20,color:c.secondary});ty+=42}}}
 async function addImageCards(slide,s,y){const c=colors[s.theme],n=s.items.length,positions=gridPositions(n,y,390,30);for(let i=0;i<n;i++){const p=positions[i],item=s.items[i],image=normalizeImage(item.image);await addImage(slide,image?.src,{left:p.left,top:p.top,width:p.width,height:230},{fit:image?.fit||'cover',radius:24,alt:image?.alt||''});addText(slide,item.title,{left:p.left,top:p.top+246,width:p.width,height:62},{fontFamily:fonts.item,fontSize:42,color:c.primary});addText(slide,item.body,{left:p.left,top:p.top+310,width:p.width,height:70},{fontSize:21,color:c.secondary})}}
-async function addTeam(slide,s,y){const image=normalizeImage(s.image);await addImage(slide,image?.src,{left:110,top:y,width:1700,height:480},{fit:image?.fit||'cover',alt:image?.alt||''})}
+async function addTeam(slide,s,y){
+  const c=colors[s.theme],positions=gridPositions(3,y,145,60);
+  for(let i=0;i<3;i++){
+    const p=positions[i],item=s.items[i];let ty=p.top;
+    if(item.label){addText(slide,item.label,{left:p.left,top:ty,width:p.width,height:27},{fontSize:18,bold:true,color:s.theme==='dark'?'#1EEAEA':'#008089',name:'team-label'});ty+=31}
+    addText(slide,item.title,{left:p.left,top:ty,width:p.width,height:52},{fontFamily:fonts.item,fontSize:40,color:c.primary,name:'team-title'});
+    addText(slide,item.body,{left:p.left,top:ty+54,width:p.width,height:58},{fontSize:19,color:c.secondary,name:'team-body'});
+  }
+  const image=normalizeImage(s.image);await addImage(slide,image?.src,{left:110,top:y+177,width:1700,height:340},{fit:image?.fit||'cover',alt:image?.alt||''});
+}
 async function addSplit(slide,s,y){const c=colors[s.theme],image=normalizeImage(s.image),imageLeft=s.imageSide!=='right',imageX=imageLeft?110:1050,textX=imageLeft?950:110;await addImage(slide,image?.src,{left:imageX,top:y,width:760,height:428},{fit:image?.fit||'cover',radius:24,alt:image?.alt||''});addText(slide,s.contentTitle||s.title,{left:textX,top:y+38,width:760,height:130},{fontFamily:fonts.item,fontSize:52,color:c.primary});addText(slide,s.body||s.subtitle||'',{left:textX,top:y+190,width:760,height:140},{fontSize:25,color:c.secondary})}
 function addCallout(slide,s){
   if(!s.callout)return;
-  const c=colors[s.theme],tallContent=['split-image-text','team','image-cards'].includes(s.type),y=s.type==='team'?890:(!s.source&&tallContent?938:875),metric=s.callout.metric||s.callout.label,hasMetric=Boolean(metric),tone=s.callout.tone==='accent'?'accent':'default',height=hasMetric||tone==='accent'?88:70;
+  const c=colors[s.theme],tallContent=['split-image-text','image-cards'].includes(s.type),y=!s.source&&tallContent?938:875,metric=s.callout.metric||s.callout.label,hasMetric=Boolean(metric),tone=s.callout.tone==='accent'?'accent':'default',height=hasMetric||tone==='accent'?88:70;
   const fill=tone==='accent'?'linear(0deg,#A0A9FE/16 0%,#2EEEEE/16 48%,#93FCB8/16 100%)':s.theme==='dark'?'#FFFFFF/6':'#111114/4';
   addBox(slide,{left:110,top:y,width:1700,height},fill,'none',16,'callout');
   addBox(slide,{left:130,top:y+(height-12)/2,width:12,height:12},s.theme==='dark'?'#1EEAEA':'#008089','none',6,'callout-bullet');

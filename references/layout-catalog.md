@@ -39,7 +39,7 @@ Source? (one line, lower left)
 | Workflow | 3 or 4 steps | fixed 1700px row with arrows/dividers | yes | yes | base / elements-inner |
 | Comparison | 2 states | two equal cards | yes | yes | base / atmosphere |
 | Image cards | 2 or 3 | equal 16:10 media cards | yes | yes | base / elements-inner |
-| Team | one 1700×480 masked image | image only in content-main | yes | yes | elements-inner / atmosphere |
+| Team | 3 content items + one 1700×340 masked image | three columns above image | no | no | elements-inner / atmosphere |
 | Split image + text | image left/right | 760×428 media + 80px gap + text | yes | yes | base / elements-inner / atmosphere |
 | Full bleed | one hero image | 1920×1080 image + wash | yes, sparingly | yes | supplied image |
 
@@ -153,11 +153,10 @@ Use only for an actual ordered sequence.
 ## Team
 
 - Page title is one line: maximum 30 English characters or 12 Chinese characters.
-- Content-main contains exactly one 1700×480 radial-alpha masked image.
+- Content-main contains exactly three left-aligned content items and one 1700×340 radial-alpha masked image below them.
 - Replace only the source image; preserve mask size and geometry.
-- Do not add `teamTitle`, `body`, a caption row, or second-column supporting copy.
-- Optional supporting statement uses the body-only or labeled Callout below the image.
-- Optional Source records image provenance/consent.
+- Do not add a Callout, Source footer, caption row, or second text block below the image.
+- Put image provenance/consent in speaker notes.
 - Prefer a current, consented photo showing real collaboration or operating context.
 
 ## Split image + text
@@ -179,7 +178,7 @@ Use only for an actual ordered sequence.
 
 ## Callout compatibility
 
-Callout is compatible with Points, Cards, Metrics, Workflow, Comparison, Image cards, Team, Split image + text, and Full bleed. It is never a page type.
+Callout is compatible with Points, Cards, Metrics, Workflow, Comparison, Image cards, Split image + text, and Full bleed. Team does not use it. Callout is never a page type.
 
 Two content variants are registered:
 
@@ -212,7 +211,7 @@ Two content variants are registered:
 | six-card/Team page title wraps | shorten title or select another layout |
 | description exceeds component | edit copy or split slide; do not use a fixed hidden overflow box |
 | Callout collides with content | shorten/collapse content or remove Callout; do not flatten structural gaps |
-| Team needs caption/body | put one concise statement in Callout or use Split image + text |
+| Team needs more than three content items or a separate caption | split the story or use Split image + text |
 | five workflow steps requested | group into 3/4 steps or use two slides |
 | image subject is cropped | change `image.position`; never stretch the image |
 | replacement logo is distorted | restore intrinsic ratio and height-limited contain sizing |

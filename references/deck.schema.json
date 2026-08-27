@@ -110,7 +110,7 @@
         "kicker": { "type": "string" },
         "title": { "type": "string", "minLength": 1 },
         "subtitle": { "type": "string" },
-        "items": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/item" }, "description": "Team requires exactly three items; other supported counts depend on slide type." },
         "steps": { "type": "array", "items": { "$ref": "#/$defs/item" } },
         "callout": { "$ref": "#/$defs/callout" },
         "source": { "type": "string" },

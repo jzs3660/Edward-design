@@ -1,18 +1,44 @@
 # Aident PPT Skill
 
-[English](./README.en.md) · [Skill instructions](./SKILL.md) · [页面版式目录](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
+![Aident PPT Skill — from content outline to polished presentation / 从内容框架到高质量演示](./assets/previews/aident-ppt-hero.png)
 
-英文示例：
+[Full English README / 完整英文文档](./README.en.md) · [Skill instructions](./SKILL.md) · [Layout catalog / 页面版式目录](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
-![Aident PPT Skill 英文示例预览](./assets/previews/aident-ppt-showcase.png)
-
-中文示例：
-
-![Aident PPT Skill 中文示例预览](./assets/previews/aident-ppt-showcase.zh.png)
+A self-contained bilingual presentation Skill that turns an audience, objective, and content outline into consistent HTML presentations. Layouts, components, bundled fonts, icons, backgrounds, and quality gates all travel with the repository; PDF and editable PPTX are optional exports.
 
 一套可离线运行、可公开安装的中英文演示文稿 Skill。用户只需提供受众、目标和内容框架，Agent 即可使用包内的版式、组件、字体策略、图标、背景和质量规则，默认生成统一风格的 HTML 演示；单文件网页、PDF 与可编辑 PPTX 均为按需选项。公开可见不等于所有品牌素材都采用开源许可，使用和再分发前请阅读 [NOTICE.md](./NOTICE.md)。
 
-Figma 和原始 PDF 只用于设计校验与溯源，不是运行依赖。生成时不需要登录 Figma，也不需要实时提取节点。
+Figma and the source PDFs are design provenance and QA references only; they are not runtime dependencies. / Figma 和原始 PDF 只用于设计校验与溯源，生成时不需要登录 Figma，也不需要实时提取节点。
+
+## Design system at a glance / 一眼看懂这套系统
+
+The preview below is generated from the packaged registries and bundled font files, so its inventory stays synchronized with the Skill. / 下图直接读取包内 registry 与字体文件生成，能力数量和字体角色会与 Skill 保持同步。
+
+![Aident PPT Skill color, typography, and layout system / 颜色、字体和版式系统](./assets/previews/aident-ppt-system.png)
+
+| Packaged capability / 已打包能力 | Count / 数量 | Includes / 包含内容 |
+|---|---:|---|
+| Page layouts / 页面版式 | 10 | Cover、Point、Card、Metric、Workflow、Comparison、Image Cards、Team、Split、Full-bleed |
+| Component types / 组件类型 | 10 | Header、Source、Point、Step、Metric、Callout、Card、Workflow、Comparison、Image Mask |
+| Background treatments / 背景处理 | 8 | Light / Dark × Base、Elements Cover、Elements Inner、Atmosphere |
+| Color system / 颜色系统 | 19 base + 9 gradients | Semantic colors、title gradients、emphasis and Callout gradients / 语义色、标题与强调渐变 |
+| Bundled fonts / 字体 | 6 families | 3 English + 3 Chinese families with licenses and role index / 英文 3 套 + 中文 3 套 |
+| Curated icons / 图标 | 10 × Light / Dark | Selected from the existing design system; no redrawn glyphs / 来自现有设计系统，不自行描画 |
+| Languages / 语言 | 2 | Independent English and Chinese hierarchy, line height, and tracking / 中英文独立字体层级、行高与字距 |
+
+## Complete nine-slide coverage in both languages / 中英文完整九页覆盖
+
+### English example / 英文示例
+
+Nine real layouts covering cover, points, workflow, metrics, comparison, dense cards, image cards, Team, and split image/text.
+
+![Aident PPT Skill nine-slide English example / 英文 9 页示例](./assets/previews/aident-ppt-showcase.png)
+
+### Chinese example / 中文示例
+
+The matching Chinese deck validates its own display, body, label, numeral, line-height, and tracking tokens. / 对应的中文示例使用独立的标题、正文、标签、数字、行高与字距 token。
+
+![Aident PPT Skill nine-slide Chinese example / 中文 9 页示例](./assets/previews/aident-ppt-showcase.zh.png)
 
 ## 快速开始
 
@@ -181,7 +207,7 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 - Callout 支持“强调小字/数值 + 正文”和“仅正文”两种内容变体，不需要为了占位虚构 label。
 - 来源、logo、右上角文字、label、icon 都可以关闭或替换。
 - 替换 logo 必须保持原始比例：内页页眉按最高 40px、封面标识按最高 56px 等比缩放，禁止固定宽度拉伸。
-- Team 页面只保留 1700×480 蒙版图；说明放入可选 Callout，来源放入可选 Source，不再增加图下双栏 caption。
+- Team 页面固定为上方 3 个内容项 + 下方 1 张 1700×340 蒙版图；不追加 Callout 或来源小字，图片来源写入演讲备注。
 - 6-card 与 Team 页的大标题必须单行，英文不超过 30 字符、中文不超过 12 字符。
 - 只使用包内设计系统 icon，不临摹、不使用 emoji 代替。
 - 未经用户提供和批准，不写入商业敏感名称、客户、指标或效果声明。

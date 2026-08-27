@@ -1,18 +1,36 @@
 # Aident PPT Skill
 
+![Aident PPT Skill — from content outline to polished presentation](./assets/previews/aident-ppt-hero.png)
+
 [中文](./README.md) · [Skill instructions](./SKILL.md) · [Page layout catalog](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
-
-English showcase:
-
-![Aident PPT Skill English showcase](./assets/previews/aident-ppt-showcase.png)
-
-Chinese showcase:
-
-![Aident PPT Skill Chinese showcase](./assets/previews/aident-ppt-showcase.zh.png)
 
 A self-contained bilingual presentation Skill that turns an audience, objective, and content outline into consistent HTML presentations by default. Single-file webpages, PDFs, and editable PPTX decks are optional outputs. Layouts, components, typography policy, icons, backgrounds, and quality gates are packaged with the Skill. Public visibility does not place every branded asset under an open-source license; read [NOTICE.md](./NOTICE.md) before use or redistribution.
 
 Figma and the source PDFs are design provenance and QA references only. They are not runtime dependencies.
+
+## The system at a glance
+
+![Aident PPT Skill color, typography, and layout system](./assets/previews/aident-ppt-system.png)
+
+| Packaged capability | Count | Includes |
+|---|---:|---|
+| Page layouts | 10 | Cover, Points, Cards, Metrics, Workflow, Comparison, Image Cards, Team, Split, Full-bleed |
+| Component types | 10 | Header, Source, Point, Step, Metric, Callout, Card, Workflow, Comparison, Image Mask |
+| Background treatments | 8 | Light / Dark × Base, Elements Cover, Elements Inner, Atmosphere |
+| Color system | 19 base + 9 gradients | Semantic colors, title gradients, emphasis gradients, Callout gradient |
+| Fonts | 6 bundled families | 3 English + 3 Chinese families with licenses and role index |
+| Icons | 10 × Light / Dark | Curated from the existing design system; no redrawn glyphs |
+| Languages | 2 | Independent English and Chinese type hierarchy, line height, and tracking |
+
+## Complete nine-slide coverage in both languages
+
+English example:
+
+![Aident PPT Skill nine-slide English example](./assets/previews/aident-ppt-showcase.png)
+
+Chinese example:
+
+![Aident PPT Skill nine-slide Chinese example](./assets/previews/aident-ppt-showcase.zh.png)
 
 ## Quick start
 
@@ -172,7 +190,7 @@ Release requires every requested artifact and a matching passing QA report. See 
 - Callouts support labeled (`metric`/`label` + body) and body-only content; do not invent a label to fill the component.
 - Source, logo, right-header text, label, and icon are independently optional.
 - Replacement logos preserve their intrinsic ratio: limit inner-header marks by 40px height and cover identity marks by 56px height; never stretch to a fixed width.
-- Team is strictly one 1700×480 masked image plus optional Callout and Source; it has no separate caption row.
+- Team is strictly three concise content items above one 1700×340 masked image; it does not append a Callout or Source footer, and image provenance belongs in speaker notes.
 - Six-card and Team page titles remain one line within 30 English or 12 Chinese characters.
 - Use packaged design-system icons only. Do not redraw them or substitute emoji.
 - Do not invent sensitive commercial names, customers, metrics, or performance claims.

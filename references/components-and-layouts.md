@@ -177,20 +177,20 @@ Do not mix image and no-image cards randomly unless the visual difference carrie
 
 Registered ratios:
 
-- team: 1700×480, full-width radial alpha mask;
+- team: 1700×340, full-width radial alpha mask below three content items;
 - feature: 760×428, 16:9 with 24px radius;
 - card: 546.67×410, 4:3 with 24px radius;
 - full bleed: 1920×1080.
 
 Team mask provenance:
 
-- frame `95:216` clips content at 1700×480;
+- the source frame is adapted to the registered 1700×340 lower-image slot;
 - mask `95:217` is alpha with radial gradient from white at 85% alpha to transparent;
 - source image `95:218` fills the masked frame.
 
-The CSS implementation uses a radial ellipse mapped from that Figma transform. Preserve the size and mask; replace only the image.
+The CSS implementation uses a radial ellipse mapped from that Figma transform. Preserve the lower image size and mask; replace only the image.
 
-The registered Team slide does not add a separate title/body caption below the image. Supporting text must use the optional Callout and Source components already present in the Figma slide component. Because the 480px mask must remain intact, the Team slide title is limited to one cross-format-safe line (30 English characters or 12 Chinese characters in the packaged generator).
+The registered Team slide renders exactly three editable content items above the image. It does not add a Callout or Source footer; place image provenance in speaker notes. The page title remains one cross-format-safe line (30 English characters or 12 Chinese characters in the packaged generator).
 
 ## Callout
 
@@ -199,7 +199,7 @@ Purpose: support the main content with a takeaway, condition, caveat, rule, next
 Rules:
 
 - Never a standalone slide.
-- Compatible with points, cards, metrics, workflow, comparison, image-cards, team, split-image-text, and full-bleed.
+- Compatible with points, cards, metrics, workflow, comparison, image-cards, split-image-text, and full-bleed. Team has its own three-items-plus-image structure and does not accept a Callout.
 - Optional; not every slide needs one.
 - Outer width: 1700px.
 - Body-only/default height: 70px; labeled/accent height: 88px; actual height hugs content.
@@ -222,7 +222,7 @@ Use either of these registered content variants:
 - `labeled`: `metric` or `label` + `body`;
 - `body-only`: `body` without an empty or invented lead label.
 
-Both variants keep the same outer width, 16px radius, 20px background blur, 20px padding, required dot, and hug-height behavior. The Team component in the current source system uses the body-only variant by default.
+Both variants keep the same outer width, 16px radius, 20px background blur, 20px padding, required dot, and hug-height behavior. Team does not use either Callout variant because its registered structure is three content items plus the lower image.
 
 Callout text and gradient-width elements must hug content where appropriate. Do not use a fixed 1px text height.
 
@@ -253,9 +253,10 @@ Do not use repeated generic decorative images. Every image should support the sl
 
 Purpose: ownership, collaboration, operating rhythm, or human context.
 
-- One 1700×480 radial-mask photo.
-- No separate caption, title/body row, or two-column text block below the image.
-- Optional supporting text uses the registered Callout below the image; provenance uses the optional Source footer.
+- Exactly three editable, left-aligned content items in one row.
+- One 1700×340 radial-mask photo below the item row.
+- No Callout, Source footer, caption row, or second text block below the image.
+- Keep image provenance and consent details in speaker notes.
 - The page heading carries the slide takeaway and remains a single line: maximum 30 English characters or 12 Chinese characters.
 - Use a current, consented, relevant image.
 - Avoid adding biographies or names unless the presentation requires them.

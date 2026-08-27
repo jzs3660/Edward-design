@@ -37,7 +37,7 @@
     "card": { "themes": ["light", "dark"], "sizes": ["half", "third", "dense-half", "dense-third"], "layoutCounts": [2, 3, 4, 6], "media": ["image", "none"], "showLabel": "optional", "showIcon": "optional", "alignment": "left", "height": "fill-row" },
     "workflow": { "themes": ["light", "dark"], "steps": [3, 4], "width": 1700, "showHeaderLabel": "optional", "showStepLabels": "optional", "showArrows": "optional", "showDividers": "optional", "alignment": "left", "structure": ["workflow-label?", "arrow-row", "step-row"], "arrow": { "separateFromStep": true, "rowHeight": 16, "columnGap": 60, "renderedCount": "steps", "onePerStep": true, "finalArrowVisible": true }, "stepRowGap": 120, "labelToArrowGap": 12, "arrowToStepGap": 32 },
     "comparison": { "themes": ["light", "dark"], "tones": ["standard", "accent"], "showBody": true, "items": [3, 4] },
-    "imageMask": { "team": { "size": [1700, 480], "mask": "radial-alpha" }, "feature16x9": { "size": [760, 428], "radius": 24 }, "card4x3": { "size": [546.6667, 410], "radius": 24 }, "fullBleed": { "size": [1920, 1080], "radius": 0 } }
+    "imageMask": { "team": { "size": [1700, 340], "mask": "radial-alpha" }, "feature16x9": { "size": [760, 428], "radius": 24 }, "card4x3": { "size": [546.6667, 410], "radius": 24 }, "fullBleed": { "size": [1920, 1080], "radius": 0 } }
   },
   "layouts": {
     "cover": { "counts": [1], "themes": ["light", "dark"], "variants": ["text-only", "media-bottom", "full-bleed"], "pageHeader": false, "titleAlignment": "center", "identity": { "variants": ["kicker", "logo", "none"], "logoMaxHeight": 56, "logoWidth": "source-aspect-ratio" } },
@@ -47,7 +47,7 @@
     "workflow": { "counts": [3, 4], "themes": ["light", "dark"], "callout": true },
     "comparison": { "counts": [2], "themes": ["light", "dark"], "callout": true },
     "image-cards": { "counts": [2, 3], "themes": ["light", "dark"], "callout": true },
-    "team": { "counts": [1], "themes": ["light", "dark"], "image": { "size": [1700, 480], "mask": "radial-alpha" }, "caption": false, "body": false, "callout": true, "source": true, "pageTitle": { "lines": 1, "en": 30, "zh": 12 } },
+    "team": { "counts": [3], "themes": ["light", "dark"], "structure": ["three-content-items", "image"], "image": { "size": [1700, 340], "mask": "radial-alpha", "position": "below-items" }, "itemLabels": "optional", "callout": false, "source": false, "pageTitle": { "lines": 1, "en": 30, "zh": 12 } },
     "split-image-text": { "counts": [1], "themes": ["light", "dark"], "image": { "size": [760, 428], "sides": ["left", "right"] }, "callout": true, "pageTitleWithCallout": { "lines": 1, "en": 30, "zh": 14 } },
     "full-bleed": { "counts": [1], "themes": ["light", "dark"], "callout": true }
   }

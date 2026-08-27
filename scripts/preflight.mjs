@@ -40,7 +40,7 @@ function staticChecks(html){
   if(/[🀀-🫿☀-➿]/u.test(html))errors.push('Emoji detected; use packaged design-system icons.');
   if(/(?:font-size|line-height)\s*:\s*150px/i.test(html))errors.push('Invalid fixed 150px line-height found; use 150%.');
   if(/height\s*:\s*1px/i.test(html))warnings.push('1px height found; inspect whether it is an intentional divider.');
-  if(/class="team-caption"/.test(html))errors.push('Unregistered team caption detected; Team supports only the image mask plus optional callout/source.');
+  if(/class="team-caption"/.test(html))errors.push('Unregistered team caption detected; Team uses three content items above one image.');
   return {slideCount:slideTags.length,errors,warnings};
 }
 
@@ -94,6 +94,13 @@ async function browserChecks(htmlPath,args,slideCount){
           const pseudo=getComputedStyle(step,'::before');
           if(pseudo.display!=='none'&&pseudo.content!=='none')errors.push('Workflow showDividers:false must remove Step dividers in HTML.');
         }
+      }
+      if(slide.dataset.type==='team'){
+        const items=[...slide.querySelectorAll('.team-point')].filter(visible),media=slide.querySelector('.team-media');
+        if(items.length!==3)errors.push(`Team must render exactly three content items; received ${items.length}.`);
+        if(slide.querySelector('.callout'))errors.push('Team must not render a Callout.');
+        if(slide.querySelector('.source-footer:not(:empty)'))errors.push('Team must not render a Source footer.');
+        if(media&&items.length){const lastBottom=Math.max(...items.map(item=>item.getBoundingClientRect().bottom)),mediaTop=media.getBoundingClientRect().top;if(mediaTop<=lastBottom)errors.push('Team image must sit below all three content items.');}
       }
       for(const el of slide.querySelectorAll('[data-one-line]')){
         if(el.scrollWidth>el.clientWidth+1)errors.push(`One-line text overflow: "${el.textContent.trim()}" (${el.scrollWidth-el.clientWidth}px)`);

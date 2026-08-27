@@ -123,10 +123,13 @@
       "background": "elements-inner",
       "kicker": "TEAM · SHARED PRACTICE",
       "title": "Ownership sustains the model",
-      "subtitle": "Use the full-width mask for a real team, workshop, or environment photograph.",
-      "callout": { "tone": "default", "body": "Use one concise conclusion, recommendation, or source note that supports the team image above." },
-      "source": "Source: replace with a current, consented team image",
-      "notes": { "purpose": "Demonstrate the team mask.", "talk": ["Use a current, consented image.", "Keep the text distinct from names or biographies unless needed."], "transition": "Close with a focused next step." }
+      "subtitle": "Three concise responsibilities establish context before the shared image.",
+      "items": [
+        { "label": "STANDARD", "title": "Shared practice", "body": "Use one visible method so the team begins with the same expectations." },
+        { "label": "OWNERSHIP", "title": "Clear roles", "body": "Make decisions and next actions accountable to a named owner." },
+        { "label": "RHYTHM", "title": "Regular review", "body": "Create a repeatable moment to compare evidence and adjust the work." }
+      ],
+      "notes": { "purpose": "Connect team practices to a shared visual context.", "talk": ["Use a current, consented image in the lower mask.", "Keep the three content items concise and operational."], "transition": "Close with a focused next step." }
     },
     {
       "id": "next-step",

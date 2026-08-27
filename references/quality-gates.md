@@ -237,9 +237,9 @@ Callout:
 
 Team:
 
-- exactly one 1700×480 radial-mask image;
-- no separate caption/title/body row below the image;
-- optional Callout and Source use the registered shell stack;
+- exactly three content items above one 1700×340 radial-mask image;
+- no Callout, Source footer, caption/title/body row, or second text block below the image;
+- image provenance is recorded in speaker notes;
 - page title remains one line within EN 30 / ZH 12 characters.
 
 Dense six-card:

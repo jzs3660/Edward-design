@@ -73,6 +73,16 @@
     },
     "readmePreviews": [
       {
+        "path": "assets/previews/aident-ppt-hero.png",
+        "source": "Generated from packaged registry counts and English/Chinese HTML preflight screenshots",
+        "runtimeRequired": false
+      },
+      {
+        "path": "assets/previews/aident-ppt-system.png",
+        "source": "Generated from packaged tokens, component, font, icon, and background registries",
+        "runtimeRequired": false
+      },
+      {
         "path": "assets/previews/aident-ppt-showcase.png",
         "source": "Generated English example HTML preflight montage",
         "runtimeRequired": false

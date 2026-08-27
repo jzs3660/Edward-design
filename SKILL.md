@@ -111,7 +111,7 @@ Use `references/components-and-layouts.md` and choose the smallest layout that c
 - `workflow`: exactly 3 or 4 ordered steps; arrow and label variants supported.
 - `comparison`: exactly two states or alternatives.
 - `image-cards`: 2 or 3 evidence-led image stories.
-- `team`: one 1700×480 radial-mask photograph; supporting text uses only the optional Callout and Source below it. Do not add a separate image caption/title/body row.
+- `team`: exactly three concise content items followed by one 1700×340 radial-mask photograph. Do not append a Callout or Source footer; keep image provenance in speaker notes.
 - `split-image-text`: one 760×428 image plus explanation, image left or right.
 - `full-bleed`: one verified hero image with readable overlay copy.
 

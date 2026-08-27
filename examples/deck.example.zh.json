@@ -69,6 +69,69 @@
       "notes": { "purpose": "给出可替换的指标示例。", "talk": ["说明示例数字不是对外承诺。", "正式材料必须替换为可验证数据。"], "transition": "最后给出一个适合开始试点的动作。" }
     },
     {
+      "id": "zh-comparison",
+      "type": "comparison",
+      "theme": "dark",
+      "background": "base",
+      "kicker": "对比 · 工作状态",
+      "title": "一致的信息如何改变协作结果",
+      "subtitle": "工具可能保持不变，但上下文和判断的质量会明显不同。",
+      "items": [
+        { "label": "当前状态", "title": "流程彼此割裂", "body": "任务在推进，但关键上下文不断丢失。", "points": ["输入散落在多个位置", "责任人在环节间变化", "审核标准出现得太晚"] },
+        { "label": "目标状态", "title": "流程保持连贯", "tone": "accent", "body": "每个环节都为下一位参与者留下足够信息。", "points": ["一处可见的信息来源", "明确的责任人与检查点", "证据持续关联到判断"] }
+      ],
+      "callout": { "tone": "accent", "metric": "转变", "body": "真正的提升来自人与人之间更清晰的接口，而不是增加更多工具。" },
+      "notes": { "purpose": "对比两种协作状态。", "talk": ["聚焦交接质量，而不是工具数量。", "如果用户提供真实场景，可替换为具体示例。"], "transition": "继续拆解支撑目标状态的通用能力。" }
+    },
+    {
+      "id": "zh-cards",
+      "type": "cards",
+      "theme": "light",
+      "background": "base",
+      "kicker": "能力 · 可复用模块",
+      "title": "六项能力支撑复用",
+      "subtitle": "标题保持简短，用描述说明每项能力在真实工作中的价值。",
+      "items": [
+        { "icon": "integration", "label": "输入", "title": "连接资料", "body": "把相关材料放入同一个可审核的上下文。" },
+        { "icon": "history", "label": "记忆", "title": "保留判断", "body": "记录已确认的变化及其背后的依据。" },
+        { "icon": "skill", "label": "方法", "title": "复用做法", "body": "把稳定实践整理为可重复执行的模式。" },
+        { "icon": "key", "label": "控制", "title": "限定权限", "body": "让权限与任务范围和责任人保持一致。" },
+        { "icon": "action", "label": "行动", "title": "清晰交接", "body": "说明下一步做什么，以及由谁负责。" },
+        { "icon": "capabilities", "label": "质量", "title": "可见检查", "body": "在重要决定被执行前设置审核节点。" }
+      ],
+      "notes": { "purpose": "展示可复用能力组合。", "talk": ["把六项能力理解为一套系统。", "删除与当前决策无关的卡片。"], "transition": "接下来展示图片如何承担证据作用。" }
+    },
+    {
+      "id": "zh-image-cards",
+      "type": "image-cards",
+      "theme": "dark",
+      "background": "elements-inner",
+      "kicker": "证据 · 图片卡片",
+      "title": "让图片提供证据，而不是装饰",
+      "subtitle": "用经过核验的界面、照片或图示替换占位图，并按照槽位安全裁切。",
+      "items": [
+        { "title": "真实行为", "body": "用实际场景或调研材料交代问题发生的上下文。" },
+        { "title": "可见结果", "body": "用经过验证的结果、界面或对比来支撑结论。" }
+      ],
+      "callout": { "tone": "default", "metric": "图片规则", "body": "保留关键主体，避免随意裁切，并让说明文字保持简洁。" },
+      "notes": { "purpose": "说明图片版式的使用方式。", "talk": ["正式交付前替换所有占位图。", "确认每张图片都直接支持页面标题。"], "transition": "继续展示团队图片蒙版。" }
+    },
+    {
+      "id": "zh-team",
+      "type": "team",
+      "theme": "light",
+      "background": "elements-inner",
+      "kicker": "团队 · 共同实践",
+      "title": "共同责任让方法持续",
+      "subtitle": "先用三项简短内容说明共同实践，再用下方图片建立真实场景。",
+      "items": [
+        { "label": "标准", "title": "共享做法", "body": "使用同一套可见方法，让团队从共同预期开始。" },
+        { "label": "责任", "title": "明确角色", "body": "让重要判断与下一步都对应到唯一责任人。" },
+        { "label": "节奏", "title": "定期审核", "body": "在固定节点比较证据，并根据结果调整工作。" }
+      ],
+      "notes": { "purpose": "用内容与图片说明共同实践。", "talk": ["在下方蒙版替换近期且获得许可的团队图片。", "三项内容保持简洁，并说明真实工作责任。"], "transition": "最后用一个清晰动作收束。" }
+    },
+    {
       "id": "zh-closing",
       "type": "split-image-text",
       "theme": "dark",

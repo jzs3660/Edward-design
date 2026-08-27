@@ -10,7 +10,7 @@ const allowedThemes=new Set(['light','dark']);
 const allowedBackgrounds=new Set(['base','elements-cover','elements-inner','atmosphere','paper','ink','elements','motion','aurora']);
 const allowedCoverIdentities=new Set(['kicker','logo','none']);
 const allowedIcons=new Set(['integration','history','skill','run-circle','download','copy','key','action','capabilities','help']);
-const allowedCounts={points:[2,3,4,6],cards:[2,3,4,6],metrics:[2,3,4,6],workflow:[3,4],comparison:[2],'image-cards':[2,3],cover:[1],team:[1],'split-image-text':[1],'full-bleed':[1]};
+const allowedCounts={points:[2,3,4,6],cards:[2,3,4,6],metrics:[2,3,4,6],workflow:[3,4],comparison:[2],'image-cards':[2,3],cover:[1],team:[3],'split-image-text':[1],'full-bleed':[1]};
 const emoji=/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/u;
 const allowedKeys={
   root:new Set(['meta','slides']),
@@ -82,7 +82,8 @@ function validate(deck){
       if(slide.source)fail(errors,`${ref}: cover does not support a source footer; place provenance in notes or an inner slide.`);
       if(slide.header)fail(errors,`${ref}: cover does not support the page header; use coverIdentity for an optional logo or kicker.`);
     }
-    if(slide.type==='team'&&(text(slide.teamTitle)||text(slide.body)))fail(errors,`${ref}: team uses the registered image mask with optional callout/source; move teamTitle/body into callout.body or the slide header.`);
+    if(slide.type==='team'&&slide.callout)fail(errors,`${ref}: team uses three content items above one image and does not support a Callout.`);
+    if(slide.type==='team'&&slide.source)fail(errors,`${ref}: team does not render a Source footer; keep image provenance in notes.`);
     if(slide.background&&!allowedBackgrounds.has(slide.background))fail(errors,`${ref}.background is not registered: ${slide.background}`);
     if(slide.type==='cover'&&slide.background==='elements-inner')fail(errors,`${ref}: cover cannot use elements-inner; use elements-cover.`);
     if(slide.type!=='cover'&&slide.background==='elements-cover')fail(errors,`${ref}: inner slide cannot use elements-cover; use elements-inner.`);
@@ -199,7 +200,10 @@ function comparisonHtml(slide){
 function imageCardsHtml(slide){
   return `<div class="grid image-card-grid" style="--cards:${slide.items.length}">${slide.items.map((item,i)=>`<article class="image-card" data-component="image-card" data-anim style="--i:${i+1}">${imageHtml(item.image,'image-card-media')}<h3 class="item-title" data-one-line>${escapeHtml(item.title)}</h3><p class="item-body">${escapeHtml(item.body)}</p></article>`).join('')}</div>`;
 }
-function teamHtml(slide){return `<div class="team-media-wrap" data-anim style="--i:1">${imageHtml(slide.image,'team-media')}</div>`}
+function teamHtml(slide){
+  const items=slide.items.map((item,i)=>`<article class="team-point" data-component="team-point" data-anim style="--i:${i+1}">${labelHtml(item)}<h3 class="item-title" data-one-line>${escapeHtml(item.title)}</h3><p class="item-body">${escapeHtml(item.body)}</p></article>`).join('');
+  return `<div class="team-layout"><div class="team-point-grid">${items}</div><div class="team-media-wrap" data-anim style="--i:4">${imageHtml(slide.image,'team-media')}</div></div>`;
+}
 function splitHtml(slide){return `<div class="split ${slide.imageSide==='right'?'reverse':''}" data-anim style="--i:1">${slide.imageSide==='right'?`<div class="split-copy"><h3 class="item-title">${escapeHtml(slide.contentTitle||slide.title)}</h3><p class="item-body">${escapeHtml(slide.body||slide.subtitle||'')}</p></div>${imageHtml(slide.image,'split-media')}`:`${imageHtml(slide.image,'split-media')}<div class="split-copy"><h3 class="item-title">${escapeHtml(slide.contentTitle||slide.title)}</h3><p class="item-body">${escapeHtml(slide.body||slide.subtitle||'')}</p></div>`}</div>`}
 function renderMain(slide){
   if(slide.type==='points')return pointsHtml(slide);

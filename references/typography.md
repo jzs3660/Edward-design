@@ -131,10 +131,10 @@ Page-title budgets for vertically constrained layouts:
 | Layout | English maximum | Chinese maximum | Line rule |
 |---|---:|---:|---|
 | six-card | 30 characters | 12 characters | exactly one line |
-| Team 1700×480 mask | 30 characters | 12 characters | exactly one line |
+| Team 3 items + 1700×340 mask | 30 characters | 12 characters | exactly one line |
 | split-image-text + Callout | 30 characters | 14 characters | exactly one line |
 
-These page-title budgets preserve the fixed media/component height and the structural gap above Callout/Source. If the takeaway is longer, shorten it or choose another layout; do not shrink the image, flatten spacing, or overlap regions.
+These page-title budgets preserve the fixed media/component height and structural spacing. If the takeaway is longer, shorten it or choose another layout; do not shrink the image, flatten spacing, or overlap regions.
 
 ## Text-box behavior
 

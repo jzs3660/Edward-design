@@ -251,16 +251,17 @@ Missing images deliberately render as replaceable placeholders during drafting. 
 ```json
 {
   "type": "team",
+  "items": [
+    { "label": "STANDARD", "title": "Shared practice", "body": "One concise responsibility." },
+    { "label": "OWNERSHIP", "title": "Clear roles", "body": "One concise responsibility." },
+    { "label": "RHYTHM", "title": "Regular review", "body": "One concise responsibility." }
+  ],
   "image": { "src": "./images/team.jpg", "alt": "Team workshop", "position": "50% 38%" },
-  "callout": {
-    "tone": "default",
-    "body": "Use one concise conclusion, recommendation, or source note that supports the team image above."
-  },
-  "source": "Source: replace with a current, consented team image"
+  "notes": { "talk": ["Image source and consent: replace with verified details."] }
 }
 ```
 
-The Team layout is strictly the 1700×480 masked image plus optional `callout` and `source`. Its slide takeaway belongs in the normal page `title`; do not add `teamTitle`, `body`, a second-column caption, or an invented text row below the image. Keep the page title to one line (30 English characters or 12 Chinese characters).
+The Team layout is strictly three content items followed by the 1700×340 masked image. It does not accept `callout` or `source`; keep provenance in `notes`. The slide takeaway belongs in the normal page `title`. Keep the page title to one line (30 English characters or 12 Chinese characters).
 
 ## Split image + text
 

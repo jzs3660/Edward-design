@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-27T14:25:17.899Z",
-  "fileCount": 76,
-  "totalBytes": 74465276,
+  "generatedAt": "2026-08-27T15:23:39.605Z",
+  "fileCount": 78,
+  "totalBytes": 76123385,
   "files": [
     {
       "path": "assets/asset-sources.json",
-      "bytes": 2168,
-      "sha256": "21391ba8da9fcd4c109c775085810f9478fa841725b2831c6c3c8354693be593"
+      "bytes": 2590,
+      "sha256": "befeba62d6247841144e12e05855a9bfd1365eec8779cf5fbf1adcb36854a79d"
     },
     {
       "path": "assets/backgrounds/compiled/dark-atmosphere.png",
@@ -96,8 +96,8 @@
     },
     {
       "path": "assets/components/registry.json",
-      "bytes": 5353,
-      "sha256": "9e9f46aebaa889c3421a98bcbf19ecb2ab4fc818fbfe154db443db823701f4bd"
+      "bytes": 5422,
+      "sha256": "d2d62347c95e2402216fe3ea7a575ebcae25769ad8ce7b259a0bd71c19518129"
     },
     {
       "path": "assets/fonts/SmileySans-v2.0.1.zip",
@@ -330,24 +330,34 @@
       "sha256": "e613848feba5d903f96725dba559cfd2a44e03a59e417acd0fe0793be668d837"
     },
     {
+      "path": "assets/previews/aident-ppt-hero.png",
+      "bytes": 782007,
+      "sha256": "590e8287e119a536c95e6585bae004c0d45805a728276035872803843bf0dd6f"
+    },
+    {
       "path": "assets/previews/aident-ppt-showcase.png",
-      "bytes": 1294586,
-      "sha256": "cb3f65e5ca5de376ac5a186305ff41aa8641664daa517765397c05f821ece11a"
+      "bytes": 1343532,
+      "sha256": "59215d36e0ce17459ed754d590fe3842ed2a287b61d640affea45bf8ce9db4ce"
     },
     {
       "path": "assets/previews/aident-ppt-showcase.zh.png",
-      "bytes": 761242,
-      "sha256": "d972e1a9ea77a7c28737cc8afce3efed207d0ab0f9592b82d1d2bfb9fd8982e8"
+      "bytes": 1310730,
+      "sha256": "c667748bb14269b7668a85aa42693c54d827d108f4ab028f45b5e7d378001b86"
+    },
+    {
+      "path": "assets/previews/aident-ppt-system.png",
+      "bytes": 275797,
+      "sha256": "16dd031db67add460b4c5e04c94a062d259d1bd8b29fe6a48adefa44e1fbea2a"
     },
     {
       "path": "assets/previews/manifest.json",
-      "bytes": 709,
-      "sha256": "5d21182872d6a68e70c550a30d7415d94e37a63ced6bb2b80effa1f93776cab4"
+      "bytes": 1446,
+      "sha256": "e33d346467299285c6ebf0f96c6c73af06e48db3d3126131a6a8f34c68bc8e35"
     },
     {
       "path": "assets/runtime/deck.css",
-      "bytes": 23514,
-      "sha256": "191d6a1a81f5fbf4300c30deb79f0d477f112f9cf409da6132919cff07bff594"
+      "bytes": 24157,
+      "sha256": "daad752785e9cd536b1cb519b6c3d49e7e0178e9fd031003622f073da0f76b8d"
     },
     {
       "path": "assets/runtime/deck.js",
@@ -382,7 +392,7 @@
     {
       "path": "assets/tokens/tokens.json",
       "bytes": 6938,
-      "sha256": "1403757c8534cdd340593e5f34196990782993e875cc2959937f6751df7f8459"
+      "sha256": "3024b2757c35ab13f3105bcff69a0e17dd1a4ac63f37bf11b808573c42d8a611"
     }
   ]
 }

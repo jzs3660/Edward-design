@@ -94,7 +94,7 @@ Rules:
 
 | Slot | Pixel size | Ratio | Fit | Radius | Typical use |
 |---|---:|---:|---|---:|---|
-| team | 1700×480 | 85:24 | cover + radial mask | 0 | team/workshop/environment |
+| team | 1700×340 | 5:1 | cover + radial mask | 0 | team/workshop/environment below three content items |
 | feature | 760×428 | 16:9 | cover | 24 | split image + text |
 | card | 546.67×410 | 4:3 | cover | 24 | image card |
 | image-card | flexible | 16:10 | cover | 24 | evidence gallery |

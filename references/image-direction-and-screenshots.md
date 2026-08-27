@@ -18,7 +18,7 @@ Remove imagery that only decorates an already dense slide. Never generate visibl
 | Slot | Target | Composition requirement |
 |---|---:|---|
 | Cover media-bottom | 1360×360 | wide evidence strip; keep the subject away from the outer 8% |
-| Team | 1700×480 | wide group/environment image; important faces and objects near the center 70% so the radial mask does not remove them |
+| Team | 1700×340 | wide group/environment image below three content items; important faces and objects stay near the center 70% so the radial mask does not remove them |
 | Split image + text | 760×428, 16:9 | reserve visual breathing room toward the text column; use `imageSide` to decide the safe side |
 | Card image | 546.67×410, 4:3 | one subject or one readable interface state; avoid a collage inside a card |
 | Image card | 16:10 | evidence-led screenshot, photo, or diagram with a clear focal point |

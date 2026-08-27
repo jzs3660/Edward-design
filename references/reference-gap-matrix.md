@@ -44,7 +44,7 @@ Baseline: `op7418/guizang-ppt-skill`, audited at commit `c91369c449d34755d320a8b
 - Callout accent is the registered three-stop gradient at 16% fill opacity with blur and no stroke; system and browser validation reject 100% fill or whole-component opacity.
 - Source footer, logo, and right-header text are independently optional.
 - Replacement logos are height-limited and keep their intrinsic aspect ratio in HTML and PPTX; browser QA rejects more than 1.5% ratio drift.
-- Team is a strict masked-image layout with no invented caption row; its support regions are the registered optional Callout and Source.
+- Team is a strict three-items-plus-masked-image layout with no Callout, Source footer, or invented caption row.
 - Six-card, Team, and split-with-Callout layouts have explicit cross-format page-title budgets.
 - Callouts support both labeled and body-only content without empty fixed lead frames.
 - True design-system icons are packaged for both themes.
