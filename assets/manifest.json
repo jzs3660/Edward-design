@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-27T15:23:39.605Z",
+  "generatedAt": "2026-08-27T15:40:17.571Z",
   "fileCount": 78,
-  "totalBytes": 76123385,
+  "totalBytes": 76123623,
   "files": [
     {
       "path": "assets/asset-sources.json",
@@ -96,8 +96,8 @@
     },
     {
       "path": "assets/components/registry.json",
-      "bytes": 5422,
-      "sha256": "d2d62347c95e2402216fe3ea7a575ebcae25769ad8ce7b259a0bd71c19518129"
+      "bytes": 5660,
+      "sha256": "3919c90dc7e33068f7f5d4c188d77ee6cfbb1d3464f3d2fb1e46628cd586c7b9"
     },
     {
       "path": "assets/fonts/SmileySans-v2.0.1.zip",

@@ -12,6 +12,7 @@
     "calloutStandaloneForbidden": true,
     "sourceOptional": true,
     "headerLogoOptionalAndReplaceable": true,
+    "userSuppliedLogoFormats": ["png", "jpg", "jpeg", "webp", "svg"],
     "logoPreserveAspectRatio": true,
     "headerLogoMaxHeight": 40,
     "coverLogoMaxHeight": 56,
@@ -28,7 +29,7 @@
     "iconGlyph": 32
   },
   "components": {
-    "header": { "usage": "inner-only", "themes": ["light", "dark"], "width": 1700, "height": 45, "logo": { "optional": true, "replaceable": true, "maxHeight": 40, "width": "source-aspect-ratio", "fit": "contain", "stretch": false }, "properties": ["showLogo", "logoLight", "logoDark", "showRightText", "rightText"] },
+    "header": { "usage": "inner-only", "themes": ["light", "dark"], "width": 1700, "height": 45, "logo": { "optional": true, "replaceable": true, "userSupplied": true, "acceptedFormats": ["png", "jpg", "jpeg", "webp", "svg"], "maxHeight": 40, "width": "source-aspect-ratio", "fit": "contain", "stretch": false }, "properties": ["showLogo", "logoLight", "logoDark", "showRightText", "rightText"] },
     "source": { "themes": ["light", "dark"], "width": 1700, "height": 30, "optional": true, "colors": { "light": "#919596", "dark": "rgba(255,255,255,0.55)" } },
     "point": { "themes": ["light", "dark"], "columns": [2, 3, 4], "layoutCounts": [2, 3, 4, 6], "widths": { "2": 760, "3": 486.6667, "4": 335 }, "showLabel": "optional", "showIcon": "optional", "alignment": "left", "height": "hug-with-budget" },
     "step": { "themes": ["light", "dark"], "columns": [3, 4], "widths": { "3": 486.6667, "4": 335 }, "showLabel": "optional", "alignment": "left", "height": "hug-with-budget", "containsArrow": false, "numberColors": { "light": "#008089", "dark": "#1EEAEA" } },
@@ -40,7 +41,7 @@
     "imageMask": { "team": { "size": [1700, 340], "mask": "radial-alpha" }, "feature16x9": { "size": [760, 428], "radius": 24 }, "card4x3": { "size": [546.6667, 410], "radius": 24 }, "fullBleed": { "size": [1920, 1080], "radius": 0 } }
   },
   "layouts": {
-    "cover": { "counts": [1], "themes": ["light", "dark"], "variants": ["text-only", "media-bottom", "full-bleed"], "pageHeader": false, "titleAlignment": "center", "identity": { "variants": ["kicker", "logo", "none"], "logoMaxHeight": 56, "logoWidth": "source-aspect-ratio" } },
+    "cover": { "counts": [1], "themes": ["light", "dark"], "variants": ["text-only", "media-bottom", "full-bleed"], "pageHeader": false, "titleAlignment": "center", "identity": { "variants": ["kicker", "logo", "none"], "userSuppliedLogo": true, "acceptedLogoFormats": ["png", "jpg", "jpeg", "webp", "svg"], "logoMaxHeight": 56, "logoWidth": "source-aspect-ratio" } },
     "points": { "counts": [2, 3, 4, 6], "themes": ["light", "dark"], "callout": true },
     "cards": { "counts": [2, 3, 4, 6], "themes": ["light", "dark"], "media": ["image", "none"], "callout": true, "sixItemPageTitle": { "lines": 1, "en": 30, "zh": 12 } },
     "metrics": { "counts": [2, 3, 4, 6], "themes": ["light", "dark"], "callout": true },

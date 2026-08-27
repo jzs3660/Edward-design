@@ -21,7 +21,7 @@ Turn an outline into a coherent, source-faithful deck. Treat the packaged assets
 - Never create a standalone callout slide. A callout is an optional supporting component attached below any compatible content layout.
 - Render `callout.tone: "accent"` from the packaged `gradients.calloutAccent` token exactly: `#A0A9FE → #2EEEEE (47.9%) → #93FCB8` at **16% fill/Paint opacity**, with 20px background blur and no stroke. In HTML/PPTX, express the 16% on the gradient-stop alpha only; never set the whole Callout element to 16% opacity, because that also fades its dot and text, and never promote the fill to 100% opacity.
 - Allow both labeled callouts (`metric`/`label` + `body`) and body-only callouts. Do not invent a label when the Figma component or content does not need one.
-- Make header/logo/right text and source footer optional. Make logo, URL/right text, and all content images replaceable.
+- Make header/logo/right text and source footer optional. Make logo, URL/right text, and all content images replaceable. Accept a user-supplied local PNG, JPG/JPEG, WebP, or SVG logo through `meta.logo`; a single path can serve both themes, or `{light,dark}` can provide theme-specific marks.
 - Preserve every replacement logo's intrinsic aspect ratio. Limit inner-header logos by 40px height and cover-identity logos by 56px height; never stretch a logo into a fixed-width box.
 - Keep all visible copy data-driven and editable: slide headings; point/card/metric/step/comparison fields; values; bullets; callouts; sources; and speaker notes. Never bake copy into background images.
 - Use only packaged design-system icons. Do not draw replacement icons and do not use emoji as icons.

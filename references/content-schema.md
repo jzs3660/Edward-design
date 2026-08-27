@@ -23,7 +23,7 @@ All visible presentation copy is data-driven. Cover and inner headings, point/ca
 | `language` | yes | `en` or `zh` | Selects typography and copy budgets |
 | `brandName` | recommended | string | Accessible logo label |
 | `url` | optional | string | Default right-header text |
-| `logo` | optional | string or object | One logo path or `{light,dark}` theme paths |
+| `logo` | optional | string or object | User-supplied local PNG/JPG/JPEG/WebP/SVG path, or `{light,dark}` theme paths; paths are relative to the deck JSON |
 | `header` | optional | object | Global header visibility and right text |
 
 Header object:

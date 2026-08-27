@@ -32,6 +32,8 @@ const callout=registry.components?.callout||{};
 const workflow=registry.components?.workflow||{};
 const step=registry.components?.step||{};
 const teamLayout=registry.layouts?.team||{};
+const headerLogo=registry.components?.header?.logo||{};
+const coverIdentity=registry.layouts?.cover?.identity||{};
 check(tokens.gradients?.calloutAccent==='linear-gradient(90deg,rgba(160,169,254,.16) 0%,rgba(46,238,238,.16) 47.9%,rgba(147,252,184,.16) 100%)','Token gradients.calloutAccent drifted from the registered 16% gradient.');
 check(callout.accentPaintOpacity===0.16,'Callout accentPaintOpacity must be 0.16.');
 check(callout.blurPx===20,'Callout blurPx must be 20.');
@@ -79,6 +81,14 @@ check(compactCss.includes('.team-media{width:1700px;height:340px;'),'Runtime Tea
 check(generator.includes("team:[3]"),'Generator must reject Team slides that do not contain exactly three items.');
 check(generator.includes("team uses three content items above one image and does not support a Callout"),'Generator must reject Team Callouts.');
 check(generator.includes("team does not render a Source footer"),'Generator must reject Team Source footers.');
+
+const logoFormats=['png','jpg','jpeg','webp','svg'];
+check(JSON.stringify(registry.rules?.userSuppliedLogoFormats)===JSON.stringify(logoFormats),'Registry must expose the supported user-supplied logo formats.');
+check(headerLogo.userSupplied===true&&headerLogo.replaceable===true&&JSON.stringify(headerLogo.acceptedFormats)===JSON.stringify(logoFormats),'Header logo must remain user-supplied and replaceable for every registered format.');
+check(coverIdentity.userSuppliedLogo===true&&JSON.stringify(coverIdentity.acceptedLogoFormats)===JSON.stringify(logoFormats),'Cover identity must accept the same user-supplied logo formats.');
+check(generator.includes("'.jpg':'image/jpeg'")&&generator.includes("'.jpeg':'image/jpeg'")&&generator.includes("'.webp':'image/webp'"),'Single-file HTML must inline user logo image formats with correct MIME types.');
+check(pptx.includes("ext==='.webp'?'image/webp'"),'PPTX image adapter must identify WebP correctly.');
+check(pptx.includes("if(ext==='.svg'||ext==='.webp')"),'PPTX logo adapter must rasterize SVG and WebP logo inputs safely.');
 
 const slideProperties=schema.$defs?.slide?.properties||{};
 check(schema.$defs?.slide?.additionalProperties===false,'Slide schema must reject unknown fields.');

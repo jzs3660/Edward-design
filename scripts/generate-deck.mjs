@@ -264,7 +264,7 @@ async function inlineHtml(html,outDir){
   const toData=async rel=>{
     if(cache.has(rel))return cache.get(rel);
     const file=path.join(outDir,rel);const bytes=await fs.readFile(file);const ext=path.extname(file).toLowerCase();
-    const mime={'.css':'text/css','.js':'text/javascript','.png':'image/png','.svg':'image/svg+xml','.ttf':'font/ttf','.otf':'font/otf','.woff2':'font/woff2'}[ext]||'application/octet-stream';
+    const mime={'.css':'text/css','.js':'text/javascript','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.svg':'image/svg+xml','.ttf':'font/ttf','.otf':'font/otf','.woff2':'font/woff2'}[ext]||'application/octet-stream';
     const data=`data:${mime};base64,${bytes.toString('base64')}`;cache.set(rel,data);return data;
   };
   const css=await fs.readFile(path.join(outDir,'assets/runtime/deck.css'),'utf8');

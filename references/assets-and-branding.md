@@ -23,13 +23,15 @@ Theme-specific logos:
 
 Logo requirements:
 
-- transparent SVG preferred, transparent PNG accepted;
+- accept user-supplied local PNG, JPG/JPEG, WebP, or SVG files through `meta.logo`; paths are resolved relative to the input deck JSON and copied into the portable output;
+- transparent SVG is preferred; transparent PNG or WebP is accepted; use JPG only when its opaque background is intentionally safe on the target slide theme;
 - trim invisible artboard padding;
 - retain the source aspect ratio exactly; browser preflight rejects a rendered/intrinsic ratio change above 1.5%;
 - inner-header logo: maximum display height 40px, width calculated from the source ratio;
 - cover-identity logo: maximum display height 56px, width calculated from the source ratio;
 - scale an extremely wide mark down proportionally to the safe width; never force it into a fixed-width rectangle;
 - HTML keeps SVG logos as vectors; PPTX rasterizes SVG logos to a transparent 4× PNG at export so viewers that ignore Office SVG fallbacks do not show a blank mark;
+- single-file HTML inlines PNG, JPG/JPEG, WebP, and SVG with their correct MIME type; PPTX converts SVG and WebP logos to PNG while preserving the calculated display ratio;
 - use adequate contrast for the target theme;
 - do not recolor a multi-color brand without authorization;
 - provide meaningful `brandName` for accessibility.

@@ -8,6 +8,8 @@ A self-contained bilingual presentation Skill that turns an audience, objective,
 
 一套可离线运行、可公开安装的中英文演示文稿 Skill。用户只需提供受众、目标和内容框架，Agent 即可使用包内的版式、组件、字体策略、图标、背景和质量规则，默认生成统一风格的 HTML 演示；单文件网页、PDF 与可编辑 PPTX 均为按需选项。公开可见不等于所有品牌素材都采用开源许可，使用和再分发前请阅读 [NOTICE.md](./NOTICE.md)。
 
+Bring your own brand / 自定义品牌：可用自己的 PNG、JPG/JPEG、WebP 或 SVG 替换封面和内页左上角 Logo；支持单一 Logo 或 Light/Dark 两套文件，始终保持原始比例。
+
 Figma and the source PDFs are design provenance and QA references only; they are not runtime dependencies. / Figma 和原始 PDF 只用于设计校验与溯源，生成时不需要登录 Figma，也不需要实时提取节点。
 
 ## Design system at a glance / 一眼看懂这套系统
@@ -63,7 +65,7 @@ cp -R /path/to/aident-ppt-skill ~/.claude/skills/aident-ppt-skill
 如果以后发布到 Git 仓库或 skills.sh，可使用对应平台的安装命令安装完整目录，Skill 名保持 `aident-ppt-skill`。
 
 ```bash
-npx skills add https://github.com/jzs3660/Edward-design --skill aident-ppt-skill
+npx skills add https://github.com/jzs3660/aident-ppt-skill --skill aident-ppt-skill
 ```
 
 ### 2. 给 Agent 一段内容框架
@@ -238,7 +240,8 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 
 品牌和图片同样不写死在模板中。可在 deck JSON 的 `meta`、每页 `header` 与图片对象中替换：
 
-- 左上角 logo 或品牌标记；
+- 用户自己的 PNG、JPG/JPEG、WebP 或 SVG Logo（`meta.logo`），可提供单一文件或 Light/Dark 两套文件；
+- 封面 Logo 与内页左上角品牌标记；
 - 右上角网址/文字；
 - 每页来源；
 - team、card、image-card、split 与 full-bleed 图片；

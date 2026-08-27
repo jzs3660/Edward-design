@@ -16,6 +16,7 @@
         "brandName": { "type": "string" },
         "url": { "type": "string" },
         "logo": {
+          "description": "User-supplied local PNG, JPG/JPEG, WebP, or SVG logo path. Use one string for both themes or light/dark paths for theme-specific marks; source aspect ratio is preserved.",
           "oneOf": [
             { "type": "string" },
             {

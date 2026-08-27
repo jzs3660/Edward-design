@@ -6,9 +6,13 @@
 
 A self-contained bilingual presentation Skill that turns an audience, objective, and content outline into consistent HTML presentations by default. Single-file webpages, PDFs, and editable PPTX decks are optional outputs. Layouts, components, typography policy, icons, backgrounds, and quality gates are packaged with the Skill. Public visibility does not place every branded asset under an open-source license; read [NOTICE.md](./NOTICE.md) before use or redistribution.
 
+Bring your own brand / 自定义品牌: replace the cover and upper-left slide mark with your own PNG, JPG/JPEG, WebP, or SVG. Use one logo for both themes or provide separate Light/Dark files; the source aspect ratio is always preserved.
+
 Figma and the source PDFs are design provenance and QA references only. They are not runtime dependencies.
 
-## The system at a glance
+## The system at a glance / 一眼看懂这套系统
+
+The preview is generated from packaged registries and bundled fonts. / 下图由包内 registry 与字体文件生成。
 
 ![Aident PPT Skill color, typography, and layout system](./assets/previews/aident-ppt-system.png)
 
@@ -22,13 +26,15 @@ Figma and the source PDFs are design provenance and QA references only. They are
 | Icons | 10 × Light / Dark | Curated from the existing design system; no redrawn glyphs |
 | Languages | 2 | Independent English and Chinese type hierarchy, line height, and tracking |
 
-## Complete nine-slide coverage in both languages
+## Complete nine-slide coverage in both languages / 中英文完整九页覆盖
 
-English example:
+English example / 英文示例:
 
 ![Aident PPT Skill nine-slide English example](./assets/previews/aident-ppt-showcase.png)
 
-Chinese example:
+Chinese example / 中文示例:
+
+The Chinese deck validates its own typography and spacing tokens. / 中文示例使用独立的字体层级与间距 token。
 
 ![Aident PPT Skill nine-slide Chinese example](./assets/previews/aident-ppt-showcase.zh.png)
 
@@ -53,7 +59,7 @@ cp -R /path/to/aident-ppt-skill ~/.claude/skills/aident-ppt-skill
 Other local Agent environments need file access, Node.js 20+, and browser preview support. If this Skill is later published to Git or skills.sh, install the complete repository using that platform's installer and keep the Skill name `aident-ppt-skill`.
 
 ```bash
-npx skills add https://github.com/jzs3660/Edward-design --skill aident-ppt-skill
+npx skills add https://github.com/jzs3660/aident-ppt-skill --skill aident-ppt-skill
 ```
 
 ### Prompt the Agent
@@ -221,7 +227,8 @@ See [content-schema.md](./references/content-schema.md) for fields, supported la
 
 Brand and image content is not hard-coded either. Deck-level `meta`, slide-level `header`, and image objects can replace or hide:
 
-- the upper-left logo or brand mark;
+- a user-supplied PNG, JPG/JPEG, WebP, or SVG through `meta.logo`, using one file or separate Light/Dark files;
+- the cover identity and upper-left slide brand mark;
 - upper-right URL/text;
 - per-slide sources;
 - team, card, image-card, split, and full-bleed images;
