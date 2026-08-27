@@ -33,6 +33,8 @@ All documented line heights are ratios/percentages.
 | Source | Noto Sans | Semibold 600 | 16 | 150% | -1% |
 | Callout body | Outfit | Medium 500 | 20 | 150% | 0 |
 
+Step-number color is a semantic component token rather than inherited body color: `#008089` on Light and `#1EEAEA` on Dark.
+
 Point/card/step/metric titles use Outfit Regular, including small titles. Body, subtitle, labels, kicker, and source use bundled Noto Sans. This preserves the reference hierarchy without requiring the restricted SF Pro file.
 
 ## Chinese roles
@@ -54,6 +56,8 @@ Point/card/step/metric titles use Outfit Regular, including small titles. Body, 
 | Source | Noto Sans SC | Medium 500 | 16 | 150% |
 | Callout metric | Noto Serif SC | Bold 700 | 40 | 150% |
 | Callout body | Noto Serif SC | Bold 700 | 20 | 150% |
+
+Chinese Step numbers use the same theme color contract as English: `#008089` on Light and `#1EEAEA` on Dark.
 
 The Chinese hierarchy is not an English font substitution. Preserve the role order: Smiley Sans for large display/numerals, bundled Noto Sans SC for information hierarchy and body, and Noto Serif SC only for emphasized callouts.
 

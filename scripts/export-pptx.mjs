@@ -15,7 +15,7 @@ const deck=JSON.parse(await fs.readFile(path.resolve(args.input),'utf8'));
 const assetRoot=path.resolve(args.assetRoot||path.dirname(path.resolve(args.input)));
 const presentation=Presentation.create({slideSize:{width:1920,height:1080}});
 const lang=deck.meta.language;
-const colors={light:{primary:'#111114',secondary:'#5E6263',hair:'#D9DCDA',surface:'#F7F8F6'},dark:{primary:'#FFFFFF',secondary:'#B9B6C0',hair:'#3C3648',surface:'#181123'}};
+const colors={light:{primary:'#111114',secondary:'#5E6263',hair:'#D9DCDA',surface:'#F7F8F6',stepNumber:'#008089'},dark:{primary:'#FFFFFF',secondary:'#B9B6C0',hair:'#3C3648',surface:'#181123',stepNumber:'#1EEAEA'}};
 const fonts=lang==='zh'?{display:'Smiley Sans',item:'Noto Sans SC',body:'Noto Sans SC',number:'Smiley Sans',callout:'Noto Serif SC'}:{display:'Outfit',item:'Outfit',body:'Noto Sans',number:'Instrument Serif',callout:'Outfit'};
 const normalizeImage=value=>typeof value==='string'?{src:value,alt:''}:value&&typeof value==='object'?value:null;
 const coverLayout=s=>s.type==='cover'?(s.coverLayout||(normalizeImage(s.image)?.src?'media-bottom':'text-only')):'';
@@ -28,6 +28,7 @@ async function imageDimensions(rel){if(!rel||/^(https?:|data:)/i.test(rel))retur
 function addText(slide,value,pos,style={}){const shape=slide.shapes.add({geometry:'textbox',name:style.name||'text',position:pos,fill:'none',line:{style:'solid',fill:'none',width:0}});shape.text=String(value??'');shape.text.style={fontFamily:style.fontFamily||fonts.body,fontSize:style.fontSize||22,color:style.color||'#111114',bold:Boolean(style.bold),italic:Boolean(style.italic),alignment:style.alignment||'left'};return shape}
 function addBox(slide,pos,fill,line='none',radius=24,name='box'){return slide.shapes.add({geometry:radius?'roundRect':'rect',name,position:pos,fill,line:line==='none'?{style:'solid',fill:'none',width:0}:line,borderRadius:radius})}
 function approximateTextWidth(value,fontSize){let units=0;for(const char of Array.from(String(value||''))){if(/\s/.test(char))units+=.34;else if(/[\u2e80-\u9fff\uf900-\ufaff]/u.test(char))units+=1.05;else if(/[A-Z0-9]/.test(char))units+=.62;else units+=.54}return Math.max(40,Math.min(520,units*fontSize+16))}
+function fitOneLineFontSize(value,width,preferred,min){const measured=approximateTextWidth(value,preferred)*1.08;return measured<=width?preferred:Math.max(min,Math.floor(preferred*width/measured))}
 async function addImage(slide,rel,pos,{fit='cover',radius=0,alt=''}={}){const data=await imageBytes(rel);if(!data)return addBox(slide,pos,'linear(135deg,#039987/18 0%,#4B56F8/18 100%)',{style:'solid',fill:'#111114/14',width:1},radius,'image-placeholder');return slide.images.add({...data,alt,fit,position:pos,geometry:radius?'roundRect':'rect',borderRadius:radius})}
 async function addLogo(slide,rel,{left,top,maxWidth,maxHeight,align='left'},alt){const dimensions=await imageDimensions(rel).catch(()=>null);if(!dimensions)return addImage(slide,rel,{left,top,width:maxWidth,height:maxHeight},{fit:'contain',alt});const ratio=dimensions.width/dimensions.height;let height=maxHeight,width=height*ratio;if(width>maxWidth){width=maxWidth;height=width/ratio}const x=align==='center'?left+(maxWidth-width)/2:left;const y=top+(maxHeight-height)/2;if(path.extname(rel).toLowerCase()==='.svg'){const rasterScale=4,png=await sharp(path.resolve(assetRoot,rel),{density:384}).resize({width:Math.max(1,Math.round(width*rasterScale)),height:Math.max(1,Math.round(height*rasterScale)),fit:'fill'}).png().toBuffer();return slide.images.add({blob:png,contentType:'image/png',alt,fit:'contain',position:{left:x,top:y,width,height},geometry:'rect',borderRadius:0})}return addImage(slide,rel,{left:x,top:y,width,height},{fit:'contain',alt})}
 function backgroundRel(s){return `assets/backgrounds/compiled/${s.theme}-${backgroundTreatment(s)}.png`}
@@ -106,20 +107,21 @@ async function addCards(slide,s,y){
 function addMetrics(slide,s,y){const c=colors[s.theme],n=s.items.length,positions=gridPositions(n,y,n===6?175:260);for(let i=0;i<n;i++){const p=positions[i],item=s.items[i];if(i%((n===6)?3:n)!==0)addBox(slide,{left:p.left-30,top:p.top,width:1,height:p.height},c.hair,'none',0,'divider');let ty=p.top;if(item.label&&item.showLabel!==false){addText(slide,item.label,{left:p.left,top:ty,width:p.width,height:30},{fontSize:18,bold:true,color:s.theme==='dark'?'#9AFFF8':'#008C94'});ty+=32}addText(slide,item.value,{left:p.left,top:ty,width:p.width,height:96},{fontFamily:fonts.item,fontSize:n>=4?68:84,color:s.theme==='dark'?'#B7F6EE':'#028C94',name:'metric-value'});ty+=96;if(item.title)addText(slide,item.title,{left:p.left,top:ty,width:p.width,height:54},{fontFamily:fonts.item,fontSize:n>=4?34:40,color:c.primary,name:'metric-title'});addText(slide,item.body,{left:p.left,top:ty+52,width:p.width,height:64},{fontSize:20,color:c.secondary})}}
 function addWorkflow(slide,s,y){
   const c=colors[s.theme],n=s.steps.length,hasWorkflowLabel=s.showWorkflowLabel!==false&&Boolean(s.workflowLabel);
-  const arrowY=y+(hasWorkflowLabel?45:0),stepY=arrowY+(s.showArrows===false?0:28);
+  const arrowY=y+(hasWorkflowLabel?45:0),stepY=arrowY+(s.showArrows===false?0:48);
   if(hasWorkflowLabel)addText(slide,s.workflowLabel,{left:110,top:y,width:900,height:33},{fontFamily:fonts.display,fontSize:22,bold:true,color:s.theme==='dark'?'#FFFFFF/70':'#111114/70',name:'workflow-label'});
   if(s.showArrows!==false){
     const arrowGap=60,arrowWidth=(1700-arrowGap*(n-1))/n,arrowFill=s.theme==='dark'?'linear(0deg,#F3B6FF/40 0%,#6DE4F9/40 51%,#77FAB4/40 100%)':'linear(0deg,#1F1F23/50 0%,#029090/50 100%)',arrowHead=s.theme==='dark'?'#77FAB4/40':'#029090/50';
-    for(let i=0;i<n-1;i++){const left=110+i*(arrowWidth+arrowGap);addBox(slide,{left,top:arrowY+7,width:arrowWidth-10,height:1},arrowFill,'none',0,'step-arrow-line');addText(slide,'›',{left:left+arrowWidth-18,top:arrowY-7,width:18,height:30},{fontFamily:fonts.display,fontSize:24,color:arrowHead,alignment:'right',name:'step-arrow-head'})}
+    for(let i=0;i<n;i++){const left=110+i*(arrowWidth+arrowGap);addBox(slide,{left,top:arrowY+7,width:arrowWidth-10,height:1},arrowFill,'none',0,'step-arrow-line');addText(slide,'›',{left:left+arrowWidth-18,top:arrowY-7,width:18,height:30},{fontFamily:fonts.display,fontSize:24,color:arrowHead,alignment:'right',name:'step-arrow-head'})}
   }
   const stepGap=120,stepWidth=(1700-stepGap*(n-1))/n;
   for(let i=0;i<n;i++){
     const left=110+i*(stepWidth+stepGap),item=s.steps[i];
     if(i&&s.showDividers!==false)addBox(slide,{left:left-60,top:stepY,width:1,height:270},c.hair,'none',0,'divider');
-    addText(slide,item.number||String(i+1).padStart(2,'0'),{left,top:stepY,width:90,height:60},{fontFamily:fonts.number,fontSize:lang==='zh'?40:50,italic:true,color:s.theme==='dark'?'#1EEAEA':'#008089',name:'step-number'});
+    addText(slide,item.number||String(i+1).padStart(2,'0'),{left,top:stepY,width:90,height:60},{fontFamily:fonts.number,fontSize:lang==='zh'?40:50,italic:true,color:c.stepNumber,name:'step-number'});
     let ty=stepY+68;
     if(item.label&&s.showStepLabels!==false){addText(slide,item.label,{left,top:ty,width:stepWidth,height:27},{fontSize:18,bold:true,color:s.theme==='dark'?'#1EEAEA':'#008089',name:'step-label'});ty+=35}
-    addText(slide,item.title,{left,top:ty,width:stepWidth,height:66},{fontFamily:fonts.item,fontSize:44,color:c.primary,name:'step-title'});
+    const titleFontSize=fitOneLineFontSize(item.title,stepWidth,44,30);
+    addText(slide,item.title,{left,top:ty,width:stepWidth,height:66},{fontFamily:fonts.item,fontSize:titleFontSize,color:c.primary,name:'step-title'});
     addText(slide,item.body,{left,top:ty+74,width:stepWidth,height:99},{fontSize:22,color:c.secondary,name:'step-body'});
   }
 }
@@ -134,7 +136,7 @@ function addCallout(slide,s){
   addBox(slide,{left:110,top:y,width:1700,height},fill,'none',16,'callout');
   addBox(slide,{left:130,top:y+(height-12)/2,width:12,height:12},s.theme==='dark'?'#1EEAEA':'#008089','none',6,'callout-bullet');
   if(hasMetric){
-    const metricWidth=approximateTextWidth(metric,40),metricLeft=154,bodyLeft=metricLeft+metricWidth+12;
+    const metricWidth=Math.min(480,Math.ceil(approximateTextWidth(metric,40)*1.35)),metricLeft=154,bodyLeft=metricLeft+metricWidth+12;
     addText(slide,metric,{left:metricLeft,top:y+20,width:metricWidth,height:48},{fontFamily:fonts.callout,fontSize:40,bold:lang==='zh',color:s.theme==='dark'?'#B7F6EE':'#028C94',name:'callout-metric'});
     addText(slide,s.callout.body,{left:bodyLeft,top:y+29,width:1780-bodyLeft,height:30},{fontFamily:fonts.callout,fontSize:20,bold:lang==='zh',color:c.primary,name:'callout-body'});
   }else{

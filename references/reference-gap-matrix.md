@@ -51,7 +51,7 @@ Baseline: `op7418/guizang-ppt-skill`, audited at commit `c91369c449d34755d320a8b
 - Chinese type roles are componentized in the runtime, not applied as one generic fallback.
 - PPTX backgrounds are precomposed to prevent opaque texture failures.
 - Example copy avoids proprietary/commercial claims and uses realistic placeholder lengths.
-- Workflow arrows live in a separate row, render only between adjacent steps, and expose independent arrow/label/divider options in HTML and PPTX.
+- Workflow arrows live in a separate row, render once above every Step including the final Step, and expose independent arrow/label/divider options in HTML and PPTX.
 
 ## Deliberate differences from the baseline
 

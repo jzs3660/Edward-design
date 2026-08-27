@@ -112,7 +112,7 @@ Variants:
 
 Anatomy:
 
-1. step number (`01`, `02`, …) in Instrument Serif Italic or Smiley Sans;
+1. step number (`01`, `02`, …) in Instrument Serif Italic or Smiley Sans, using `#008089` on Light and `#1EEAEA` on Dark;
 2. optional small label;
 3. one-line title;
 4. short description;
@@ -120,7 +120,7 @@ Anatomy:
 
 Three-step width is 486.67px; four-step width is 335px. The workflow width remains 1700px in both cases. Never widen the slide to fit another step.
 
-Each Step component contains only number, optional label, title, and body; it never contains an arrow. The Workflow owns an independent 16px arrow row with exactly one visible arrow between each adjacent pair of steps and no trailing arrow after the final step. The row retains the registered 60px column gaps. The Step row uses 120px gaps so the optional 1px divider sits at the center of each gap. Arrow row and Step row have a fixed 12px structural gap.
+Each Step component contains only number, optional label, title, and body; it never contains an arrow. The Workflow owns an independent 16px arrow row with exactly one visible direction line above every Step, including the final Step. A three-step Workflow therefore has three arrows and a four-step Workflow has four. The row retains the registered 60px column gaps. The Step row uses 120px gaps so the optional 1px divider sits at the center of each gap. The arrow row is visibly above the entire Step row: its box ends 32px before the Step row begins. The optional Workflow label has a separate 12px gap above the arrows.
 
 ## Metric block
 

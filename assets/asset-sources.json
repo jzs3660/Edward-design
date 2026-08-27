@@ -71,10 +71,17 @@
       "script": "scripts/compile-backgrounds.mjs",
       "purpose": "Reliable PowerPoint rendering without CSS blend modes"
     },
-    "readmePreview": {
-      "path": "assets/previews/aident-ppt-showcase.png",
-      "source": "Generated English example HTML preflight montage",
-      "runtimeRequired": false
-    }
+    "readmePreviews": [
+      {
+        "path": "assets/previews/aident-ppt-showcase.png",
+        "source": "Generated English example HTML preflight montage",
+        "runtimeRequired": false
+      },
+      {
+        "path": "assets/previews/aident-ppt-showcase.zh.png",
+        "source": "Generated Chinese example HTML preflight montage",
+        "runtimeRequired": false
+      }
+    ]
   }
 }

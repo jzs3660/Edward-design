@@ -128,7 +128,9 @@ Use only for an actual ordered sequence.
 
 - The whole workflow remains 1700px wide; never widen the slide.
 - Step number, optional label, one-line title, and description are left-aligned.
-- The arrow row is separate from every Step component and renders exactly `steps - 1` visible arrows; the last step never has a trailing arrow.
+- The arrow row is separate from every Step component and renders one visible direction line above every Step, including the final Step (`arrows = steps`).
+- Keep the arrow row visually above the complete Step row with a 32px arrow-to-Step gap; numbers and Step copy never share the arrow lane.
+- Step numbers use `#008089` on Light and `#1EEAEA` on Dark.
 - `showArrows`, `showStepLabels`, and `showDividers` are independent variants in HTML and PPTX.
 - Do not create five steps; split the sequence or group stages.
 

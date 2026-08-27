@@ -81,8 +81,15 @@ async function browserChecks(htmlPath,args,slideCount){
       for(const workflow of slide.querySelectorAll('.workflow')){
         const steps=[...workflow.querySelectorAll('.workflow-step')];
         const arrows=[...workflow.querySelectorAll('.workflow-arrow')].filter(visible);
-        const expected=workflow.classList.contains('no-arrows')?0:Math.max(0,steps.length-1);
-        if(arrows.length!==expected)errors.push(`Workflow must render ${expected} visible arrows between ${steps.length} steps; received ${arrows.length}.`);
+        const expected=workflow.classList.contains('no-arrows')?0:steps.length;
+        if(arrows.length!==expected)errors.push(`Workflow must render one visible arrow above each Step (${expected} total); received ${arrows.length}.`);
+        if(workflow.querySelector('.workflow-step .workflow-arrow'))errors.push('Workflow arrows must not be children of Step components.');
+        if(!workflow.classList.contains('no-arrows')){
+          const arrowRow=workflow.querySelector('.workflow-arrows'),stepRow=workflow.querySelector('.workflow-steps');
+          if(arrowRow&&stepRow){const gap=stepRow.getBoundingClientRect().top-arrowRow.getBoundingClientRect().bottom;if(gap<31.5)errors.push(`Workflow arrow row must end 32px above the Step row; received ${gap.toFixed(1)}px.`)}
+        }
+        const expectedNumberColor=slide.dataset.theme==='dark'?'rgb(30, 234, 234)':'rgb(0, 128, 137)';
+        for(const number of workflow.querySelectorAll('.step-number'))if(getComputedStyle(number).color!==expectedNumberColor)errors.push(`Step number must use ${expectedNumberColor}; received ${getComputedStyle(number).color}.`);
         if(workflow.classList.contains('no-dividers'))for(const step of steps.slice(1)){
           const pseudo=getComputedStyle(step,'::before');
           if(pseudo.display!=='none'&&pseudo.content!=='none')errors.push('Workflow showDividers:false must remove Step dividers in HTML.');

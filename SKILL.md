@@ -16,6 +16,7 @@ Turn an outline into a coherent, source-faithful deck. Treat the packaged assets
 - Use percentage line-height tokens. `150%` means 1.5× the font size; it never means `150px`.
 - Keep point, step, card, and metric titles on one line. Shorten the text, change the count/layout, or let the runtime fitter reduce it only within the documented minimum.
 - Keep dense six-card and Team page titles on one line: no more than 30 English characters or 12 Chinese characters. A split-image-text page with a callout uses 30 English or 14 Chinese characters.
+- Keep Workflow arrows in their own row above the entire Step row, with one visible arrow above every Step including the final Step. The arrow row ends 32px before the Step row begins; Step numbers use `#008089` on Light and `#1EEAEA` on Dark.
 - Never allow text, cards, callouts, images, headers, or source footers to overlap or leave the slide.
 - Never create a standalone callout slide. A callout is an optional supporting component attached below any compatible content layout.
 - Render `callout.tone: "accent"` from the packaged `gradients.calloutAccent` token exactly: `#A0A9FE → #2EEEEE (47.9%) → #93FCB8` at **16% fill/Paint opacity**, with 20px background blur and no stroke. In HTML/PPTX, express the 16% on the gradient-stop alpha only; never set the whole Callout element to 16% opacity, because that also fades its dot and text, and never promote the fill to 100% opacity.
@@ -190,6 +191,8 @@ Folder HTML is the default and primary deliverable. Generate it first, run HTML 
 
 The PPTX exporter uses editable native text and shapes, packaged images/icons, speaker notes, and precomposed background texture assets. The HTML version remains the most faithful animation/presentation target.
 
+Treat validated HTML as the visual source of truth. Do not weaken or distort the HTML layout to compensate for PowerPoint font substitution. PPTX is an optional editable convenience format: apply the packaged fitter and layout checks, but if the target PowerPoint installation cannot recognize a bundled font or uses different font metrics, disclose that limitation and allow final manual adjustment in PowerPoint.
+
 ### 8. Verify every final artifact
 
 Follow `references/quality-gates.md`.
@@ -198,6 +201,7 @@ Follow `references/quality-gates.md`.
 - Run `scripts/validate-presenter.mjs` on the final HTML; add `--require-notes` for a formal presentation where every slide must have speaking guidance.
 - If PDF was requested, render every PDF page to PNG and inspect it.
 - If PPTX was requested, render every PPTX slide and run the slide overflow checker.
+- Run `scripts/validate-pptx-layout.mjs --layouts <preview-dir>` after PPTX export; wrapped one-line component text or out-of-bounds shapes block delivery.
 - Inspect montages for rhythm, then inspect dense or image-heavy slides at full size.
 - Verify replacement logos/images, source text, themes, one-line titles, and speaker notes.
 

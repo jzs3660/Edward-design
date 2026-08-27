@@ -214,7 +214,7 @@ Mark placeholder metrics as illustrative. Replace with verified values before ex
 }
 ```
 
-`number` is optional; the generator creates zero-padded numbers. `workflowLabel` is optional. `showArrows`, `showDividers`, and `showStepLabels` are independent. Arrows render as a dedicated row above the Step row, exactly between adjacent steps; they are never children of an individual Step component and the final step has no trailing arrow.
+`number` is optional; the generator creates zero-padded numbers. `workflowLabel` is optional. `showArrows`, `showDividers`, and `showStepLabels` are independent. Arrows render as a dedicated row 32px above the complete Step row, with one visible direction line above every Step, including the final Step; they are never children of an individual Step component. Step numbers use the registered theme colors (`#008089` Light / `#1EEAEA` Dark), not inherited body text colors.
 
 ## Comparison
 

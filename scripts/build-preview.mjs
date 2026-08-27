@@ -8,7 +8,7 @@ function parseArgs(argv){const args={};for(let i=2;i<argv.length;i++){if(argv[i]
 async function importPackage(name){const require=createRequire(import.meta.url);const resolved=require.resolve(name,{paths:[process.env.RUNTIME_NODE_MODULES,path.resolve('node_modules')].filter(Boolean)});return import(pathToFileURL(resolved).href)}
 
 const args=parseArgs(process.argv);
-if(!args.screenshots||!args.out)throw new Error('Usage: node scripts/build-preview.mjs --screenshots output/example-en/qa --out assets/previews/aident-ppt-showcase.png');
+if(!args.screenshots||!args.out)throw new Error('Usage: node scripts/build-preview.mjs --screenshots output/<example>/qa --out assets/previews/<showcase>.png');
 const sharpModule=await importPackage('sharp');
 const sharp=sharpModule.default||sharpModule;
 const dir=path.resolve(args.screenshots);
@@ -20,7 +20,12 @@ const height=padding*2+rows*thumbHeight+(rows-1)*gap;
 const composites=[];
 for(const [index,file] of files.entries()){
   const input=await sharp(path.join(dir,file)).resize(thumbWidth,thumbHeight,{fit:'cover'}).png().toBuffer();
-  composites.push({input,left:padding+(index%columns)*(thumbWidth+gap),top:padding+Math.floor(index/columns)*(thumbHeight+gap)});
+  const row=Math.floor(index/columns),column=index%columns;
+  const itemsInRow=Math.min(columns,files.length-row*columns);
+  const fullRowWidth=columns*thumbWidth+(columns-1)*gap;
+  const currentRowWidth=itemsInRow*thumbWidth+(itemsInRow-1)*gap;
+  const rowOffset=Math.round((fullRowWidth-currentRowWidth)/2);
+  composites.push({input,left:padding+rowOffset+column*(thumbWidth+gap),top:padding+row*(thumbHeight+gap)});
 }
 await fs.mkdir(path.dirname(path.resolve(args.out)),{recursive:true});
 await sharp({create:{width,height,channels:4,background:'#09080d'}}).composite(composites).png().toFile(path.resolve(args.out));

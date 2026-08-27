@@ -2,13 +2,19 @@
 
 [中文](./README.md) · [Skill instructions](./SKILL.md) · [Page layout catalog](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
-![Aident PPT Skill showcase](./assets/previews/aident-ppt-showcase.png)
+English showcase:
+
+![Aident PPT Skill English showcase](./assets/previews/aident-ppt-showcase.png)
+
+Chinese showcase:
+
+![Aident PPT Skill Chinese showcase](./assets/previews/aident-ppt-showcase.zh.png)
 
 A self-contained bilingual presentation Skill that turns an audience, objective, and content outline into consistent HTML presentations by default. Single-file webpages, PDFs, and editable PPTX decks are optional outputs. Layouts, components, typography policy, icons, backgrounds, and quality gates are packaged with the Skill. Public visibility does not place every branded asset under an open-source license; read [NOTICE.md](./NOTICE.md) before use or redistribution.
 
 Figma and the source PDFs are design provenance and QA references only. They are not runtime dependencies.
 
-## Start in 30 seconds
+## Quick start
 
 ### Install
 
@@ -86,6 +92,8 @@ Poor fit: spreadsheet-heavy reports, training manuals that require dense page-le
 
 HTML is the default primary renderer and deliverable. PDF and PPTX are exported only when explicitly requested. PDF is exported from that HTML, while PPTX is authored from the same resolved JSON as native text, shapes, images, and speaker notes.
 
+Validated HTML is the visual source of truth. PPTX is an optional editable adapter; if the target machine substitutes a bundled font or PowerPoint uses different glyph metrics, final manual adjustment may be needed. Do not compromise the HTML layout to imitate a PowerPoint fallback renderer.
+
 JSON plus HTML is used because an Agent can reliably read, edit, and validate structured content and CSS geometry. The same source can drive web motion, PDF, and native PPTX without recovering text from flattened design screenshots.
 
 ## Single-Agent workflow
@@ -158,6 +166,7 @@ Release requires every requested artifact and a matching passing QA report. See 
 - Every slide uses a registered background and texture treatment.
 - `150%` line height means 1.5 times the font size, never `150px`.
 - Point, Card, Step, and Metric titles are one line by default.
+- Workflow arrows occupy a separate row 32px above the complete Step row, with one arrow above every Step including the final Step; Step numbers are `#008089` on Light and `#1EEAEA` on Dark.
 - Text, cards, callouts, images, headers, and sources must not overlap or leave the canvas.
 - A callout never becomes a standalone slide. Its Accent fill is exactly `#A0A9FE → #2EEEEE (47.9%) → #93FCB8` at **16% Paint opacity**, with 20px blur and no stroke. HTML/PPTX must apply 16% to the gradient-stop alpha, never to the whole Callout element and never as a 100%-opaque fill.
 - Callouts support labeled (`metric`/`label` + body) and body-only content; do not invent a label to fill the component.

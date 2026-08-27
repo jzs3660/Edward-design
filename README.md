@@ -2,13 +2,19 @@
 
 [English](./README.en.md) · [Skill instructions](./SKILL.md) · [页面版式目录](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
-![Aident PPT Skill 示例预览](./assets/previews/aident-ppt-showcase.png)
+英文示例：
+
+![Aident PPT Skill 英文示例预览](./assets/previews/aident-ppt-showcase.png)
+
+中文示例：
+
+![Aident PPT Skill 中文示例预览](./assets/previews/aident-ppt-showcase.zh.png)
 
 一套可离线运行、可公开安装的中英文演示文稿 Skill。用户只需提供受众、目标和内容框架，Agent 即可使用包内的版式、组件、字体策略、图标、背景和质量规则，默认生成统一风格的 HTML 演示；单文件网页、PDF 与可编辑 PPTX 均为按需选项。公开可见不等于所有品牌素材都采用开源许可，使用和再分发前请阅读 [NOTICE.md](./NOTICE.md)。
 
 Figma 和原始 PDF 只用于设计校验与溯源，不是运行依赖。生成时不需要登录 Figma，也不需要实时提取节点。
 
-## 30 秒开始
+## 快速开始
 
 ### 1. 安装
 
@@ -89,6 +95,8 @@ node scripts/generate-deck.mjs \
 
 HTML 是默认主渲染与交付实现。除非用户明确要求，否则不额外导出 PDF 或 PPTX。PDF 从同一 HTML 导出；PPTX 从同一份解析后的 JSON 生成原生文本、形状、图片和备注，因此按需导出时内容仍保持同步。
 
+HTML 是视觉标准，必须优先保证。PPTX 是可编辑的可选适配格式；目标电脑若未识别包内字体，或 PowerPoint 使用了不同的字体度量，可能需要人工微调，不能为了迁就 PPTX 的字体替换而破坏 HTML 排版。
+
 选择 JSON + HTML，是因为 Agent 可以可靠地读取、修改和验证结构化内容与 CSS 几何；同一内容源还能驱动网页动画、PDF 和原生 PPTX，而不需要从一张张不可编辑的设计截图反推文字。
 
 ## 单 Agent 工作流
@@ -167,6 +175,7 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 - 所有页面必须使用注册的背景与纹理，不能输出纯白或纯黑空底。
 - `150%` 行高表示字号的 1.5 倍，不是固定 `150px`。
 - Point、Card、Step、Metric 的小标题默认最多一行。
+- Workflow 箭头独立位于完整 Step 行上方，每个 Step（包括最后一个）上方都有一条箭头，箭头行与 Step 行保持 32px；编号在 Light 为 `#008089`、Dark 为 `#1EEAEA`。
 - 文字、卡片、callout、图片、页眉和来源不能重叠或越界。
 - Callout 不能单独成页，可附着到兼容布局；强调版是 `#A0A9FE → #2EEEEE (47.9%) → #93FCB8` 的渐变填充，Paint opacity 固定为 **16%**，并使用 20px blur、不加描边。HTML/PPTX 必须将 16% 写在渐变色标 alpha 上，不能把整个 Callout 设为 16% opacity，也不能将填充提高到 100%。
 - Callout 支持“强调小字/数值 + 正文”和“仅正文”两种内容变体，不需要为了占位虚构 label。

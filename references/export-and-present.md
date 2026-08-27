@@ -160,6 +160,13 @@ node "$SKILL_DIR/scripts/export-pptx.mjs" \
   --preview-dir /absolute/path/output/qa/pptx-preview
 ```
 
+Validate the exported layout metadata before release:
+
+```bash
+node "$SKILL_DIR/scripts/validate-pptx-layout.mjs" \
+  --layouts /absolute/path/output/qa/pptx-preview
+```
+
 PPTX behavior:
 
 - native editable text boxes for headings, labels, body, callouts, and sources;
@@ -172,6 +179,10 @@ PPTX behavior:
 - optional Artifact Tool preview PNG/layout JSON/montage.
 
 Some HTML-specific features are flattened or approximated in PPTX:
+
+- Validated HTML remains the visual source of truth and release priority.
+- PPTX is an optional editable adapter, not the reference renderer.
+- A target PowerPoint installation may substitute fonts or calculate different glyph metrics even when the font files are bundled. Keep the text editable, run the packaged checks, and document any remaining application-specific adjustment instead of changing the HTML design to match a fallback renderer.
 
 - CSS blend modes -> compiled background PNG;
 - backdrop blur -> translucent shape approximation;

@@ -9,6 +9,15 @@
       "purpose": "README overview of the generated English example deck",
       "runtimeRequired": false,
       "derivedFrom": "examples/deck.example.en.json HTML preflight screenshots"
+    },
+    {
+      "id": "aident-ppt-showcase-zh",
+      "path": "assets/previews/aident-ppt-showcase.zh.png",
+      "width": 2016,
+      "height": 792,
+      "purpose": "README overview of the generated Chinese example deck",
+      "runtimeRequired": false,
+      "derivedFrom": "examples/deck.example.zh.json HTML preflight screenshots"
     }
   ]
 }

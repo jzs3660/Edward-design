@@ -77,6 +77,7 @@ The accent callout has no border. Its emphasis comes from translucent gradient f
 - Base: `#F2F4F0` or a packaged light background image.
 - Primary text: `#111114`.
 - Secondary text: `#5E6263`.
+- Step number: `#008089`.
 - Hairline: `rgba(17,17,20,.14)`.
 - Card surface: `rgba(17,17,20,.02)`.
 - Default callout surface: `rgba(17,17,20,.04)`.
@@ -86,6 +87,7 @@ The accent callout has no border. Its emphasis comes from translucent gradient f
 - Base: `#0F091D` or a packaged dark background image.
 - Primary text: `#FFFFFF`.
 - Secondary text: `rgba(255,255,255,.70)`.
+- Step number: `#1EEAEA`.
 - Hairline: `rgba(255,255,255,.14)`.
 - Card surface: `rgba(255,255,255,.025)`.
 - Default callout surface: `rgba(255,255,255,.06)`.

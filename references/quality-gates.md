@@ -136,6 +136,7 @@ Inspect at full size:
 - cover;
 - densest 6-item slide;
 - workflow;
+- for Workflow, verify the arrow row is visibly above the Step row by 32px, no arrow is nested inside a Step, and number colors are `#008089` on Light / `#1EEAEA` on Dark;
 - comparison;
 - every image-heavy slide;
 - every slide with a long title/callout/source;
@@ -167,16 +168,26 @@ Poppler Type 3 glyph warnings can occur with browser-generated SVG/text clipping
 
 ## PPTX gate
 
+Run this gate only when PPTX was requested. HTML remains the primary visual standard. Font substitution or application-specific glyph metrics may require a final human adjustment in PowerPoint; such variance must be documented, but it must never be "fixed" by degrading the validated HTML layout.
+
 1. Export from the same latest resolved JSON.
 2. Render every slide.
 3. Run the presentation overflow checker.
-4. Inspect montage and full-size dense slides.
-5. Confirm dark backgrounds remain dark; an opaque texture over the background is a P0 export bug.
-6. Confirm text remains editable and speaker notes exist.
-7. Confirm logos/icons/images are present and not stretched. Browser preflight compares every header/cover logo's rendered aspect ratio with its intrinsic ratio; any change above 1.5% is an error.
+4. Run the packaged layout validator on the exported layout JSON:
+
+```bash
+node "$SKILL_DIR/scripts/validate-pptx-layout.mjs" \
+  --layouts /absolute/path/output/qa/pptx-preview
+```
+
+It rejects shapes outside the slide and wrapped Point/Card/Metric/Step titles, Step labels/numbers, Callout leads, and Sources.
+5. Inspect montage and full-size dense slides.
+6. Confirm dark backgrounds remain dark; an opaque texture over the background is a P0 export bug.
+7. Confirm text remains editable and speaker notes exist.
+8. Confirm logos/icons/images are present and not stretched. Browser preflight compares every header/cover logo's rendered aspect ratio with its intrinsic ratio; any change above 1.5% is an error.
    For PPTX, inspect the package or a non-SVG-aware viewer to confirm the logo is backed by a real PNG rather than a transparent fallback.
-8. Confirm source footer is not hidden behind callout/content.
-9. Open in PowerPoint/Keynote when available for application-specific review.
+9. Confirm source footer is not hidden behind callout/content.
+10. Open in PowerPoint/Keynote when available for application-specific review.
 
 ## Image gate
 

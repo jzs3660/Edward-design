@@ -30,6 +30,7 @@ const [tokens,registry,css,generator,pptx,schema]=await Promise.all([
 
 const callout=registry.components?.callout||{};
 const workflow=registry.components?.workflow||{};
+const step=registry.components?.step||{};
 check(tokens.gradients?.calloutAccent==='linear-gradient(90deg,rgba(160,169,254,.16) 0%,rgba(46,238,238,.16) 47.9%,rgba(147,252,184,.16) 100%)','Token gradients.calloutAccent drifted from the registered 16% gradient.');
 check(callout.accentPaintOpacity===0.16,'Callout accentPaintOpacity must be 0.16.');
 check(callout.blurPx===20,'Callout blurPx must be 20.');
@@ -46,13 +47,25 @@ check(compactCss.includes('gap:12px;')&&compactCss.includes('backdrop-filter:blu
 check(compactCss.includes('.callout.accent{min-height:88px;background:var(--callout-accent)}'),'Runtime Accent Callout must keep an 88px minimum and registered token.');
 check(compactCss.includes('.slide[data-theme="dark"].callout.accent{background:var(--callout-accent)}')||compactCss.includes('.slide[data-theme="dark"] .callout.accent{background:var(--callout-accent)}'),'Dark-theme specificity must not override the Accent Callout gradient.');
 
-check(workflow.arrow?.renderedCount==='steps-1'&&workflow.arrow?.trailingArrow===false,'Workflow arrow contract must render only between adjacent steps.');
+check(workflow.arrow?.renderedCount==='steps'&&workflow.arrow?.onePerStep===true&&workflow.arrow?.finalArrowVisible===true,'Workflow arrow contract must render one arrow above every Step, including the final Step.');
 check(workflow.arrow?.separateFromStep===true,'Workflow arrows must stay outside Step components.');
-check(compactCss.includes('.workflow-arrow:last-child{visibility:hidden}'),'HTML workflow must hide the terminal arrow slot.');
+check(workflow.arrowToStepGap===32&&workflow.labelToArrowGap===12,'Workflow must keep a 32px arrow-to-Step gap and a 12px label-to-arrow gap.');
+check(tokens.layout?.workflow?.arrowToStepGap===32&&tokens.layout?.workflow?.labelToArrowGap===12,'Workflow spacing tokens drifted.');
+check(tokens.semantic?.light?.stepNumber==='#008089'&&tokens.semantic?.dark?.stepNumber==='#1EEAEA','Step-number semantic colors drifted.');
+check(step.numberColors?.light==='#008089'&&step.numberColors?.dark==='#1EEAEA','Step component number colors drifted.');
+check(!compactCss.includes('.workflow-arrow:last-child{visibility:hidden}'),'HTML workflow must not hide the final Step arrow.');
+check(compactCss.includes('.workflow-steps{')&&compactCss.includes('margin-top:20px}'),'HTML workflow must combine the 12px flex gap with a 20px Step-row margin.');
+check(compactCss.includes('.workflow.no-arrows.workflow-steps{margin-top:0}')||compactCss.includes('.workflow.no-arrows .workflow-steps{margin-top:0}'),'Arrow-free workflow must remove the arrow-to-Step margin.');
+check(compactCss.includes('.step-number{')&&compactCss.includes('color:#008089;'),'Light Step numbers must use #008089.');
+check(compactCss.includes('.slide[data-theme="dark"].step-number{color:#1eeaea}')||compactCss.includes('.slide[data-theme="dark"] .step-number{color:#1eeaea}'),'Dark Step numbers must use #1EEAEA.');
 check(compactCss.includes('.workflow.no-dividers.workflow-step+.workflow-step::before{display:none}')||compactCss.includes('.workflow.no-dividers .workflow-step+.workflow-step::before{display:none}'),'HTML workflow must implement showDividers:false.');
 check(generator.includes("slide.showDividers===false?'no-dividers':''"),'Generator must bind showDividers:false to HTML.');
 check(generator.includes('is not a registered field.'),'Generator must reject unknown fields rather than silently ignore typos.');
-check(pptx.includes('for(let i=0;i<n-1;i++)'),'PPTX workflow must omit a trailing arrow.');
+check(pptx.includes('for(let i=0;i<n;i++)'),'PPTX workflow must render one arrow above every Step, including the final Step.');
+check(pptx.includes("stepY=arrowY+(s.showArrows===false?0:48)"),'PPTX workflow must keep the 16px arrow row plus 32px arrow-to-Step gap.');
+check(pptx.includes('color:c.stepNumber'),'PPTX Step numbers must use the registered theme color.');
+check(pptx.includes('fitOneLineFontSize(item.title,stepWidth,44,30)'),'PPTX workflow titles must use the one-line fitter.');
+check(pptx.includes('approximateTextWidth(metric,40)*1.35'),'PPTX Callout lead width must include the rendering safety factor.');
 check(pptx.includes("height=hasMetric||tone==='accent'?88:70"),'PPTX Callout height contract drifted.');
 
 const slideProperties=schema.$defs?.slide?.properties||{};
