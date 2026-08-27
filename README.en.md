@@ -1,12 +1,12 @@
 # Aident PPT Skill
 
-![Aident PPT Skill — from content outline to polished presentation](./assets/previews/aident-ppt-hero.png)
+![Aident PPT Skill — from content outline to polished presentation / 从内容框架到高质量演示](./assets/previews/aident-ppt-hero.png)
 
 [中文](./README.md) · [Skill instructions](./SKILL.md) · [Page layout catalog](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
 A self-contained bilingual presentation Skill that turns an audience, objective, and content outline into consistent HTML presentations by default. Single-file webpages, PDFs, and editable PPTX decks are optional outputs. Layouts, components, typography policy, icons, backgrounds, and quality gates are packaged with the Skill. Public visibility does not place every branded asset under an open-source license; read [NOTICE.md](./NOTICE.md) before use or redistribution.
 
-Bring your own brand / 自定义品牌: replace the cover and upper-left slide mark with your own PNG, JPG/JPEG, WebP, or SVG. Use one logo for both themes or provide separate Light/Dark files; the source aspect ratio is always preserved.
+Bring your own brand: replace the cover and upper-left slide mark with your own PNG, JPG/JPEG, WebP, or SVG. Use one logo for both themes or provide separate Light/Dark files; the source aspect ratio is always preserved.
 
 Figma and the source PDFs are design provenance and QA references only. They are not runtime dependencies.
 
@@ -14,25 +14,27 @@ Figma and the source PDFs are design provenance and QA references only. They are
 
 The preview is generated from packaged registries and bundled fonts. / 下图由包内 registry 与字体文件生成。
 
-![Aident PPT Skill color, typography, and layout system](./assets/previews/aident-ppt-system.png)
+![Aident PPT Skill color, typography, and layout system / 颜色、字体和版式系统](./assets/previews/aident-ppt-system.png)
 
-| Packaged capability | Count | Includes |
+| Packaged capability / 已打包能力 | Count / 数量 | Includes / 包含内容 |
 |---|---:|---|
-| Page layouts | 10 | Cover, Points, Cards, Metrics, Workflow, Comparison, Image Cards, Team, Split, Full-bleed |
-| Component types | 10 | Header, Source, Point, Step, Metric, Callout, Card, Workflow, Comparison, Image Mask |
-| Background treatments | 8 | Light / Dark × Base, Elements Cover, Elements Inner, Atmosphere |
-| Color system | 19 base + 9 gradients | Semantic colors, title gradients, emphasis gradients, Callout gradient |
-| Fonts | 6 bundled families | 3 English + 3 Chinese families with licenses and role index |
-| Icons | 10 × Light / Dark | Curated from the existing design system; no redrawn glyphs |
-| Languages | 2 | Independent English and Chinese type hierarchy, line height, and tracking |
+| Page layouts / 页面版式 | 10 | Cover、Points、Cards、Metrics、Workflow、Comparison、Image Cards、Team、Split、Full-bleed |
+| Component types / 组件类型 | 10 | Header、Source、Point、Step、Metric、Callout、Card、Workflow、Comparison、Image Mask |
+| Background treatments / 背景处理 | 8 | Light / Dark × Base、Elements Cover、Elements Inner、Atmosphere |
+| Color system / 颜色系统 | 19 base + 9 gradients | Semantic colors、title gradients、emphasis gradients、Callout gradient / 语义色、标题、强调与 Callout 渐变 |
+| Fonts / 字体 | 6 bundled families / 6 套 | 3 English + 3 Chinese families with licenses and role index / 英文 3 套 + 中文 3 套，包含许可与角色索引 |
+| Icons / 图标 | 10 × Light / Dark | Curated from the existing design system; no redrawn glyphs / 来自现有设计系统，不自行描画 |
+| Languages / 语言 | 2 | Independent English and Chinese type hierarchy, line height, and tracking / 中英文独立字体层级、行高与字距 |
 
 ## Complete nine-slide coverage in both languages / 中英文完整九页覆盖
 
-English example / 英文示例:
+### English example / 英文示例
+
+Nine real layouts covering cover, points, workflow, metrics, comparison, dense cards, image cards, Team, and split image/text. / 九种真实版式覆盖封面、要点、流程、指标、对比、密集卡片、图片卡片、团队与左文右图。
 
 ![Aident PPT Skill nine-slide English example](./assets/previews/aident-ppt-showcase.png)
 
-Chinese example / 中文示例:
+### Chinese example / 中文示例
 
 The Chinese deck validates its own typography and spacing tokens. / 中文示例使用独立的字体层级与间距 token。
 

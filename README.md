@@ -4,13 +4,11 @@
 
 [Full English README / 完整英文文档](./README.en.md) · [Skill instructions](./SKILL.md) · [Layout catalog / 页面版式目录](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
-A self-contained bilingual presentation Skill that turns an audience, objective, and content outline into consistent HTML presentations. Layouts, components, bundled fonts, icons, backgrounds, and quality gates all travel with the repository; PDF and editable PPTX are optional exports.
-
 一套可离线运行、可公开安装的中英文演示文稿 Skill。用户只需提供受众、目标和内容框架，Agent 即可使用包内的版式、组件、字体策略、图标、背景和质量规则，默认生成统一风格的 HTML 演示；单文件网页、PDF 与可编辑 PPTX 均为按需选项。公开可见不等于所有品牌素材都采用开源许可，使用和再分发前请阅读 [NOTICE.md](./NOTICE.md)。
 
-Bring your own brand / 自定义品牌：可用自己的 PNG、JPG/JPEG、WebP 或 SVG 替换封面和内页左上角 Logo；支持单一 Logo 或 Light/Dark 两套文件，始终保持原始比例。
+自定义品牌：可用自己的 PNG、JPG/JPEG、WebP 或 SVG 替换封面和内页左上角 Logo；支持单一 Logo 或 Light/Dark 两套文件，始终保持原始比例。
 
-Figma and the source PDFs are design provenance and QA references only; they are not runtime dependencies. / Figma 和原始 PDF 只用于设计校验与溯源，生成时不需要登录 Figma，也不需要实时提取节点。
+Figma 和原始 PDF 只用于设计校验与溯源，生成时不需要登录 Figma，也不需要实时提取节点。
 
 ## Design system at a glance / 一眼看懂这套系统
 
