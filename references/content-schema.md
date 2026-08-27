@@ -268,7 +268,7 @@ The Team layout is strictly three content items followed by the 1700×340 masked
 ```json
 {
   "type": "split-image-text",
-  "imageSide": "left",
+  "imageSide": "right",
   "image": { "src": "./images/pilot.jpg", "alt": "Pilot workflow" },
   "contentTitle": "Choose a visible, repeatable task",
   "body": "Short explanatory paragraph."

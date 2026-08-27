@@ -141,7 +141,7 @@
       "subtitle": "A small pilot creates evidence without forcing a broad rollout.",
       "contentTitle": "Choose a visible, repeatable task",
       "body": "Define the owner, inputs, review gate, and success signal before the pilot begins.",
-      "imageSide": "left",
+      "imageSide": "right",
       "callout": { "tone": "accent", "metric": "7 DAYS", "body": "Use the first week to learn where context is lost, then adjust the workflow before expanding it." },
       "notes": { "purpose": "End with a concrete action.", "talk": ["Name the selection criteria for a good pilot.", "Confirm who will own the first review."], "transition": "Open discussion around the pilot choice." }
     }

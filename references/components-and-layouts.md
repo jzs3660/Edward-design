@@ -266,7 +266,7 @@ Purpose: ownership, collaboration, operating rhythm, or human context.
 Purpose: feature/evidence plus explanation or next step.
 
 - One 760×428 image.
-- Image left by default; `imageSide: "right"` reverses it.
+- Text stays on the left and the image stays on the right; do not mirror this layout.
 - Content title may wrap, unlike small component titles.
 - Preserve an 80px gap between image and text.
 - A callout may sit below the split content.

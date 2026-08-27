@@ -32,8 +32,10 @@ const callout=registry.components?.callout||{};
 const workflow=registry.components?.workflow||{};
 const step=registry.components?.step||{};
 const teamLayout=registry.layouts?.team||{};
+const splitLayout=registry.layouts?.['split-image-text']||{};
 const headerLogo=registry.components?.header?.logo||{};
 const coverIdentity=registry.layouts?.cover?.identity||{};
+const slideProperties=schema.$defs?.slide?.properties||{};
 check(tokens.gradients?.calloutAccent==='linear-gradient(90deg,rgba(160,169,254,.16) 0%,rgba(46,238,238,.16) 47.9%,rgba(147,252,184,.16) 100%)','Token gradients.calloutAccent drifted from the registered 16% gradient.');
 check(callout.accentPaintOpacity===0.16,'Callout accentPaintOpacity must be 0.16.');
 check(callout.blurPx===20,'Callout blurPx must be 20.');
@@ -82,6 +84,13 @@ check(generator.includes("team:[3]"),'Generator must reject Team slides that do 
 check(generator.includes("team uses three content items above one image and does not support a Callout"),'Generator must reject Team Callouts.');
 check(generator.includes("team does not render a Source footer"),'Generator must reject Team Source footers.');
 
+check(splitLayout.structure==='left-text-right-image','Split layout must stay left text / right image.');
+check(splitLayout.image?.side==='right'&&splitLayout.gap===80,'Split image must stay on the right with an 80px text/media gap.');
+check(JSON.stringify(slideProperties?.imageSide?.enum||[])==='["right"]','Deck schema must reject left-image split layouts.');
+check(generator.includes('data-layout="text-left-image-right"'),'HTML split renderer must expose the fixed left-text/right-image contract.');
+check(compactCss.includes('.split{display:grid;grid-template-columns:minmax(0,1fr)760px;gap:80px;'),'Runtime split geometry must keep flexible left copy, 80px gap, and 760px right media.');
+check(pptx.includes("left:1050,top:y,width:760,height:428")&&pptx.includes("left:110,top:y+38,width:860"),'PPTX split renderer must keep copy left and image right.');
+
 const logoFormats=['png','jpg','jpeg','webp','svg'];
 check(JSON.stringify(registry.rules?.userSuppliedLogoFormats)===JSON.stringify(logoFormats),'Registry must expose the supported user-supplied logo formats.');
 check(headerLogo.userSupplied===true&&headerLogo.replaceable===true&&JSON.stringify(headerLogo.acceptedFormats)===JSON.stringify(logoFormats),'Header logo must remain user-supplied and replaceable for every registered format.');
@@ -90,7 +99,6 @@ check(generator.includes("'.jpg':'image/jpeg'")&&generator.includes("'.jpeg':'im
 check(pptx.includes("ext==='.webp'?'image/webp'"),'PPTX image adapter must identify WebP correctly.');
 check(pptx.includes("if(ext==='.svg'||ext==='.webp')"),'PPTX logo adapter must rasterize SVG and WebP logo inputs safely.');
 
-const slideProperties=schema.$defs?.slide?.properties||{};
 check(schema.$defs?.slide?.additionalProperties===false,'Slide schema must reject unknown fields.');
 check(schema.$defs?.item?.additionalProperties===false,'Item schema must reject unknown fields.');
 for(const property of ['workflowLabel','showWorkflowLabel','showArrows','showDividers','showStepLabels'])check(property in slideProperties,`Slide schema is missing ${property}.`);

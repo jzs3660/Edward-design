@@ -199,6 +199,7 @@ Release requires every requested artifact and a matching passing QA report. See 
 - Source, logo, right-header text, label, and icon are independently optional.
 - Replacement logos preserve their intrinsic ratio: limit inner-header marks by 40px height and cover identity marks by 56px height; never stretch to a fixed width.
 - Team is strictly three concise content items above one 1700×340 masked image; it does not append a Callout or Source footer, and image provenance belongs in speaker notes.
+- Split image/text is fixed to left text and one 760×428 image on the right with an 80px gap; never mirror it.
 - Six-card and Team page titles remain one line within 30 English or 12 Chinese characters.
 - Use packaged design-system icons only. Do not redraw them or substitute emoji.
 - Do not invent sensitive commercial names, customers, metrics, or performance claims.

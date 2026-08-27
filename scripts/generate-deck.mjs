@@ -84,6 +84,7 @@ function validate(deck){
     }
     if(slide.type==='team'&&slide.callout)fail(errors,`${ref}: team uses three content items above one image and does not support a Callout.`);
     if(slide.type==='team'&&slide.source)fail(errors,`${ref}: team does not render a Source footer; keep image provenance in notes.`);
+    if(slide.type==='split-image-text'&&slide.imageSide&&slide.imageSide!=='right')fail(errors,`${ref}: split-image-text is fixed to left text / right image; imageSide must be right or omitted.`);
     if(slide.background&&!allowedBackgrounds.has(slide.background))fail(errors,`${ref}.background is not registered: ${slide.background}`);
     if(slide.type==='cover'&&slide.background==='elements-inner')fail(errors,`${ref}: cover cannot use elements-inner; use elements-cover.`);
     if(slide.type!=='cover'&&slide.background==='elements-cover')fail(errors,`${ref}: inner slide cannot use elements-cover; use elements-inner.`);
@@ -204,7 +205,7 @@ function teamHtml(slide){
   const items=slide.items.map((item,i)=>`<article class="team-point" data-component="team-point" data-anim style="--i:${i+1}">${labelHtml(item)}<h3 class="item-title" data-one-line>${escapeHtml(item.title)}</h3><p class="item-body">${escapeHtml(item.body)}</p></article>`).join('');
   return `<div class="team-layout"><div class="team-point-grid">${items}</div><div class="team-media-wrap" data-anim style="--i:4">${imageHtml(slide.image,'team-media')}</div></div>`;
 }
-function splitHtml(slide){return `<div class="split ${slide.imageSide==='right'?'reverse':''}" data-anim style="--i:1">${slide.imageSide==='right'?`<div class="split-copy"><h3 class="item-title">${escapeHtml(slide.contentTitle||slide.title)}</h3><p class="item-body">${escapeHtml(slide.body||slide.subtitle||'')}</p></div>${imageHtml(slide.image,'split-media')}`:`${imageHtml(slide.image,'split-media')}<div class="split-copy"><h3 class="item-title">${escapeHtml(slide.contentTitle||slide.title)}</h3><p class="item-body">${escapeHtml(slide.body||slide.subtitle||'')}</p></div>`}</div>`}
+function splitHtml(slide){return `<div class="split" data-layout="text-left-image-right" data-anim style="--i:1"><div class="split-copy"><h3 class="item-title">${escapeHtml(slide.contentTitle||slide.title)}</h3><p class="item-body">${escapeHtml(slide.body||slide.subtitle||'')}</p></div>${imageHtml(slide.image,'split-media')}</div>`}
 function renderMain(slide){
   if(slide.type==='points')return pointsHtml(slide);
   if(slide.type==='cards')return cardsHtml(slide);

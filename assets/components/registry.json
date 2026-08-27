@@ -49,7 +49,7 @@
     "comparison": { "counts": [2], "themes": ["light", "dark"], "callout": true },
     "image-cards": { "counts": [2, 3], "themes": ["light", "dark"], "callout": true },
     "team": { "counts": [3], "themes": ["light", "dark"], "structure": ["three-content-items", "image"], "image": { "size": [1700, 340], "mask": "radial-alpha", "position": "below-items" }, "itemLabels": "optional", "callout": false, "source": false, "pageTitle": { "lines": 1, "en": 30, "zh": 12 } },
-    "split-image-text": { "counts": [1], "themes": ["light", "dark"], "image": { "size": [760, 428], "sides": ["left", "right"] }, "callout": true, "pageTitleWithCallout": { "lines": 1, "en": 30, "zh": 14 } },
+    "split-image-text": { "counts": [1], "themes": ["light", "dark"], "structure": "left-text-right-image", "image": { "size": [760, 428], "side": "right" }, "gap": 80, "callout": true, "pageTitleWithCallout": { "lines": 1, "en": 30, "zh": 14 } },
     "full-bleed": { "counts": [1], "themes": ["light", "dark"], "callout": true }
   }
 }

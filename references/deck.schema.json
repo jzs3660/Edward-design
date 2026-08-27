@@ -117,7 +117,7 @@
         "source": { "type": "string" },
         "header": { "$ref": "#/$defs/header" },
         "image": { "$ref": "#/$defs/image" },
-        "imageSide": { "enum": ["left", "right"] },
+        "imageSide": { "enum": ["right"], "description": "Split layout is fixed to left text / right image. Omit for the same default behavior." },
         "contentTitle": { "type": "string" },
         "body": { "type": "string" },
         "showArrows": { "type": "boolean" },

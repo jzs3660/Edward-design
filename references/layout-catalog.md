@@ -40,7 +40,7 @@ Source? (one line, lower left)
 | Comparison | 2 states | two equal cards | yes | yes | base / atmosphere |
 | Image cards | 2 or 3 | equal 16:10 media cards | yes | yes | base / elements-inner |
 | Team | 3 content items + one 1700×340 masked image | three columns above image | no | no | elements-inner / atmosphere |
-| Split image + text | image left/right | 760×428 media + 80px gap + text | yes | yes | base / elements-inner / atmosphere |
+| Split image + text | left text / right image | text + 80px gap + 760×428 media | yes | yes | base / elements-inner / atmosphere |
 | Full bleed | one hero image | 1920×1080 image + wash | yes, sparingly | yes | supplied image |
 
 ## Cover
@@ -162,7 +162,7 @@ Use only for an actual ordered sequence.
 ## Split image + text
 
 - One 760×428, 16:9 image with 24px radius.
-- `imageSide` can be `left` or `right`; the package default is left image / right text.
+- Text is always on the left and the image is always on the right. `imageSide`, when supplied, must be `right`.
 - Preserve the 80px gap between media and text.
 - `contentTitle` may wrap; it is not a small card title.
 - With Callout, the page title must be one line: EN 30 / ZH 14.

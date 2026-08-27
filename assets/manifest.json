@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-27T15:40:17.571Z",
+  "generatedAt": "2026-08-27T15:51:39.248Z",
   "fileCount": 78,
-  "totalBytes": 76123623,
+  "totalBytes": 76118806,
   "files": [
     {
       "path": "assets/asset-sources.json",
@@ -96,8 +96,8 @@
     },
     {
       "path": "assets/components/registry.json",
-      "bytes": 5660,
-      "sha256": "3919c90dc7e33068f7f5d4c188d77ee6cfbb1d3464f3d2fb1e46628cd586c7b9"
+      "bytes": 5698,
+      "sha256": "2a83e7e9c401e1f4c4627c69a7e738fb3df195c403c5b2230e4dd6f03c73cb51"
     },
     {
       "path": "assets/fonts/SmileySans-v2.0.1.zip",
@@ -336,13 +336,13 @@
     },
     {
       "path": "assets/previews/aident-ppt-showcase.png",
-      "bytes": 1343532,
-      "sha256": "59215d36e0ce17459ed754d590fe3842ed2a287b61d640affea45bf8ce9db4ce"
+      "bytes": 1341740,
+      "sha256": "69a165460f2590198a3f53c3e109d2d3329bf2c2b3033202a2f89f071aaadecd"
     },
     {
       "path": "assets/previews/aident-ppt-showcase.zh.png",
-      "bytes": 1310730,
-      "sha256": "c667748bb14269b7668a85aa42693c54d827d108f4ab028f45b5e7d378001b86"
+      "bytes": 1307725,
+      "sha256": "0f89f893f9f57b1ac135b87c6622be394afcd1ceab49d9a7ca85e7071ef584e7"
     },
     {
       "path": "assets/previews/aident-ppt-system.png",
@@ -356,8 +356,8 @@
     },
     {
       "path": "assets/runtime/deck.css",
-      "bytes": 24157,
-      "sha256": "daad752785e9cd536b1cb519b6c3d49e7e0178e9fd031003622f073da0f76b8d"
+      "bytes": 24099,
+      "sha256": "795b045248e22e751c505aa98bbf5905c9b9855a6aa396df2e22e48a3d727814"
     },
     {
       "path": "assets/runtime/deck.js",

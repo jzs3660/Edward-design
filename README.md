@@ -40,11 +40,11 @@ The matching Chinese deck validates its own display, body, label, numeral, line-
 
 ![Aident PPT Skill nine-slide Chinese example / 中文 9 页示例](./assets/previews/aident-ppt-showcase.zh.png)
 
-## 快速开始
+## Quick start / 快速开始
 
-### 1. 安装
+### 1. Install / 安装
 
-将整个目录复制到 Agent 的 Skill 目录。不要只复制 `SKILL.md`，字体、背景、图标、运行时和参考文档都属于 Skill 的一部分。
+Copy the complete repository into the Agent's Skill directory; do not copy only `SKILL.md`. / 将整个目录复制到 Agent 的 Skill 目录。不要只复制 `SKILL.md`，字体、背景、图标、运行时和参考文档都属于 Skill 的一部分。
 
 Codex：
 
@@ -58,7 +58,7 @@ Claude Code：
 cp -R /path/to/aident-ppt-skill ~/.claude/skills/aident-ppt-skill
 ```
 
-其他支持本地 Skill 的 Agent，可把目录放入其约定的技能路径；至少需要文件读写、Node.js 20+ 和浏览器预览能力。
+Other local Agent environments need file access, Node.js 20+, and browser preview support. / 其他支持本地 Skill 的 Agent，可把目录放入其约定的技能路径；至少需要文件读写、Node.js 20+ 和浏览器预览能力。
 
 如果以后发布到 Git 仓库或 skills.sh，可使用对应平台的安装命令安装完整目录，Skill 名保持 `aident-ppt-skill`。
 
@@ -66,7 +66,16 @@ cp -R /path/to/aident-ppt-skill ~/.claude/skills/aident-ppt-skill
 npx skills add https://github.com/jzs3660/aident-ppt-skill --skill aident-ppt-skill
 ```
 
-### 2. 给 Agent 一段内容框架
+### 2. Give the Agent an outline / 给 Agent 一段内容框架
+
+Use the English prompt below or the matching Chinese prompt; both exercise the same editable system. / 可使用下面的英文或中文提示词，两者调用同一套可编辑系统。
+
+```text
+Use $aident-ppt-skill to make an 8-slide English strategy presentation.
+The audience is business leadership. Explain the current situation, three opportunities,
+an implementation workflow, and success measures. Deliver folder HTML only unless I explicitly request PDF or editable PPTX.
+I will supply a replaceable logo and images. Do not invent customers, revenue, or performance claims.
+```
 
 ```text
 使用 $aident-ppt-skill 制作一份 8 页中文产品策略演示。
@@ -77,7 +86,7 @@ npx skills add https://github.com/jzs3660/aident-ppt-skill --skill aident-ppt-sk
 
 Agent 会把内容先整理成叙事与布局，再生成和检查各格式，不会机械地把每一条 bullet 变成一页。
 
-### 3. 直接运行示例
+### 3. Run an example / 直接运行示例
 
 ```bash
 node scripts/check-fonts.mjs
@@ -86,15 +95,17 @@ node scripts/generate-deck.mjs \
   --out output/example-zh
 ```
 
-打开 `output/example-zh/index.html` 即可演示。按 `P` 进入演讲者模式。
+Open `output/example-zh/index.html` to present; press `P` for presenter mode. / 打开 `output/example-zh/index.html` 即可演示。按 `P` 进入演讲者模式。
 
-## 能力范围
+## What is included / 能力范围
+
+The package includes bilingual typography, reusable 1920×1080 layouts, Light/Dark visual treatments, editable content, replaceable branding, HTML-first delivery, optional PDF/PPTX exports, presenter controls, and executable Single-/Multi-Agent QA workflows. / 包内覆盖中英文字体、可复用版式、深浅色视觉、可编辑内容、自定义品牌、HTML 优先交付、可选 PDF/PPTX、演讲控制，以及可执行的单/多 Agent QA 流程。
 
 - 中英文两套明确的字体层级、字号、行高和字距规则。
 - 1920×1080、16:9 的固定画布与可复用布局系统。
 - Light/Dark 背景、纹理叠加、渐变文字、kicker、callout 与对比色；Elements 明确拆分 Cover/Inner，Atmosphere 可用于 Light/Dark 内页。
 - Point、Card、Metric 的 2/3/4/6 组合；Workflow 的 3/4 步组合。
-- 图片卡片、团队蒙版、左右图文、全幅图片、对比页等素材版式。
+- 图片卡片、团队蒙版、固定左文右图、全幅图片、对比页等素材版式。
 - label、icon、header、source、callout、workflow 箭头等可选变体。
 - 所有页面文案都由 JSON 填充并可编辑：kicker、标题、副标题、Point/Card/Metric/Step/Comparison 的各级文字、数值、列表、Callout、来源与演讲备注。
 - 可替换 logo、右上角文字/网址、内容图片、裁切位置与来源。
@@ -103,15 +114,15 @@ node scripts/generate-deck.mjs \
 - 静态校验、浏览器重叠/越界检查、PDF/PPTX 渲染检查。
 - 单 Agent 流程和具备文件所有权、handoff、并行 QA 的真实多 Agent 流程。
 
-## 适合 / 不适合
+## Good fit / poor fit / 适合与不适合
 
-适合：对外方案、产品介绍、策略汇报、方法论、团队/流程介绍、带少量关键指标和图片证据的高质量演示。
+Good fit: proposals, product introductions, strategy reviews, operating frameworks, team/process stories, and evidence-led presentations. / 适合：对外方案、产品介绍、策略汇报、方法论、团队/流程介绍、带少量关键指标和图片证据的高质量演示。
 
-不适合：以超大表格为主体的报表、要求在一页容纳大量明细的培训手册、未经整理的逐字稿、需要实时多人同时编辑同一个 PPTX 文件的场景。后者应先在协作平台完成内容，再用本 Skill 生成发布版。
+Poor fit: spreadsheet-heavy reports, dense training manuals, raw transcripts, or real-time co-editing of one PPTX. / 不适合：以超大表格为主体的报表、要求在一页容纳大量明细的培训手册、未经整理的逐字稿、需要实时多人同时编辑同一个 PPTX 文件的场景。后者应先在协作平台完成内容，再用本 Skill 生成发布版。
 
-## 输出格式如何选择
+## Output formats / 输出格式如何选择
 
-| 需求 | 推荐输出 | 说明 |
+| Need / 需求 | Recommended / 推荐输出 | Notes / 说明 |
 |---|---|---|
 | 动画、演讲者备注、网页演示 | 文件夹 HTML | 视觉与交互最完整 |
 | 离线发送或单文件交付 | 单文件 HTML | 字体与素材内嵌，文件会更大 |
@@ -119,15 +130,15 @@ node scripts/generate-deck.mjs \
 | 在 PowerPoint 继续修改 | PPTX | 文字和主要形状可编辑，部分网页效果会近似 |
 | 发布为网页 | 文件夹 HTML | 可部署到任意静态 HTTPS 主机 |
 
-HTML 是默认主渲染与交付实现。除非用户明确要求，否则不额外导出 PDF 或 PPTX。PDF 从同一 HTML 导出；PPTX 从同一份解析后的 JSON 生成原生文本、形状、图片和备注，因此按需导出时内容仍保持同步。
+HTML is the default renderer and visual source of truth; PDF and editable PPTX are optional exports. / HTML 是默认主渲染与交付实现。除非用户明确要求，否则不额外导出 PDF 或 PPTX。PDF 从同一 HTML 导出；PPTX 从同一份解析后的 JSON 生成原生文本、形状、图片和备注，因此按需导出时内容仍保持同步。
 
 HTML 是视觉标准，必须优先保证。PPTX 是可编辑的可选适配格式；目标电脑若未识别包内字体，或 PowerPoint 使用了不同的字体度量，可能需要人工微调，不能为了迁就 PPTX 的字体替换而破坏 HTML 排版。
 
 选择 JSON + HTML，是因为 Agent 可以可靠地读取、修改和验证结构化内容与 CSS 几何；同一内容源还能驱动网页动画、PDF 和原生 PPTX，而不需要从一张张不可编辑的设计截图反推文字。
 
-## 单 Agent 工作流
+## Single-Agent workflow / 单 Agent 工作流
 
-适合 2–8 页、素材简单或只输出一种格式的任务。
+Use for a small deck, simple asset requirements, or one output format. / 适合 2–8 页、素材简单或只输出一种格式的任务。
 
 1. 读取 `SKILL.md`，按需读取相关 reference。
 2. 把请求整理成受众、目的、叙事和逐页 takeaway。
@@ -139,9 +150,9 @@ HTML 是视觉标准，必须优先保证。PPTX 是可编辑的可选适配格�
 
 完整规则见 [SKILL.md](./SKILL.md)。
 
-## 多 Agent 工作流
+## Multi-Agent workflow / 多 Agent 工作流
 
-适合 10 页以上、多源材料、多格式同时交付，或用户明确要求并行 Agent 的任务。它不是“多个 Agent 同时改一个 PPT”，而是单写者所有权下的分工与确定性组装。
+Use for 10+ slides, multiple sources, concurrent formats, or an explicit parallel-Agent request. Specialists write bounded handoffs; one lead owns deterministic assembly. / 适合 10 页以上、多源材料、多格式同时交付，或用户明确要求并行 Agent 的任务。它不是“多个 Agent 同时改一个 PPT”，而是单写者所有权下的分工与确定性组装。
 
 ```text
 Lead / Orchestrator
@@ -161,7 +172,7 @@ HTML QA      PDF QA       PPTX QA
 
 角色表在 [`agents/roles.json`](./agents/roles.json)，仓库级文件所有权在 [`AGENTS.md`](./AGENTS.md)，每个角色的可直接分派提示词在 [`agents/prompts/`](./agents/prompts/)。
 
-### 初始化一次运行
+### Initialize a run / 初始化一次运行
 
 ```bash
 node scripts/init-multi-agent-run.mjs \
@@ -173,7 +184,7 @@ node scripts/init-multi-agent-run.mjs \
 
 初始化后，Lead 将专业任务分派给 Agent。每个 Agent 只能写自己的 handoff 或 QA 目录；最终 `deck.json`、`output/` 和 release 由 Lead 单独拥有。
 
-### 验证并组装
+### Validate and assemble / 验证并组装
 
 ```bash
 node scripts/validate-agent-run.mjs --run /absolute/path/run --phase planning
@@ -183,7 +194,7 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase assembled
 
 只有 narrative 为 `complete`，assets/notes 为 `complete` 或 `waived` 时才可组装。未知 slide ID、重复 ID、越权写入声明和无效 item 索引都会失败。
 
-### 发布门禁
+### Release gate / 发布门禁
 
 各格式 QA Agent 只负责检查和写报告，不直接修改最终稿。Lead 修复后重新生成，最后运行：
 
@@ -193,9 +204,9 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 
 所有请求的文件与对应 `pass: true` 报告齐全后才能发布。完整协议、失败恢复和 Codex/Claude/Cursor 的分派模式见 [multi-agent-workflow.md](./references/multi-agent-workflow.md)。
 
-## 设计与内容规则
+## Non-negotiable design rules / 设计与内容规则
 
-几个最重要、并且会被运行时或 QA 强制检查的规则：
+These rules are enforced by runtime validation or QA. / 以下关键规则会被运行时或 QA 强制检查：
 
 - 只有封面标题居中；所有内页标题左对齐。
 - 所有页面必须使用注册的背景与纹理，不能输出纯白或纯黑空底。
@@ -208,6 +219,7 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 - 来源、logo、右上角文字、label、icon 都可以关闭或替换。
 - 替换 logo 必须保持原始比例：内页页眉按最高 40px、封面标识按最高 56px 等比缩放，禁止固定宽度拉伸。
 - Team 页面固定为上方 3 个内容项 + 下方 1 张 1700×340 蒙版图；不追加 Callout 或来源小字，图片来源写入演讲备注。
+- Split image/text is fixed to left text + right image with an 80px gap; it must never be mirrored. / 单图左右分栏固定为左文右图，间距 80px，禁止镜像成左图右文。
 - 6-card 与 Team 页的大标题必须单行，英文不超过 30 字符、中文不超过 12 字符。
 - 只使用包内设计系统 icon，不临摹、不使用 emoji 代替。
 - 未经用户提供和批准，不写入商业敏感名称、客户、指标或效果声明。
@@ -216,11 +228,11 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 组件结构见 [components-and-layouts.md](./references/components-and-layouts.md)；逐页版式、数量、字数预算、背景与图片槽位见 [layout-catalog.md](./references/layout-catalog.md)；输入字段见 [content-schema.md](./references/content-schema.md)。
 配图生成、槽位构图和产品截图处理见 [image-direction-and-screenshots.md](./references/image-direction-and-screenshots.md)。
 
-## 全部页面内容都可编辑
+## All slide content is editable / 全部页面内容都可编辑
 
-组件不是文字烘焙成图片的静态模板。每一页的可见内容都来自 `deck.json`，因此可以由用户输入、Agent 生成或后续直接修改：
+Components are not flattened screenshots: every visible field comes from `deck.json` and can be supplied, generated, or edited. / 组件不是文字烘焙成图片的静态模板。每一页的可见内容都来自 `deck.json`，因此可以由用户输入、Agent 生成或后续直接修改：
 
-| 区域 | 可填充/修改字段 |
+| Area / 区域 | Editable fields / 可填充与修改字段 |
 |---|---|
 | 页面标题区 | `kicker`、`title`、`subtitle` |
 | Point / Card | `label`、`title`、`body`、`icon`、可选 `image` |
@@ -234,9 +246,9 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 
 字段、布局适用范围和示例见 [content-schema.md](./references/content-schema.md)。
 
-## 品牌、图片与素材替换
+## Replaceable branding and imagery / 品牌、图片与素材替换
 
-品牌和图片同样不写死在模板中。可在 deck JSON 的 `meta`、每页 `header` 与图片对象中替换：
+Branding and imagery are data-driven and replaceable through deck-level `meta`, slide-level `header`, and image objects. / 品牌和图片同样不写死在模板中。可在 deck JSON 的 `meta`、每页 `header` 与图片对象中替换：
 
 - 用户自己的 PNG、JPG/JPEG、WebP 或 SVG Logo（`meta.logo`），可提供单一文件或 Light/Dark 两套文件；
 - 封面 Logo 与内页左上角品牌标记；
@@ -248,18 +260,18 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 
 具体字段与裁切安全区见 [assets-and-branding.md](./references/assets-and-branding.md)。
 
-## 字体与授权
+## Fonts and licensing / 字体与授权
 
-包内已打包并索引可再分发字体：
+Redistributable fonts are bundled, indexed, and license-tracked. / 包内已打包并索引可再分发字体：
 
 - English: Outfit、Noto Sans、Instrument Serif；
 - 中文: Smiley Sans、Noto Sans SC、Noto Serif SC。
 
 默认输出不依赖本机 SF Pro 或 MiSans：Skill 使用可公开打包的 Noto Sans / Noto Sans SC 承担对应正文与信息层级角色。运行 `node scripts/check-fonts.mjs` 可验证每个字体文件均已打包。字体角色、比例行高与安装策略见 [typography.md](./references/typography.md)，授权文件位于 `assets/fonts/licenses/`。
 
-## 演示控制
+## Presenter controls / 演示控制
 
-观众视图：
+Audience view / 观众视图：
 
 - `→` / `Page Down` / `Space`：下一页；
 - `←` / `Page Up`：上一页；
@@ -270,9 +282,9 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 
 演讲者视图提供当前页、下一页、备注、计时器、黑屏/白屏、冻结观众窗口和窗口同步。详细信息见 [export-and-present.md](./references/export-and-present.md)。
 
-## 质量门禁
+## Quality gates / 质量门禁
 
-成功导出不等于通过。发布前必须：
+A successful export is not a passing deck; every requested format must pass its own visual QA. / 成功导出不等于通过。发布前必须：
 
 - HTML preflight 为 0 error；
 - 无重叠、越界、断图、字体缺失、错误对齐和非法行高；
@@ -283,7 +295,7 @@ node scripts/validate-agent-run.mjs --run /absolute/path/run --phase release
 
 命令和 P0/P1/P2 判定见 [quality-gates.md](./references/quality-gates.md)。
 
-## 目录结构
+## Repository structure / 目录结构
 
 ```text
 aident-ppt-skill/
@@ -304,13 +316,15 @@ aident-ppt-skill/
   scripts/                     初始化、组装、生成、导出、验证
 ```
 
-## 来源与运行独立性
+## Provenance and runtime independence / 来源与运行独立性
 
-内部设计稿、用户提供的 PDF 和参考仓库是构建与校验来源。组件范围和素材来源记录在 [source-index.md](./references/source-index.md) 与 `assets/asset-sources.json`；私有文件标识和本机路径不会公开。运行时只读取当前目录内的 token、组件、素材和文档，因此打包后的 Skill 不依赖原始 Figma 文件。
+Figma, source PDFs, and the reference repository are provenance and QA inputs only; the distributed Skill runs entirely from packaged files. / 内部设计稿、用户提供的 PDF 和参考仓库是构建与校验来源。组件范围和素材来源记录在 [source-index.md](./references/source-index.md) 与 `assets/asset-sources.json`；私有文件标识和本机路径不会公开。运行时只读取当前目录内的 token、组件、素材和文档，因此打包后的 Skill 不依赖原始 Figma 文件。
 
 相对于 [`op7418/guizang-ppt-skill`](https://github.com/op7418/guizang-ppt-skill) 的能力覆盖记录在 [reference-gap-matrix.md](./references/reference-gap-matrix.md)。本 Skill 在多平台 Agent 兼容之外，额外提供了可执行的多 Agent handoff、单写者和发布验证协议。
 
-## 公开发布与许可
+## Public release and licensing / 公开发布与许可
+
+Keep third-party licenses and provenance indexes, and remove user inputs, temporary outputs, and sensitive QA material before release. / 发布前保留第三方授权与来源索引，并删除用户输入、临时产物与敏感 QA 材料。
 
 - 保留包内第三方字体授权文件和素材来源索引。
 - 第三方字体分别遵循包内 OFL 文件；Aident 名称、logo、背景、图标和设计系统素材不因仓库公开而自动获得开源许可，详见 [NOTICE.md](./NOTICE.md)。

@@ -137,7 +137,7 @@ async function addTeam(slide,s,y){
   }
   const image=normalizeImage(s.image);await addImage(slide,image?.src,{left:110,top:y+177,width:1700,height:340},{fit:image?.fit||'cover',alt:image?.alt||''});
 }
-async function addSplit(slide,s,y){const c=colors[s.theme],image=normalizeImage(s.image),imageLeft=s.imageSide!=='right',imageX=imageLeft?110:1050,textX=imageLeft?950:110;await addImage(slide,image?.src,{left:imageX,top:y,width:760,height:428},{fit:image?.fit||'cover',radius:24,alt:image?.alt||''});addText(slide,s.contentTitle||s.title,{left:textX,top:y+38,width:760,height:130},{fontFamily:fonts.item,fontSize:52,color:c.primary});addText(slide,s.body||s.subtitle||'',{left:textX,top:y+190,width:760,height:140},{fontSize:25,color:c.secondary})}
+async function addSplit(slide,s,y){const c=colors[s.theme],image=normalizeImage(s.image);await addImage(slide,image?.src,{left:1050,top:y,width:760,height:428},{fit:image?.fit||'cover',radius:24,alt:image?.alt||''});addText(slide,s.contentTitle||s.title,{left:110,top:y+38,width:860,height:130},{fontFamily:fonts.item,fontSize:52,color:c.primary});addText(slide,s.body||s.subtitle||'',{left:110,top:y+190,width:860,height:140},{fontSize:25,color:c.secondary})}
 function addCallout(slide,s){
   if(!s.callout)return;
   const c=colors[s.theme],tallContent=['split-image-text','image-cards'].includes(s.type),y=!s.source&&tallContent?938:875,metric=s.callout.metric||s.callout.label,hasMetric=Boolean(metric),tone=s.callout.tone==='accent'?'accent':'default',height=hasMetric||tone==='accent'?88:70;

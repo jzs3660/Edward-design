@@ -57,12 +57,12 @@ Treat a screenshot as evidence, not as a background texture.
 - Prefer the slide/card surface and registered radius as the frame. Do not bake an Aident page header, title, Callout, or Source into the screenshot.
 - If the source aspect ratio is unsuitable, capture or redesign the screenshot at the target slot ratio instead of compressing it.
 
-## Side-aware split composition
+## Split composition
 
 For `split-image-text`:
 
-- `imageSide: "left"`: keep the subject near the left/center of the image and avoid visual pull toward the right text column;
-- `imageSide: "right"`: mirror the composition and keep the left edge calm next to the text;
+- keep the text column on the left and the image on the right;
+- keep the image's left edge calm next to the text and avoid a subject that visually collides with the copy column;
 - preserve the registered 80px media/text gap;
 - keep the main page heading outside the split region;
 - use one image only.

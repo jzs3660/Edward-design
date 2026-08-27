@@ -112,7 +112,7 @@ Use `references/components-and-layouts.md` and choose the smallest layout that c
 - `comparison`: exactly two states or alternatives.
 - `image-cards`: 2 or 3 evidence-led image stories.
 - `team`: exactly three concise content items followed by one 1700×340 radial-mask photograph. Do not append a Callout or Source footer; keep image provenance in speaker notes.
-- `split-image-text`: one 760×428 image plus explanation, image left or right.
+- `split-image-text`: explanation on the left and one 760×428 image on the right. This order is fixed; never mirror it.
 - `full-bleed`: one verified hero image with readable overlay copy.
 
 Do not invent a layout outside the registry during ordinary generation. If the content cannot fit, restructure it or split it into two slides.
