@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "A practical framework for responsible growth",
+    "language": "en",
+    "brandName": "Example Studio",
+    "url": "example.com",
+    "header": { "show": true, "showLogo": true, "showRightText": true }
+  },
+  "slides": [
+    {
+      "id": "opening-thesis",
+      "type": "cover",
+      "theme": "dark",
+      "background": "elements-cover",
+      "coverIdentity": "logo",
+      "kicker": "STRATEGY BRIEF · 2026",
+      "title": "Build momentum without losing clarity",
+      "subtitle": "A concise operating model for teams moving from early traction to repeatable execution.",
+      "notes": { "purpose": "Frame the central tension.", "talk": ["Explain why speed and clarity must increase together.", "Set expectations for a practical, decision-oriented discussion."], "transition": "Define the three operating principles." }
+    },
+    {
+      "id": "three-principles",
+      "type": "points",
+      "theme": "light",
+      "background": "elements-inner",
+      "kicker": "OPERATING MODEL · PRINCIPLES",
+      "title": "Three principles keep the system coherent",
+      "subtitle": "Each principle covers one recurring decision the team must make well.",
+      "items": [
+        { "icon": "integration", "label": "ALIGN", "title": "Shared context", "body": "Keep goals, constraints, and ownership visible before execution begins." },
+        { "icon": "history", "label": "LEARN", "title": "Recorded decisions", "body": "Preserve key choices and evidence so future work starts with context." },
+        { "icon": "action", "label": "DELIVER", "title": "Clear next action", "body": "End each review with one accountable owner and a measurable next step." }
+      ],
+      "callout": { "tone": "accent", "metric": "RULE", "body": "If the audience cannot repeat the decision in one sentence, the slide is not finished." },
+      "source": "Source: illustrative operating framework",
+      "notes": { "purpose": "Introduce the core model.", "talk": ["Connect each principle to a common failure mode.", "Keep examples brief so the audience sees the system, not a checklist."], "transition": "Show how the principles translate into a four-step workflow." }
+    },
+    {
+      "id": "workflow",
+      "type": "workflow",
+      "theme": "dark",
+      "background": "elements-inner",
+      "kicker": "PROCESS EXAMPLE · FOUR STEPS",
+      "title": "A repeatable workflow turns intent into evidence",
+      "subtitle": "The same sequence works for launches, research, planning, and review cycles.",
+      "steps": [
+        { "number": "01", "label": "COLLECT", "title": "Collect inputs", "body": "Gather the materials, constraints, and success criteria." },
+        { "number": "02", "label": "ORGANIZE", "title": "Organize signals", "body": "Structure evidence so gaps and conflicts are visible." },
+        { "number": "03", "label": "CREATE", "title": "Create output", "body": "Build the smallest useful deliverable for review." },
+        { "number": "04", "label": "REVIEW", "title": "Review and decide", "body": "Confirm changes, ownership, and the next checkpoint." }
+      ],
+      "callout": { "tone": "default", "metric": "HUMAN CHECK", "body": "Important changes pause for an explicit review before the workflow continues." },
+      "notes": { "purpose": "Make the operating model concrete.", "talk": ["Describe the handoff between each stage.", "Emphasize that review is part of the workflow, not a final afterthought."], "transition": "Quantify what a healthy workflow should improve." }
+    },
+    {
+      "id": "success-metrics",
+      "type": "metrics",
+      "theme": "dark",
+      "background": "atmosphere",
+      "kicker": "MEASUREMENT · HEALTH SIGNALS",
+      "title": "Measure flow quality, not activity volume",
+      "subtitle": "Use a small set of signals that reveal speed, clarity, and reliability.",
+      "items": [
+        { "label": "TIME TO FIRST REVIEW", "value": "30 min", "title": "Early visibility", "body": "Time from intake to a reviewable first pass." },
+        { "label": "DECISION TRACE", "value": "100%", "title": "Recorded choices", "body": "Share of important decisions linked to evidence." },
+        { "label": "OWNER COVERAGE", "value": "1 owner", "title": "Clear accountability", "body": "Every next step has one named accountable owner." }
+      ],
+      "source": "Source: replace with verified internal measurement",
+      "notes": { "purpose": "Define practical metrics.", "talk": ["Explain that these are framework examples, not claimed benchmarks.", "Invite the audience to replace them with verified operational data."], "transition": "Compare fragmented and coherent operating states." }
+    },
+    {
+      "id": "before-after",
+      "type": "comparison",
+      "theme": "dark",
+      "background": "base",
+      "kicker": "COMPARISON · OPERATING STATE",
+      "title": "Coherence changes how the same team performs",
+      "subtitle": "The tools may stay the same; the quality of context and decisions changes.",
+      "items": [
+        { "label": "CURRENT STATE", "title": "Fragmented process", "body": "Work advances, but context is repeatedly lost.", "points": ["Inputs live in several locations", "Ownership changes between stages", "Review criteria arrive too late"] },
+        { "label": "TARGET STATE", "title": "Coherent process", "tone": "accent", "body": "Every stage leaves the next person enough context.", "points": ["One visible source of truth", "Explicit owners and checkpoints", "Evidence stays linked to decisions"] }
+      ],
+      "callout": { "tone": "accent", "metric": "SHIFT", "body": "The improvement comes from better interfaces between people, not from adding more tools." },
+      "notes": { "purpose": "Clarify the change in operating behavior.", "talk": ["Contrast the quality of handoffs rather than the number of tools.", "Use a specific team example if the audience has supplied one."], "transition": "Show the capabilities that support the target state." }
+    },
+    {
+      "id": "capability-cards",
+      "type": "cards",
+      "theme": "light",
+      "background": "base",
+      "kicker": "CAPABILITIES · REUSABLE BUILDING BLOCKS",
+      "title": "Six reusable capabilities",
+      "subtitle": "Keep titles short; use the description to explain the practical value.",
+      "items": [
+        { "icon": "integration", "label": "INPUT", "title": "Connected inputs", "body": "Bring relevant materials into one reviewable context." },
+        { "icon": "history", "label": "MEMORY", "title": "Decision history", "body": "Preserve approved changes and the evidence behind them." },
+        { "icon": "skill", "label": "METHOD", "title": "Reusable methods", "body": "Turn stable practice into repeatable execution patterns." },
+        { "icon": "key", "label": "CONTROL", "title": "Scoped access", "body": "Keep permissions aligned with the task and accountable owner." },
+        { "icon": "action", "label": "ACTION", "title": "Clear handoffs", "body": "Define what happens next and who is responsible." },
+        { "icon": "capabilities", "label": "QUALITY", "title": "Visible checks", "body": "Place review gates before material decisions are applied." }
+      ],
+      "notes": { "purpose": "Show the reusable capability set.", "talk": ["Treat the cards as a system, not independent features.", "Remove any card that is not needed for the audience's decision."], "transition": "Demonstrate image-led storytelling options." }
+    },
+    {
+      "id": "image-evidence",
+      "type": "image-cards",
+      "theme": "dark",
+      "background": "elements-inner",
+      "kicker": "EVIDENCE · IMAGE CARDS",
+      "title": "Use images as evidence, not decoration",
+      "subtitle": "Replace each placeholder with a verified screenshot, photo, or diagram sized for its slot.",
+      "items": [
+        { "title": "Observed behavior", "body": "Use a real scene or research artifact to establish context." },
+        { "title": "Visible outcome", "body": "Use a verified result, interface, or comparison to support the claim." }
+      ],
+      "callout": { "tone": "default", "metric": "IMAGE RULE", "body": "Preserve the important subject, avoid arbitrary crops, and keep captions concise." },
+      "notes": { "purpose": "Explain image usage.", "talk": ["Replace placeholders before final delivery.", "Check that each image directly supports the slide title."], "transition": "Show the team-image mask and split layout variants." }
+    },
+    {
+      "id": "team-layout",
+      "type": "team",
+      "theme": "light",
+      "background": "elements-inner",
+      "kicker": "TEAM · SHARED PRACTICE",
+      "title": "Ownership sustains the model",
+      "subtitle": "Use the full-width mask for a real team, workshop, or environment photograph.",
+      "callout": { "tone": "default", "body": "Use one concise conclusion, recommendation, or source note that supports the team image above." },
+      "source": "Source: replace with a current, consented team image",
+      "notes": { "purpose": "Demonstrate the team mask.", "talk": ["Use a current, consented image.", "Keep the text distinct from names or biographies unless needed."], "transition": "Close with a focused next step." }
+    },
+    {
+      "id": "next-step",
+      "type": "split-image-text",
+      "theme": "light",
+      "background": "atmosphere",
+      "kicker": "NEXT STEP · PILOT",
+      "title": "Pilot one visible workflow",
+      "subtitle": "A small pilot creates evidence without forcing a broad rollout.",
+      "contentTitle": "Choose a visible, repeatable task",
+      "body": "Define the owner, inputs, review gate, and success signal before the pilot begins.",
+      "imageSide": "left",
+      "callout": { "tone": "accent", "metric": "7 DAYS", "body": "Use the first week to learn where context is lost, then adjust the workflow before expanding it." },
+      "notes": { "purpose": "End with a concrete action.", "talk": ["Name the selection criteria for a good pilot.", "Confirm who will own the first review."], "transition": "Open discussion around the pilot choice." }
+    }
+  ]
+}

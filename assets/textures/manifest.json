@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "sourceNode": "306:4512",
+  "textures": [
+    { "name": "light-overlay", "file": "light-overlay.png", "theme": "light", "blend": "multiply", "opacity": 0.34 },
+    { "name": "dark-overlay", "file": "dark-overlay.png", "theme": "dark", "blend": "soft-light", "opacity": 0.55 },
+    { "name": "source", "file": "source.png", "theme": "reference", "use": "source texture reference; not placed directly by the runtime" }
+  ]
+}

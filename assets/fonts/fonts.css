@@ -1,0 +1,16 @@
+@font-face{font-family:"Outfit";src:url("./outfit/Outfit-VariableFont_wght.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("./instrument-serif/InstrumentSerif-Regular.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("./instrument-serif/InstrumentSerif-Italic.ttf") format("truetype");font-style:italic;font-weight:400;font-display:swap}
+@font-face{font-family:"Noto Sans";src:url("./noto-sans/NotoSans-Variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Noto Sans SC";src:url("./noto-sans-sc/NotoSansSC-Variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Smiley Sans";src:url("./smiley-sans/SmileySans-Oblique.ttf") format("truetype");font-style:oblique;font-weight:400;font-display:swap}
+@font-face{font-family:"Noto Serif SC";src:url("./noto-serif-sc/NotoSerifCJKsc-Bold.otf") format("opentype");font-style:normal;font-weight:700;font-display:swap}
+
+:root{
+  --font-en-display:"Outfit",Arial,sans-serif;
+  --font-en-body:"Noto Sans",Arial,sans-serif;
+  --font-en-number:"Instrument Serif",Georgia,serif;
+  --font-zh-display:"Smiley Sans","Noto Sans SC",sans-serif;
+  --font-zh-body:"Noto Sans SC",sans-serif;
+  --font-zh-callout:"Noto Serif SC","Songti SC","SimSun",serif;
+}

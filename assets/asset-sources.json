@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "runtimeDependsOnFigma": false,
+  "figma": {
+    "source": "Approved internal Aident PPT design system",
+    "privateIdentifiersPublished": false,
+    "notes": "The private design-file key and node identifiers are intentionally omitted from the public package. Packaged tokens, assets, and registries are canonical at runtime."
+  },
+  "sourcePdfs": [
+    {
+      "role": "primary visual reference",
+      "distributed": false
+    },
+    {
+      "role": "additional visual reference",
+      "distributed": false
+    }
+  ],
+  "componentNodes": {
+    "published": false,
+    "coveredRoles": [
+      "header",
+      "sourceFooter",
+      "point",
+      "step",
+      "metric",
+      "callout",
+      "card",
+      "imageMask",
+      "icon",
+      "workflowHeader",
+      "workflow",
+      "kicker",
+      "divider",
+      "cardLayout",
+      "pointLayout",
+      "metricLayout",
+      "comparisonCard",
+      "comparisonPair",
+      "imageCardLayout",
+      "backgroundLayer",
+      "textureOverlay",
+      "chineseTypography",
+      "gradientSwatches"
+    ]
+  },
+  "backgroundVariantNodes": {
+    "published": false,
+    "coveredVariants": [
+      "lightElementsCover",
+      "lightElementsInner",
+      "lightAtmosphereInner",
+      "darkElementsCover",
+      "darkElementsInner",
+      "darkAtmosphereInner"
+    ]
+  },
+  "imageMaskNodes": {
+    "published": false,
+    "coveredRoles": [
+      "teamComponent",
+      "teamClip",
+      "teamRadialMask",
+      "teamImage",
+      "card4x3"
+    ]
+  },
+  "buildArtifacts": {
+    "compiledBackgrounds": {
+      "source": "Packaged 1920×1080 Figma-exported background variant",
+      "script": "scripts/compile-backgrounds.mjs",
+      "purpose": "Reliable PowerPoint rendering without CSS blend modes"
+    },
+    "readmePreview": {
+      "path": "assets/previews/aident-ppt-showcase.png",
+      "source": "Generated English example HTML preflight montage",
+      "runtimeRequired": false
+    }
+  }
+}

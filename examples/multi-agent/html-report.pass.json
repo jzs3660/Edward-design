@@ -1,0 +1,13 @@
+{
+  "format": "html",
+  "pass": true,
+  "commands": [
+    "node scripts/preflight.mjs --html output/web/index.html --screenshots qa/html"
+  ],
+  "artifactsInspected": [
+    "output/web/index.html",
+    "qa/html"
+  ],
+  "findings": []
+}
+

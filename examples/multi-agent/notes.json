@@ -1,0 +1,26 @@
+{
+  "_status": "complete",
+  "meta": {
+    "role": "speaker-notes-editor",
+    "assumptions": [],
+    "openQuestions": []
+  },
+  "slides": {
+    "cover": {
+      "purpose": "Introduce the operating-review thesis.",
+      "talk": [
+        "Frame the presentation as a reusable review habit, not a one-time process."
+      ],
+      "transition": "Move from the thesis to the two habits that make it practical."
+    },
+    "two-principles": {
+      "purpose": "Explain the two behaviors that make a review actionable.",
+      "talk": [
+        "Start with shared context so the group debates the same signal.",
+        "End with explicit ownership and a visible follow-up moment."
+      ],
+      "transition": "Invite the audience to adapt the rhythm to its own review cadence."
+    }
+  }
+}
+

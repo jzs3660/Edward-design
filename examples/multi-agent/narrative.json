@@ -1,0 +1,59 @@
+{
+  "_status": "complete",
+  "meta": {
+    "role": "narrative-architect",
+    "assumptions": [
+      "The audience prefers a concise operating framework."
+    ],
+    "openQuestions": []
+  },
+  "deck": {
+    "meta": {
+      "title": "A repeatable review rhythm",
+      "language": "en",
+      "brandName": "Example Studio",
+      "url": "example.com"
+    },
+    "slides": [
+      {
+        "id": "cover",
+        "type": "cover",
+        "theme": "dark",
+        "background": "elements-cover",
+        "coverIdentity": "kicker",
+        "coverLayout": "text-only",
+        "kicker": "OPERATING REVIEW · EXAMPLE",
+        "title": "A repeatable review rhythm",
+        "subtitle": "A simple structure for turning signals into clear next actions."
+      },
+      {
+        "id": "two-principles",
+        "type": "points",
+        "theme": "light",
+        "background": "elements-inner",
+        "kicker": "01 · PRINCIPLES",
+        "title": "Make context visible before making decisions",
+        "subtitle": "Two habits keep every review focused and actionable.",
+        "items": [
+          {
+            "icon": "integration",
+            "label": "CONTEXT",
+            "title": "Share the same view",
+            "body": "Bring the current signal, constraint, and owner into one review surface."
+          },
+          {
+            "icon": "action",
+            "label": "ACTION",
+            "title": "Close with ownership",
+            "body": "Record one next action, one accountable owner, and one review moment."
+          }
+        ],
+        "callout": {
+          "tone": "accent",
+          "metric": "WORKING RULE",
+          "body": "If the next action is unclear, the review is not finished."
+        }
+      }
+    ]
+  }
+}

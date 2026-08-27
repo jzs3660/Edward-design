@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aident-ppt/deck.schema.json",
+  "title": "Aident PPT deck content",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "slides"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "language"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "language": { "enum": ["en", "zh"] },
+        "brandName": { "type": "string" },
+        "url": { "type": "string" },
+        "logo": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": { "light": { "type": "string" }, "dark": { "type": "string" } }
+            }
+          ]
+        },
+        "header": { "$ref": "#/$defs/header" }
+      }
+    },
+    "slides": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/slide" } }
+  },
+  "$defs": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "show": { "type": "boolean" },
+        "showLogo": { "type": "boolean" },
+        "showRightText": { "type": "boolean" },
+        "rightText": { "type": "string" }
+      }
+    },
+    "image": {
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["src"],
+          "properties": {
+            "src": { "type": "string" },
+            "alt": { "type": "string" },
+            "position": { "type": "string", "description": "CSS object-position, e.g. 50% 30%." },
+            "fit": { "enum": ["cover", "contain"] }
+          }
+        }
+      ]
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "number": { "type": "string" },
+        "label": { "type": "string" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "value": { "type": ["string", "number"] },
+        "icon": { "enum": ["integration", "history", "skill", "run-circle", "download", "copy", "key", "action", "capabilities", "help"] },
+        "showIcon": { "type": "boolean" },
+        "showLabel": { "type": "boolean" },
+        "image": { "$ref": "#/$defs/image" },
+        "tone": { "enum": ["standard", "accent"] },
+        "points": { "type": "array", "items": { "type": "string" }, "maxItems": 4 }
+      }
+    },
+    "callout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["body"],
+      "properties": {
+        "tone": { "enum": ["default", "accent"] },
+        "metric": { "type": "string" },
+        "label": { "type": "string" },
+        "body": { "type": "string" }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "purpose": { "type": "string" },
+        "talk": { "type": "array", "items": { "type": "string" } },
+        "transition": { "type": "string" }
+      }
+    },
+    "slide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "theme", "title"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "type": { "enum": ["cover", "points", "cards", "metrics", "workflow", "comparison", "image-cards", "team", "split-image-text", "full-bleed"] },
+        "theme": { "enum": ["light", "dark"] },
+        "background": { "enum": ["base", "elements-cover", "elements-inner", "atmosphere", "paper", "ink", "elements", "motion", "aurora"] },
+        "coverIdentity": { "enum": ["kicker", "logo", "none"], "description": "Cover-only identity above the title. Cover slides never render the page header." },
+        "coverLayout": { "enum": ["text-only", "media-bottom", "full-bleed"] },
+        "titleAlignment": { "enum": ["left", "center"], "description": "center is valid only for cover slides; all inner titles are left aligned." },
+        "kicker": { "type": "string" },
+        "title": { "type": "string", "minLength": 1 },
+        "subtitle": { "type": "string" },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+        "steps": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+        "callout": { "$ref": "#/$defs/callout" },
+        "source": { "type": "string" },
+        "header": { "$ref": "#/$defs/header" },
+        "image": { "$ref": "#/$defs/image" },
+        "imageSide": { "enum": ["left", "right"] },
+        "contentTitle": { "type": "string" },
+        "body": { "type": "string" },
+        "showArrows": { "type": "boolean" },
+        "showDividers": { "type": "boolean" },
+        "workflowLabel": { "type": "string" },
+        "showWorkflowLabel": { "type": "boolean" },
+        "showStepLabels": { "type": "boolean" },
+        "notes": { "$ref": "#/$defs/notes" }
+      }
+    }
+  }
+}

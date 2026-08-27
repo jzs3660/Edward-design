@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Aident PPT multi-agent run",
+  "type": "object",
+  "required": ["version", "runId", "status", "language", "formats", "roles"],
+  "properties": {
+    "version": { "const": 1 },
+    "runId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "createdAt": { "type": "string" },
+    "status": { "enum": ["initialized", "planning", "integrating", "generating", "verifying", "complete", "blocked"] },
+    "language": { "enum": ["en", "zh"] },
+    "formats": { "type": "array", "uniqueItems": true, "items": { "enum": ["html", "single-html", "web", "pdf", "pptx"] } },
+    "briefFile": { "type": "string" },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "writes"],
+        "properties": {
+          "id": { "type": "string" },
+          "status": { "enum": ["pending", "running", "complete", "waived", "blocked"] },
+          "writes": { "type": "array", "items": { "type": "string" } },
+          "agentId": { "type": ["string", "null"] },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

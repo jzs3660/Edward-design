@@ -1,0 +1,32 @@
+{
+  "name": "aident-ppt-skill",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Self-contained Aident-style bilingual HTML, PPTX, PDF, and web presentation skill.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jzs3660/Edward-design.git"
+  },
+  "scripts": {
+    "fonts": "node scripts/check-fonts.mjs",
+    "backgrounds": "node scripts/compile-backgrounds.mjs",
+    "generate:en": "node scripts/generate-deck.mjs --input examples/deck.example.en.json --out output/example-en",
+    "generate:zh": "node scripts/generate-deck.mjs --input examples/deck.example.zh.json --out output/example-zh",
+    "preflight:en": "node scripts/preflight.mjs --html output/example-en/index.html --screenshots output/example-en/qa",
+    "preflight:zh": "node scripts/preflight.mjs --html output/example-zh/index.html --screenshots output/example-zh/qa",
+    "presenter:en": "node scripts/validate-presenter.mjs --html output/example-en/index.html --require-notes",
+    "presenter:zh": "node scripts/validate-presenter.mjs --html output/example-zh/index.html --require-notes",
+    "pptx:en": "node scripts/export-pptx.mjs --input output/example-en/deck.resolved.json --asset-root output/example-en --out output/example-en/example-en.pptx --preview-dir output/example-en/pptx-qa",
+    "pptx:zh": "node scripts/export-pptx.mjs --input output/example-zh/deck.resolved.json --asset-root output/example-zh --out output/example-zh/example-zh.pptx --preview-dir output/example-zh/pptx-qa",
+    "pdf:en": "node scripts/export-pdf.mjs --html output/example-en/index.html --out output/example-en/example-en.pdf",
+    "pdf:zh": "node scripts/export-pdf.mjs --html output/example-zh/index.html --out output/example-zh/example-zh.pdf",
+    "preview": "node scripts/build-preview.mjs --screenshots output/example-en/qa --out assets/previews/aident-ppt-showcase.png",
+    "assets": "node scripts/validate-assets.mjs",
+    "validate": "node scripts/validate-system.mjs && node scripts/check-fonts.mjs",
+    "run:init": "node scripts/init-multi-agent-run.mjs",
+    "run:assemble": "node scripts/assemble-agent-run.mjs",
+    "run:validate": "node scripts/validate-agent-run.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

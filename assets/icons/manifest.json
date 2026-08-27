@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "sourceNode": "129:271",
+  "policy": "Curated existing Aident design-system icons; no geometry was redrawn.",
+  "boxPx": 60,
+  "glyphPx": 32,
+  "themes": ["light", "dark"],
+  "icons": [
+    { "name": "integration", "meaning": ["connect", "inputs", "systems"], "light": "light/integration.svg", "dark": "dark/integration.svg" },
+    { "name": "history", "meaning": ["record", "memory", "timeline"], "light": "light/history.svg", "dark": "dark/history.svg" },
+    { "name": "skill", "meaning": ["method", "capability", "idea"], "light": "light/skill.svg", "dark": "dark/skill.svg" },
+    { "name": "run-circle", "meaning": ["execute", "start", "run"], "light": "light/run-circle.svg", "dark": "dark/run-circle.svg" },
+    { "name": "download", "meaning": ["export", "receive", "download"], "light": "light/download.svg", "dark": "dark/download.svg" },
+    { "name": "copy", "meaning": ["duplicate", "reuse", "copy"], "light": "light/copy.svg", "dark": "dark/copy.svg" },
+    { "name": "key", "meaning": ["access", "control", "permission"], "light": "light/key.svg", "dark": "dark/key.svg" },
+    { "name": "action", "meaning": ["action", "handoff", "interaction"], "light": "light/action.svg", "dark": "dark/action.svg" },
+    { "name": "capabilities", "meaning": ["grid", "modules", "quality"], "light": "light/capabilities.svg", "dark": "dark/capabilities.svg" },
+    { "name": "help", "meaning": ["guidance", "support", "question"], "light": "light/help.svg", "dark": "dark/help.svg" }
+  ]
+}

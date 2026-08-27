@@ -1,0 +1,10 @@
+{
+  "meta": { "title": "Presentation title", "language": "en", "brandName": "Your brand", "url": "example.com" },
+  "slides": [
+    { "id": "cover", "type": "cover", "theme": "dark", "background": "elements-cover", "coverIdentity": "logo", "coverLayout": "text-only", "title": "A clear presentation title", "subtitle": "One sentence describing the purpose and scope." },
+    { "id": "main-points", "type": "points", "theme": "light", "background": "elements-inner", "kicker": "SECTION · TOPIC", "title": "One takeaway-style slide title", "subtitle": "Optional context sentence.", "items": [
+      { "icon": "integration", "label": "LABEL", "title": "Short point title", "body": "A concise explanation that supports the slide takeaway." },
+      { "icon": "history", "showLabel": false, "title": "Short point title", "body": "A concise explanation that supports the slide takeaway." }
+    ], "callout": { "tone": "accent", "metric": "TAKEAWAY", "body": "A concise conclusion or recommendation tied to the content above." } }
+  ]
+}

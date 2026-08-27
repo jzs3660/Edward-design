@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "policy": "Every default font is bundled under an open license so HTML, PDF, and PPTX export is deterministic on another machine.",
+  "families": [
+    {
+      "family": "Outfit",
+      "roles": ["English cover", "English slide title", "point/card/metric title", "callout"],
+      "bundled": true,
+      "files": ["outfit/Outfit-VariableFont_wght.ttf"],
+      "license": "SIL OFL 1.1",
+      "licenseFile": "licenses/Outfit-OFL.txt",
+      "source": "https://github.com/Outfitio/Outfit-Fonts"
+    },
+    {
+      "family": "Instrument Serif",
+      "roles": ["English step numerals"],
+      "bundled": true,
+      "files": ["instrument-serif/InstrumentSerif-Regular.ttf", "instrument-serif/InstrumentSerif-Italic.ttf"],
+      "license": "SIL OFL 1.1",
+      "licenseFile": "licenses/InstrumentSerif-OFL.txt",
+      "source": "https://github.com/Instrument/instrument-serif"
+    },
+    {
+      "family": "Noto Sans",
+      "roles": ["English body", "English kicker", "English label", "source"],
+      "bundled": true,
+      "files": ["noto-sans/NotoSans-Variable.ttf"],
+      "license": "SIL OFL 1.1",
+      "licenseFile": "licenses/NotoSans-OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosans",
+      "replacesRestrictedReferenceFont": "SF Pro"
+    },
+    {
+      "family": "Noto Sans SC",
+      "roles": ["Chinese point/card/metric title", "Chinese body", "Chinese labels", "source"],
+      "bundled": true,
+      "files": ["noto-sans-sc/NotoSansSC-Variable.ttf"],
+      "license": "SIL OFL 1.1",
+      "licenseFile": "licenses/NotoSansSC-OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanssc",
+      "replacesRestrictedReferenceFont": "MiSans"
+    },
+    {
+      "family": "Smiley Sans",
+      "roles": ["Chinese cover", "Chinese large display", "Chinese step numerals"],
+      "bundled": true,
+      "files": ["smiley-sans/SmileySans-Oblique.ttf"],
+      "license": "SIL OFL 1.1",
+      "licenseFile": "licenses/SmileySans-OFL.txt",
+      "source": "https://github.com/atelier-anchor/smiley-sans"
+    },
+    {
+      "family": "Noto Serif SC",
+      "roles": ["Chinese emphasized callout"],
+      "bundled": true,
+      "files": ["noto-serif-sc/NotoSerifCJKsc-Bold.otf"],
+      "license": "SIL OFL 1.1",
+      "licenseFile": "licenses/NotoSerifCJK-OFL.txt",
+      "source": "https://github.com/notofonts/noto-cjk"
+    }
+  ]
+}

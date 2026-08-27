@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "aident-ppt-showcase",
+      "path": "assets/previews/aident-ppt-showcase.png",
+      "width": 2016,
+      "height": 1176,
+      "purpose": "README overview of the generated English example deck",
+      "runtimeRequired": false,
+      "derivedFrom": "examples/deck.example.en.json HTML preflight screenshots"
+    }
+  ]
+}

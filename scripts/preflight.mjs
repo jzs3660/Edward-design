@@ -1,0 +1,132 @@
+#!/usr/bin/env node
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import {pathToFileURL} from 'node:url';
+
+function parseArgs(argv){const args={};for(let i=2;i<argv.length;i++){if(argv[i]==='--html')args.html=argv[++i];else if(argv[i]==='--screenshots')args.screenshots=argv[++i];else if(argv[i]==='--static-only')args.staticOnly=true;else if(argv[i]==='--allow-font-fallback')args.allowFontFallback=true;else if(argv[i]==='--help')args.help=true;else throw new Error(`Unknown argument: ${argv[i]}`)}return args}
+const usage='Usage: node scripts/preflight.mjs --html output/deck/index.html [--screenshots output/qa] [--allow-font-fallback] [--static-only]\n';
+
+async function importPackage(name){
+  const require=createRequire(import.meta.url);
+  const roots=[process.env.RUNTIME_NODE_MODULES,path.resolve('node_modules')].filter(Boolean);
+  const resolved=require.resolve(name,{paths:roots});
+  return import(pathToFileURL(resolved).href);
+}
+async function browserExecutable(){for(const candidate of [process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome','/Applications/Chromium.app/Contents/MacOS/Chromium'].filter(Boolean)){if(await fs.access(candidate).then(()=>true).catch(()=>false))return candidate}return undefined}
+
+async function localFontChecks(html,args,htmlPath){
+  const lang=html.match(/<body[^>]*data-lang="([^"]+)"/)?.[1]||'en';
+  const required=lang==='zh'?
+    [{family:'Smiley Sans',file:'smiley-sans/SmileySans-Oblique.ttf'},{family:'Noto Sans SC',file:'noto-sans-sc/NotoSansSC-Variable.ttf'},{family:'Noto Serif SC',file:'noto-serif-sc/NotoSerifCJKsc-Bold.otf'}]:
+    [{family:'Outfit',file:'outfit/Outfit-VariableFont_wght.ttf'},{family:'Noto Sans',file:'noto-sans/NotoSans-Variable.ttf'},{family:'Instrument Serif',file:'instrument-serif/InstrumentSerif-Regular.ttf'}];
+  const fontRoot=path.join(path.dirname(htmlPath),'assets/fonts');
+  const missing=[];
+  for(const font of required)if(!await fs.access(path.join(fontRoot,font.file)).then(()=>true).catch(()=>false))missing.push(font.family);
+  if(!missing.length)return {errors:[],warnings:[]};
+  const message=`Required bundled font files not found: ${missing.join(', ')}`;
+  return args.allowFontFallback?{errors:[],warnings:[message]}:{errors:[message],warnings:[]};
+}
+
+function staticChecks(html){
+  const errors=[],warnings=[];
+  const slideTags=[...html.matchAll(/<section class="slide\s+([^\"]+)"[^>]*data-id="([^"]+)"[^>]*>/g)];
+  if(!slideTags.length)errors.push('No slides found.');
+  const ids=slideTags.map(m=>m[2]);
+  if(new Set(ids).size!==ids.length)errors.push('Duplicate slide ids found.');
+  if(/class="slide\s+callout\b/.test(html))errors.push('Standalone callout slide is forbidden.');
+  if(/<h1[^>]*>\s*(?:\[|TODO|TBD|Lorem)/i.test(html))errors.push('Unresolved title placeholder found.');
+  if(!html.includes('class="background"')||!html.includes('class="texture"'))errors.push('Every slide must use background and texture layers.');
+  if(/[🀀-🫿☀-➿]/u.test(html))errors.push('Emoji detected; use packaged design-system icons.');
+  if(/(?:font-size|line-height)\s*:\s*150px/i.test(html))errors.push('Invalid fixed 150px line-height found; use 150%.');
+  if(/height\s*:\s*1px/i.test(html))warnings.push('1px height found; inspect whether it is an intentional divider.');
+  if(/class="team-caption"/.test(html))errors.push('Unregistered team caption detected; Team supports only the image mask plus optional callout/source.');
+  return {slideCount:slideTags.length,errors,warnings};
+}
+
+async function browserChecks(htmlPath,args,slideCount){
+  const playwrightModule=await importPackage('playwright');
+  const {chromium}=playwrightModule.default||playwrightModule;
+  const browser=await chromium.launch({headless:true,executablePath:await browserExecutable()});
+  const page=await browser.newPage({viewport:{width:1920,height:1080},deviceScaleFactor:1});
+  const results=[];
+  if(args.screenshots)await fs.mkdir(path.resolve(args.screenshots),{recursive:true});
+  for(let i=0;i<slideCount;i++){
+    const url=new URL(pathToFileURL(htmlPath));url.searchParams.set('embed','1');url.searchParams.set('slide',String(i));
+    await page.goto(url.href,{waitUntil:'load'});await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(120);
+    const audit=await page.evaluate(async({allowFontFallback})=>{
+      const slide=document.querySelector('.slide.is-active');
+      const errors=[],warnings=[];
+      if(!slide)return {errors:['No active slide.'],warnings:[]};
+      const sr=slide.getBoundingClientRect();
+      if(Math.abs(sr.width-1920)>1||Math.abs(sr.height-1080)>1)errors.push(`Rendered slide size must be 1920×1080, received ${Math.round(sr.width)}×${Math.round(sr.height)}.`);
+      const visible=el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0&&r.width>0&&r.height>0};
+      for(const el of slide.querySelectorAll('img'))if(!el.complete||el.naturalWidth===0)errors.push(`Broken image: ${el.getAttribute('src')}`);
+      for(const el of slide.querySelectorAll('.brand-logo,.cover-identity-logo')){if(!visible(el)||!el.naturalWidth||!el.naturalHeight)continue;const r=el.getBoundingClientRect(),natural=el.naturalWidth/el.naturalHeight,rendered=r.width/r.height;if(Math.abs(rendered/natural-1)>.015)errors.push(`Logo aspect ratio changed: ${natural.toFixed(3)} → ${rendered.toFixed(3)}.`);if(r.left<sr.left-1||r.right>sr.right+1)errors.push('Logo exceeds slide bounds; use a logo with tighter visible bounds.')}
+      if(slide.dataset.type==='cover'&&slide.querySelector('.brand-header'))errors.push('Cover must not render the page header.');
+      if(slide.dataset.type==='cover'&&slide.dataset.coverLayout==='text-only'&&slide.querySelector('.content-zone'))errors.push('Text-only cover must not reserve an empty content zone.');
+      if(slide.dataset.type!=='cover'&&getComputedStyle(slide.querySelector('.slide-heading')).textAlign==='center')errors.push('Inner slide heading must be left aligned.');
+      if(slide.dataset.type==='cover'&&slide.dataset.background==='elements-inner')errors.push('Cover uses elements-inner background.');
+      if(slide.dataset.type!=='cover'&&slide.dataset.background==='elements-cover')errors.push('Inner slide uses elements-cover background.');
+      for(const el of slide.querySelectorAll('.callout.accent')){
+        const style=getComputedStyle(el),background=style.backgroundImage.replace(/\s+/g,'').toLowerCase();
+        const expectedStops=['rgba(160,169,254,0.16)','rgba(46,238,238,0.16)','rgba(147,252,184,0.16)'];
+        if(!expectedStops.every(stop=>background.includes(stop)))errors.push('Accent Callout must use the registered gradient with 16% fill opacity on every stop.');
+        if(Number(style.opacity)<.999)errors.push('Accent Callout container must remain fully opaque; apply 16% only to its background gradient stops.');
+        if(el.getBoundingClientRect().height<87.5)errors.push('Accent Callout must keep its 88px minimum hug height.');
+        const blur=style.backdropFilter||style.webkitBackdropFilter||'';
+        if(!/blur\(20px\)/.test(blur))errors.push('Accent Callout must retain the registered 20px background blur.');
+        if(parseFloat(style.borderTopWidth)>0&&style.borderTopStyle!=='none')errors.push('Accent Callout must not have a stroke.');
+      }
+      for(const workflow of slide.querySelectorAll('.workflow')){
+        const steps=[...workflow.querySelectorAll('.workflow-step')];
+        const arrows=[...workflow.querySelectorAll('.workflow-arrow')].filter(visible);
+        const expected=workflow.classList.contains('no-arrows')?0:Math.max(0,steps.length-1);
+        if(arrows.length!==expected)errors.push(`Workflow must render ${expected} visible arrows between ${steps.length} steps; received ${arrows.length}.`);
+        if(workflow.classList.contains('no-dividers'))for(const step of steps.slice(1)){
+          const pseudo=getComputedStyle(step,'::before');
+          if(pseudo.display!=='none'&&pseudo.content!=='none')errors.push('Workflow showDividers:false must remove Step dividers in HTML.');
+        }
+      }
+      for(const el of slide.querySelectorAll('[data-one-line]')){
+        if(el.scrollWidth>el.clientWidth+1)errors.push(`One-line text overflow: "${el.textContent.trim()}" (${el.scrollWidth-el.clientWidth}px)`);
+        const lh=parseFloat(getComputedStyle(el).lineHeight)||0;if(lh&&el.getBoundingClientRect().height>lh*1.15)errors.push(`One-line text wrapped: "${el.textContent.trim()}"`);
+      }
+      const bounded=[...slide.querySelectorAll('.brand-header,.slide-heading,.content-zone,.source-footer')].filter(visible);
+      for(const el of bounded){const r=el.getBoundingClientRect();if(r.left<sr.left-1||r.top<sr.top-1||r.right>sr.right+1||r.bottom>sr.bottom+1)errors.push(`${el.className} leaves slide bounds.`)}
+      const ordered=[...slide.querySelectorAll('.brand-header,.slide-heading,.content-main,.callout,.source-footer')].filter(visible);
+      for(let a=0;a<ordered.length;a++)for(let b=a+1;b<ordered.length;b++){
+        const x=ordered[a],y=ordered[b];if(x.contains(y)||y.contains(x))continue;
+        const xr=x.getBoundingClientRect(),yr=y.getBoundingClientRect();
+        const ox=Math.min(xr.right,yr.right)-Math.max(xr.left,yr.left),oy=Math.min(xr.bottom,yr.bottom)-Math.max(xr.top,yr.top);
+        if(ox>1&&oy>1)errors.push(`Overlap: ${x.className} ↔ ${y.className} (${Math.round(ox)}×${Math.round(oy)}px)`);
+      }
+      if(slide.scrollWidth>1920+1||slide.scrollHeight>1080+1)errors.push(`Slide overflow: ${slide.scrollWidth}×${slide.scrollHeight}.`);
+      const lang=document.body.dataset.lang;
+      const expected=lang==='zh'?['Smiley Sans','Noto Sans SC','Noto Serif SC']:['Outfit','Noto Sans','Instrument Serif'];
+      const missing=[];
+      for(const font of expected){await document.fonts.load(`20px "${font}"`);if(!document.fonts.check(`20px "${font}"`))missing.push(font)}
+      if(missing.length){const message=`Unresolved fonts: ${missing.join(', ')}`;(allowFontFallback?warnings:errors).push(message)}
+      const debugRect=el=>{if(!el)return null;const r=el.getBoundingClientRect(),s=getComputedStyle(el);return {left:r.left,top:r.top,width:r.width,height:r.height,right:r.right,bottom:r.bottom,fontSize:s.fontSize,lineHeight:s.lineHeight,display:s.display,position:s.position,transform:s.transform}};
+      return {id:slide.dataset.id,type:slide.dataset.type,errors,warnings,geometry:{slide:debugRect(slide),shell:debugRect(slide.querySelector('.slide-shell')),heading:debugRect(slide.querySelector('.slide-heading')),title:debugRect(slide.querySelector('.slide-title')),identity:debugRect(slide.querySelector('.cover-identity-logo,.cover-identity-kicker')),content:debugRect(slide.querySelector('.content-zone'))}};
+    },{allowFontFallback:Boolean(args.allowFontFallback)});
+    if(args.screenshots)await page.screenshot({path:path.join(path.resolve(args.screenshots),`slide-${String(i+1).padStart(2,'0')}.png`),fullPage:false});
+    results.push(audit);
+  }
+  await browser.close();return results;
+}
+
+async function main(){
+  const args=parseArgs(process.argv);if(args.help){process.stdout.write(usage);return}if(!args.html)throw new Error(usage.trim());
+  const htmlPath=path.resolve(args.html),html=await fs.readFile(htmlPath,'utf8');
+  const stat=staticChecks(html);const localFonts=await localFontChecks(html,args,htmlPath);let browser=[];
+  if(!args.staticOnly)browser=await browserChecks(htmlPath,args,stat.slideCount);
+  const errors=[...stat.errors,...localFonts.errors,...browser.flatMap(s=>s.errors.map(e=>`${s.id}: ${e}`))];
+  const warnings=[...stat.warnings,...localFonts.warnings,...browser.flatMap(s=>s.warnings.map(e=>`${s.id}: ${e}`))];
+  if(process.env.AIDENT_DEBUG_LAYOUT==='1')console.log(JSON.stringify(browser,null,2));
+  warnings.forEach(w=>console.warn(`WARN ${w}`));errors.forEach(e=>console.error(`ERROR ${e}`));
+  console.log(`Preflight: ${stat.slideCount} slides, ${errors.length} errors, ${warnings.length} warnings.`);
+  if(errors.length)process.exitCode=1;
+}
+
+main().catch(error=>{console.error(error.stack||error);process.exitCode=1});

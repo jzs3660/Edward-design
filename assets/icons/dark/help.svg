@@ -1,0 +1,36 @@
+<svg width="60" height="56" viewBox="0 0 60 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="60" height="56" fill="#1E1E1E"/>
+<g id="Aident PPT &#194;&#183; Components &#38; Templates">
+<path d="M-5754 -8008C-5754 -8009.1 -5753.1 -8010 -5752 -8010H4744C4745.1 -8010 4746 -8009.1 4746 -8008V85988C4746 85989.1 4745.1 85990 4744 85990H-5752C-5753.1 85990 -5754 85989.1 -5754 85988V-8008Z" fill="#989898"/>
+<path d="M-5752 -8010V-8009H4744V-8010V-8011H-5752V-8010ZM4746 -8008H4745V85988H4746H4747V-8008H4746ZM4744 85990V85989H-5752V85990V85991H4744V85990ZM-5754 85988H-5753V-8008H-5754H-5755V85988H-5754ZM-5752 85990V85989C-5752.55 85989 -5753 85988.6 -5753 85988H-5754H-5755C-5755 85989.7 -5753.66 85991 -5752 85991V85990ZM4746 85988H4745C4745 85988.6 4744.55 85989 4744 85989V85990V85991C4745.66 85991 4747 85989.7 4747 85988H4746ZM4744 -8010V-8009C4744.55 -8009 4745 -8008.55 4745 -8008H4746H4747C4747 -8009.66 4745.66 -8011 4744 -8011V-8010ZM-5752 -8010V-8011C-5753.66 -8011 -5755 -8009.66 -5755 -8008H-5754H-5753C-5753 -8008.55 -5752.55 -8009 -5752 -8009V-8010Z" fill="white" fill-opacity="0.1"/>
+<g id="PPT/Icon">
+<g clip-path="url(#clip0_0_1)">
+<rect x="-954" y="-100" width="1014" height="156" rx="5" fill="url(#paint0_linear_0_1)"/>
+<g id="Name=Help, Theme=Dark">
+<rect width="60" height="60" rx="12" fill="white" fill-opacity="0.08"/>
+<g id="Aident DS / Help">
+<g id="Help">
+<path id="Icon" d="M26.2744 26.16C26.5754 25.3045 27.1693 24.5832 27.9512 24.1237C28.733 23.6642 29.6522 23.4963 30.546 23.6496C31.4398 23.8029 32.2505 24.2676 32.8345 24.9613C33.4185 25.6551 33.7382 26.5332 33.7368 27.44C33.7368 30 29.8968 31.28 29.8968 31.28M29.9992 36.4H30.012M42.7992 30C42.7992 37.0693 37.0685 42.8 29.9992 42.8C22.93 42.8 17.1992 37.0693 17.1992 30C17.1992 22.9308 22.93 17.2 29.9992 17.2C37.0685 17.2 42.7992 22.9308 42.7992 30Z" stroke="url(#paint1_linear_0_1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_1" x1="-447" y1="-100" x2="-447" y2="56" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F7F8F6"/>
+<stop offset="0.499" stop-color="#F7F8F6"/>
+<stop offset="0.501" stop-color="#0F091D"/>
+<stop offset="1" stop-color="#0F091D"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_1" x1="42.7992" y1="30" x2="17.1992" y2="30" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F3B6FF"/>
+<stop offset="0.509615" stop-color="#6DE4F9"/>
+<stop offset="1" stop-color="#77FAB4"/>
+</linearGradient>
+<clipPath id="clip0_0_1">
+<rect x="-954" y="-100" width="1014" height="156" rx="5" fill="white"/>
+</clipPath>
+</defs>
+</svg>

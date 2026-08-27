@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "defaultConcurrency": 4,
+  "singleWriterFinalArtifacts": true,
+  "roles": [
+    {
+      "id": "lead",
+      "title": "Deck lead / orchestrator",
+      "phase": ["intake", "integration", "release"],
+      "responsibilities": [
+        "normalize the user request and authority boundaries",
+        "create the run workspace",
+        "assign bounded specialist tasks",
+        "resolve conflicts and assemble deck.json",
+        "generate formats and make final release decision"
+      ],
+      "writes": ["run.json", "deck.json", "output/", "release/"],
+      "reads": ["all run files"]
+    },
+    {
+      "id": "narrative-architect",
+      "title": "Narrative and layout architect",
+      "phase": ["planning"],
+      "responsibilities": [
+        "extract the argument and audience decision",
+        "design the slide sequence",
+        "route each slide to a registered layout",
+        "write realistic copy within layout budgets"
+      ],
+      "writes": ["handoffs/narrative.json"],
+      "reads": ["input/", "references/content-schema.md", "references/components-and-layouts.md"]
+    },
+    {
+      "id": "asset-curator",
+      "title": "Brand and visual asset curator",
+      "phase": ["planning"],
+      "responsibilities": [
+        "inventory supplied logos and images",
+        "map assets to registered image slots",
+        "record crop, alt text, provenance, and missing-asset status",
+        "select only packaged design-system icons"
+      ],
+      "writes": ["handoffs/assets.json"],
+      "reads": ["input/", "references/assets-and-branding.md", "assets/icons/manifest.json"]
+    },
+    {
+      "id": "speaker-notes-editor",
+      "title": "Speaker notes and timing editor",
+      "phase": ["planning"],
+      "responsibilities": [
+        "write purpose, speaking points, and transitions for each proposed slide",
+        "avoid inventing unsupported live details",
+        "keep notes aligned with slide IDs and supplied source material"
+      ],
+      "writes": ["handoffs/notes.json"],
+      "reads": ["input/", "handoffs/narrative.json when available", "references/content-schema.md"]
+    },
+    {
+      "id": "html-qa",
+      "title": "HTML and web QA reviewer",
+      "phase": ["verification"],
+      "responsibilities": [
+        "run HTML preflight and inspect screenshots",
+        "report overlap, overflow, fonts, images, alignment, and background failures",
+        "write a read-only evidence report"
+      ],
+      "writes": ["qa/html-report.json", "qa/html/"],
+      "reads": ["deck.json", "output/web/", "references/quality-gates.md"]
+    },
+    {
+      "id": "pptx-qa",
+      "title": "PPTX QA reviewer",
+      "phase": ["verification"],
+      "responsibilities": [
+        "render every PPTX slide",
+        "run overflow checks",
+        "inspect editability, font substitution, backgrounds, and crops",
+        "write a read-only evidence report"
+      ],
+      "writes": ["qa/pptx-report.json", "qa/pptx/"],
+      "reads": ["deck.json", "output/deck.pptx", "references/quality-gates.md"]
+    },
+    {
+      "id": "pdf-qa",
+      "title": "PDF QA reviewer",
+      "phase": ["verification"],
+      "responsibilities": [
+        "render every PDF page",
+        "check page count, aspect ratio, fonts, images, and print styling",
+        "write a read-only evidence report"
+      ],
+      "writes": ["qa/pdf-report.json", "qa/pdf/"],
+      "reads": ["deck.json", "output/deck.pdf", "references/quality-gates.md"]
+    }
+  ],
+  "parallelGroups": [
+    ["narrative-architect", "asset-curator"],
+    ["html-qa", "pptx-qa", "pdf-qa"]
+  ],
+  "dependencyRules": [
+    "speaker-notes-editor may start from the brief but should receive narrative.json before finalizing notes",
+    "integration starts only after narrative.json is valid and all requested planning handoffs are complete or explicitly waived",
+    "format QA starts only after the lead has generated the corresponding artifact",
+    "release starts only after every requested format has a passing QA report"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "title": "让复杂协作保持清晰",
+    "language": "zh",
+    "brandName": "示例品牌",
+    "url": "example.com",
+    "header": { "show": true, "showLogo": true, "showRightText": true }
+  },
+  "slides": [
+    {
+      "id": "zh-cover",
+      "type": "cover",
+      "theme": "dark",
+      "background": "elements-cover",
+      "coverIdentity": "logo",
+      "kicker": "方法框架 · 示例材料",
+      "title": "让复杂协作保持清晰",
+      "subtitle": "从输入、判断到复盘，建立一套能够被团队重复使用的工作方式。",
+      "notes": { "purpose": "提出整份材料的核心问题。", "talk": ["说明复杂度上升后最容易丢失的是上下文。", "强调本次讨论聚焦工作方式，而不是工具清单。"], "transition": "先看三个最重要的设计原则。" }
+    },
+    {
+      "id": "zh-points",
+      "type": "points",
+      "theme": "light",
+      "background": "elements-inner",
+      "kicker": "工作方式 · 三个原则",
+      "title": "三个原则让协作不再失焦",
+      "subtitle": "每个原则都对应一个需要持续做好的团队决策。",
+      "items": [
+        { "icon": "integration", "label": "对齐", "title": "共享上下文", "body": "开始执行前，把目标、限制与责任人放在同一处。" },
+        { "icon": "history", "label": "沉淀", "title": "记录关键判断", "body": "保留重要选择与依据，让后续工作不用重新猜测。" },
+        { "icon": "action", "label": "推进", "title": "明确下一步", "body": "每次评审都形成一个责任清晰、可验证的行动。" }
+      ],
+      "callout": { "tone": "accent", "metric": "判断标准", "body": "如果听众无法用一句话复述结论，这一页就还没有完成。" },
+      "source": "来源：示例方法框架",
+      "notes": { "purpose": "介绍核心模型。", "talk": ["把三个原则分别对应到常见协作问题。", "避免把页面讲成互不相关的功能清单。"], "transition": "继续说明这套原则如何进入实际流程。" }
+    },
+    {
+      "id": "zh-workflow",
+      "type": "workflow",
+      "theme": "dark",
+      "background": "elements-inner",
+      "kicker": "流程示例 · 四个步骤",
+      "title": "稳定流程把意图变成证据",
+      "subtitle": "同一套顺序可以应用于调研、策划、制作与审核。",
+      "steps": [
+        { "number": "01", "label": "收集", "title": "收集输入", "body": "整理资料、限制条件与完成标准。" },
+        { "number": "02", "label": "组织", "title": "组织信息", "body": "让信息缺口和冲突能够被看见。" },
+        { "number": "03", "label": "形成", "title": "形成输出", "body": "先制作最小但可供审核的版本。" },
+        { "number": "04", "label": "审核", "title": "审核确认", "body": "明确修改、责任人与下一次检查。" }
+      ],
+      "callout": { "tone": "default", "metric": "人工确认", "body": "重要变化在流程继续之前，需要经过明确审核。" },
+      "notes": { "purpose": "把模型变成可执行流程。", "talk": ["说明每个步骤之间的交接内容。", "强调审核是流程的一部分。"], "transition": "接下来定义用于判断流程质量的指标。" }
+    },
+    {
+      "id": "zh-metrics",
+      "type": "metrics",
+      "theme": "light",
+      "background": "atmosphere",
+      "kicker": "衡量方式 · 关键指标",
+      "title": "衡量流转质量，而不是动作数量",
+      "subtitle": "选择少量能够解释速度、清晰度与可靠性的信号。",
+      "items": [
+        { "label": "首次审核时间", "value": "30 分钟", "title": "尽早可见", "body": "从收到需求到出现可审核初稿。" },
+        { "label": "判断留痕", "value": "100%", "title": "记录完整", "body": "重要判断都能够关联原始依据。" },
+        { "label": "责任覆盖", "value": "1 人", "title": "责任清晰", "body": "每个下一步都有唯一责任人。" }
+      ],
+      "source": "来源：请替换为经过核验的内部数据",
+      "notes": { "purpose": "给出可替换的指标示例。", "talk": ["说明示例数字不是对外承诺。", "正式材料必须替换为可验证数据。"], "transition": "最后给出一个适合开始试点的动作。" }
+    },
+    {
+      "id": "zh-closing",
+      "type": "split-image-text",
+      "theme": "dark",
+      "background": "atmosphere",
+      "kicker": "下一步 · 小范围试点",
+      "title": "先选择一条流程和一个决策",
+      "subtitle": "用小范围试点积累证据，再决定是否扩大。",
+      "contentTitle": "选择可见且重复的任务",
+      "body": "开始前明确责任人、输入、审核节点与成功标准。",
+      "callout": { "tone": "accent", "metric": "7 天", "body": "第一周只关注上下文在哪个环节丢失，然后调整流程。" },
+      "notes": { "purpose": "以清晰行动收束。", "talk": ["说明适合试点任务的选择标准。", "确认第一次审核由谁负责。"], "transition": "进入讨论并确认试点范围。" }
+    }
+  ]
+}

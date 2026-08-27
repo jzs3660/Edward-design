@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "generatedAt": "2026-08-27T14:01:47.256Z",
+  "fileCount": 75,
+  "totalBytes": 73699209,
+  "files": [
+    {
+      "path": "assets/asset-sources.json",
+      "bytes": 1963,
+      "sha256": "ee8dcc3c60c4a78f197d8564bf79f7734badbc8987283d0992ff355a328787a9"
+    },
+    {
+      "path": "assets/backgrounds/compiled/dark-atmosphere.png",
+      "bytes": 3173647,
+      "sha256": "3e55341b3ada38b5c4eaa9274b8373cd6ae3ca544d5e70e2aff31892d2177af7"
+    },
+    {
+      "path": "assets/backgrounds/compiled/dark-base.png",
+      "bytes": 43087,
+      "sha256": "025899b3e79df03c4c3d0a5653687ed4476d7ed93324aec8e81d257d67064edf"
+    },
+    {
+      "path": "assets/backgrounds/compiled/dark-elements-cover.png",
+      "bytes": 214240,
+      "sha256": "ad33a7204d4f016dc7e76bd46fde147eac20d39a8c58de3012427a3eb0e33ee3"
+    },
+    {
+      "path": "assets/backgrounds/compiled/dark-elements-inner.png",
+      "bytes": 124906,
+      "sha256": "5876ef487145fc3b015ca77a30483c4451fa5814c44b1533b896f928e7498861"
+    },
+    {
+      "path": "assets/backgrounds/compiled/light-atmosphere.png",
+      "bytes": 2264412,
+      "sha256": "f33333b9d3d05046cfc1f5a4cecdc48fc3c9e2ee93197e92a8d96122c492179b"
+    },
+    {
+      "path": "assets/backgrounds/compiled/light-base.png",
+      "bytes": 43090,
+      "sha256": "c20dc890b76ffbfe84db37fdd610ceff0c956e810d2bf387eb597ce4146e8286"
+    },
+    {
+      "path": "assets/backgrounds/compiled/light-elements-cover.png",
+      "bytes": 139009,
+      "sha256": "f2bbfadce94be227e69c8e4705fa502d5df38b60f83914e937e259a6effa5d72"
+    },
+    {
+      "path": "assets/backgrounds/compiled/light-elements-inner.png",
+      "bytes": 141385,
+      "sha256": "4dce5e776b654c172ff1f70a672295eaa941b34cdaee84caaf1a1907e917989b"
+    },
+    {
+      "path": "assets/backgrounds/dark-aurora.png",
+      "bytes": 2783405,
+      "sha256": "ee698949fff6d62e3601d6b1cd4fefad0fd6ca41c4b5dba77987847b0de1ac45"
+    },
+    {
+      "path": "assets/backgrounds/dark-elements-cover.png",
+      "bytes": 192361,
+      "sha256": "cfa0ad0570a4aa64e492ad5b4b96faba976c2ab5a0589e4486279b62a004586d"
+    },
+    {
+      "path": "assets/backgrounds/dark-elements-inner.png",
+      "bytes": 98312,
+      "sha256": "94da386c5a6bb82dc3635d776518352d85874c95d5735da18cea8c93a169f2c1"
+    },
+    {
+      "path": "assets/backgrounds/dark-ink.png",
+      "bytes": 10571,
+      "sha256": "b6813965f8d4f25387cffb8ffd9f629a278931b6d4c468f206e85d6bf83b57e5"
+    },
+    {
+      "path": "assets/backgrounds/light-elements-cover.png",
+      "bytes": 114511,
+      "sha256": "efdcc5133baab6ec1d593c3aa13c6b685cbff327b69ae00e2d3e64446226d260"
+    },
+    {
+      "path": "assets/backgrounds/light-elements-inner.png",
+      "bytes": 115662,
+      "sha256": "135fc8f1f7265c619898bcf45781d08e7c0e8e85c2a5566177a6b151164f1b50"
+    },
+    {
+      "path": "assets/backgrounds/light-motion.png",
+      "bytes": 2413105,
+      "sha256": "6b8f8fd7dc7e0e621fdb95f926578a1d60f8e5c15ac31cb9f877abc73d0dec16"
+    },
+    {
+      "path": "assets/backgrounds/light-paper.png",
+      "bytes": 10572,
+      "sha256": "832374aeba83055d6cd0f15fe64a9952338a39b5b4073d395344a4641f1454d4"
+    },
+    {
+      "path": "assets/backgrounds/manifest.json",
+      "bytes": 2419,
+      "sha256": "7322bb655f0ecfc862b66a8bee32cfc327a93d2c1324e46d1b3c59c7800f8b83"
+    },
+    {
+      "path": "assets/components/registry.json",
+      "bytes": 5246,
+      "sha256": "28b45867c993918b133b4fd71459c667177f3a95c3e6804acd117e1cea796ab9"
+    },
+    {
+      "path": "assets/fonts/SmileySans-v2.0.1.zip",
+      "bytes": 5781344,
+      "sha256": "299c0be6c960ae37361762eca76f7d0cd516615435bb96c0d4b98a1e70178a07"
+    },
+    {
+      "path": "assets/fonts/fonts.css",
+      "bytes": 1466,
+      "sha256": "4059c720a387dc7c08f3bb0a8d1455441fec21bad8d1244667b224ee8f359d5c"
+    },
+    {
+      "path": "assets/fonts/instrument-serif/InstrumentSerif-Italic.ttf",
+      "bytes": 71592,
+      "sha256": "08939b8bdf534afec24ae0ef5e03f948940cd9a8fe08e7fecbad040e62327385"
+    },
+    {
+      "path": "assets/fonts/instrument-serif/InstrumentSerif-Regular.ttf",
+      "bytes": 70012,
+      "sha256": "498efd461f6ddfcb7a111bf9a565709d2085d48201d501ead960d93e84ffbb88"
+    },
+    {
+      "path": "assets/fonts/licenses/InstrumentSerif-OFL.txt",
+      "bytes": 4405,
+      "sha256": "129ed7618959716959f2941fdd5b49e0ad6e6c1d78726761786a00253d865521"
+    },
+    {
+      "path": "assets/fonts/licenses/MiSans-License.pdf",
+      "bytes": 79535,
+      "sha256": "4a93a27cd2bd81b3b5ecfd0a853144a876fa26938a93a68443c67d74172fcb86"
+    },
+    {
+      "path": "assets/fonts/licenses/NotoSans-OFL.txt",
+      "bytes": 4396,
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+    },
+    {
+      "path": "assets/fonts/licenses/NotoSansSC-OFL.txt",
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
+      "path": "assets/fonts/licenses/NotoSerifCJK-OFL.txt",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "path": "assets/fonts/licenses/Outfit-OFL.txt",
+      "bytes": 4482,
+      "sha256": "8fc6af31312082959cc8297b30e04d94ff457faecc9fb0aeeb8906bf448f20e6"
+    },
+    {
+      "path": "assets/fonts/licenses/SmileySans-OFL.txt",
+      "bytes": 4422,
+      "sha256": "9401f4050f1b66c26b6ccdc8b0e14a3c1cc37aac122eda84386f25854a9bec72"
+    },
+    {
+      "path": "assets/fonts/manifest.json",
+      "bytes": 2407,
+      "sha256": "5d2d474e1c536849bbb9849235fbb507178e29d6bfa26745b579369467b25c11"
+    },
+    {
+      "path": "assets/fonts/noto-sans-sc/NotoSansSC-Variable.ttf",
+      "bytes": 17772300,
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da"
+    },
+    {
+      "path": "assets/fonts/noto-sans/NotoSans-Variable.ttf",
+      "bytes": 2049096,
+      "sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d"
+    },
+    {
+      "path": "assets/fonts/noto-serif-sc/NotoSerifCJKsc-Bold.otf",
+      "bytes": 24666740,
+      "sha256": "0da938d0551303bed1232bc4c7c2157660ff9824f89098d1b5da4dd389938a63"
+    },
+    {
+      "path": "assets/fonts/outfit/Outfit-VariableFont_wght.ttf",
+      "bytes": 110572,
+      "sha256": "bccf9dda25ddc7fb32217f386e07c72c699a902eed3abcf5665ce4377fdfa33b"
+    },
+    {
+      "path": "assets/fonts/smiley-sans/SmileySans-Oblique.otf",
+      "bytes": 2003884,
+      "sha256": "139b5dcbe70d6d52de85a62d148784c6af4bd161e38fdb62ba0c1e7e5065fca6"
+    },
+    {
+      "path": "assets/fonts/smiley-sans/SmileySans-Oblique.otf.woff2",
+      "bytes": 1361268,
+      "sha256": "4895e7a5b72753b7d4bf090581fbc4375e0ec53484944f369a584588f1eeaf08"
+    },
+    {
+      "path": "assets/fonts/smiley-sans/SmileySans-Oblique.ttf",
+      "bytes": 2629764,
+      "sha256": "b447d7e781f08bc95c4c9f23ba71ed2b8ebb639aa7184485c71c4ca5afcd25c4"
+    },
+    {
+      "path": "assets/fonts/smiley-sans/SmileySans-Oblique.ttf.woff2",
+      "bytes": 1150924,
+      "sha256": "731f22973349404b15a88a99ef3b5dd4104c0965c23b7e485c1f11e84fea99e2"
+    },
+    {
+      "path": "assets/icons/dark/action.svg",
+      "bytes": 3204,
+      "sha256": "0f3247c6debabaffaae3899fc518a40ef1a04456dcd7a5c07523a63e86279bba"
+    },
+    {
+      "path": "assets/icons/dark/capabilities.svg",
+      "bytes": 3992,
+      "sha256": "85ec7be7a6a777cdbbf5497bfd06cd5d34fa8237818b5606a421df997b3d2fd3"
+    },
+    {
+      "path": "assets/icons/dark/copy.svg",
+      "bytes": 2626,
+      "sha256": "643e5107157460bf5007abb7a79ea1fd229ab98601cc001bc53e71931ce0bc9b"
+    },
+    {
+      "path": "assets/icons/dark/download.svg",
+      "bytes": 2505,
+      "sha256": "8a5d9d1da15bfe954f711e71d850142f9cc8dd200b7db73b53b002c3611e49fa"
+    },
+    {
+      "path": "assets/icons/dark/help.svg",
+      "bytes": 2644,
+      "sha256": "b849d34e510745a45ed5a1842df2eb1d5af7923e632751134aaeb08d12f1899e"
+    },
+    {
+      "path": "assets/icons/dark/history.svg",
+      "bytes": 2556,
+      "sha256": "3039ae10b3dccbb5a26c781c60cde36e39fb798b6d90933717b9e3572dc5731b"
+    },
+    {
+      "path": "assets/icons/dark/integration.svg",
+      "bytes": 2601,
+      "sha256": "529bd1999f132a2df4e5d8a3167cdc6d33d9d37ab9d2f337038498ae0ce5d61e"
+    },
+    {
+      "path": "assets/icons/dark/key.svg",
+      "bytes": 2947,
+      "sha256": "5023d719eee72bc7690bb50b903fb24c305338d9389489cb69e055749e443b5e"
+    },
+    {
+      "path": "assets/icons/dark/run-circle.svg",
+      "bytes": 2555,
+      "sha256": "4522dcc4f3a1ecb10f92f3eb6d6e8e8d8d472e237d8186c96b35edeb2b01948b"
+    },
+    {
+      "path": "assets/icons/dark/skill.svg",
+      "bytes": 3584,
+      "sha256": "19a99d19b9c8da7dbfdf4b40c0fc87e8c58ac81c2feeb9c9ede19c4f516a5ae1"
+    },
+    {
+      "path": "assets/icons/light/action.svg",
+      "bytes": 2774,
+      "sha256": "53d9b8435c542c86aa64f970e9a5423b619e43599786e49288202f71176de45c"
+    },
+    {
+      "path": "assets/icons/light/capabilities.svg",
+      "bytes": 2803,
+      "sha256": "75d04a17df737ec6a485b1df118e45d990f4d665e6f926d3b039bf6dac9391b0"
+    },
+    {
+      "path": "assets/icons/light/copy.svg",
+      "bytes": 2196,
+      "sha256": "1f3b7c7f80d7bbdd97706aa32a4ebe006cac4c5093616d48bf087a370d7b6f76"
+    },
+    {
+      "path": "assets/icons/light/download.svg",
+      "bytes": 2065,
+      "sha256": "3d197c8d31817bc0d61b5754bc08ecbd7fb38a1a4dba6881fda3b30efb6e30c6"
+    },
+    {
+      "path": "assets/icons/light/help.svg",
+      "bytes": 2204,
+      "sha256": "8bfda342c87e5c3d1aac3f34fa93fcd34c4745574c76e9438616a58186f71954"
+    },
+    {
+      "path": "assets/icons/light/history.svg",
+      "bytes": 2116,
+      "sha256": "08cb40d9a086cea7521759ac6d0dacbdd0d5ec40376e1802fa384370ec545c81"
+    },
+    {
+      "path": "assets/icons/light/integration.svg",
+      "bytes": 2170,
+      "sha256": "3f06155526e3d162bb949b45b0cfe66d1e9e1fbd9b3cc42e8f865918074e98a7"
+    },
+    {
+      "path": "assets/icons/light/key.svg",
+      "bytes": 2497,
+      "sha256": "11d68abc11774d1d44302355f3d695f925a02baed87c282594deb855fbe672af"
+    },
+    {
+      "path": "assets/icons/light/run-circle.svg",
+      "bytes": 2115,
+      "sha256": "6e88feca9b3a684ede8a39c04886421e53e966dff8d5f80a44ab1277a4ef92b9"
+    },
+    {
+      "path": "assets/icons/light/skill.svg",
+      "bytes": 3154,
+      "sha256": "b6b2564142b14def4ada2fc81a877039f0172bf9c3e5cb293f9e6aca2a87f27a"
+    },
+    {
+      "path": "assets/icons/manifest.json",
+      "bytes": 1513,
+      "sha256": "ddbeec64a9521d8f107e8439bbb497b6d653bd011e45168840a9c6528589a8da"
+    },
+    {
+      "path": "assets/logos/manifest.json",
+      "bytes": 474,
+      "sha256": "9cf52595687d73776d759b98d6d1de5beb0383d6a1b8b57bd3ed59024902ccda"
+    },
+    {
+      "path": "assets/logos/mark-dark.svg",
+      "bytes": 988,
+      "sha256": "5e937b4edfbd8503b2f2c4ebb1c368d61fcee2fccf9d052a87a28e269f9eaff5"
+    },
+    {
+      "path": "assets/logos/mark-light.svg",
+      "bytes": 988,
+      "sha256": "93ff619007d26b663ce2b7277dbb9ef5c9ae282e1a7ec76fd78a0929750272fb"
+    },
+    {
+      "path": "assets/logos/wordmark-dark.svg",
+      "bytes": 12242,
+      "sha256": "6b9dcc42f0af126370f0837874296177e5a13c40e0168cfab0804409748eb349"
+    },
+    {
+      "path": "assets/logos/wordmark-light.svg",
+      "bytes": 12264,
+      "sha256": "e613848feba5d903f96725dba559cfd2a44e03a59e417acd0fe0793be668d837"
+    },
+    {
+      "path": "assets/previews/aident-ppt-showcase.png",
+      "bytes": 1290672,
+      "sha256": "ce2e1fc1fc4b231a1a805bd0ae89df72233cc4b1ed08a5316dd9f17abc0a6c7f"
+    },
+    {
+      "path": "assets/previews/manifest.json",
+      "bytes": 370,
+      "sha256": "f91f95962b497de162c8b512158c2f894abab627f759d0d33a602c7f4c3b9d13"
+    },
+    {
+      "path": "assets/runtime/deck.css",
+      "bytes": 23393,
+      "sha256": "4b653ea4d82de83a2612a52768319157c475d37d5420dccd72018381f57af36d"
+    },
+    {
+      "path": "assets/runtime/deck.js",
+      "bytes": 8739,
+      "sha256": "550dc5849f07f39d7fcb3b10c32e6628fb1e0c48e5210be8dd7212bd554deb12"
+    },
+    {
+      "path": "assets/templates/deck-shell.html",
+      "bytes": 2267,
+      "sha256": "968491fe10566b89ceafdf6d5d2f122e8f9c47ea7e4a9b88b1efdd64cb6ad75b"
+    },
+    {
+      "path": "assets/textures/dark-overlay.png",
+      "bytes": 1481126,
+      "sha256": "43bb12728f602c4cdece53759fe1eace2394415c773f0f6ae7bd28b5a73e9173"
+    },
+    {
+      "path": "assets/textures/light-overlay.png",
+      "bytes": 1060896,
+      "sha256": "0162d80b576ca62b9a806803dff264c1e95622c7e09e6b65ecb625f74f4a557e"
+    },
+    {
+      "path": "assets/textures/manifest.json",
+      "bytes": 443,
+      "sha256": "b9ce59c4bc7fb37f9a3601d3b2caab4ec10bf9cea3347ff72ada9e7b46bef193"
+    },
+    {
+      "path": "assets/textures/source.png",
+      "bytes": 73526,
+      "sha256": "5bae6fa1ea55641a826aa54dabb9c24faf4b34154fb0afe4298b8fa8f6108094"
+    },
+    {
+      "path": "assets/tokens/tokens.json",
+      "bytes": 6799,
+      "sha256": "e6bfb4edc1d6b13abb21373866f8d0ced9a0403f25066b73475a22833a545484"
+    }
+  ]
+}

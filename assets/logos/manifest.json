@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "sourceNode": "96:102",
+  "replaceable": true,
+  "fit": "contain",
+  "defaultHtmlBox": [320, 40],
+  "defaultPptxBox": [270, 40],
+  "assets": [
+    { "name": "mark-light", "file": "mark-light.svg", "theme": "light" },
+    { "name": "mark-dark", "file": "mark-dark.svg", "theme": "dark" },
+    { "name": "wordmark-light", "file": "wordmark-light.svg", "theme": "light" },
+    { "name": "wordmark-dark", "file": "wordmark-dark.svg", "theme": "dark" }
+  ]
+}

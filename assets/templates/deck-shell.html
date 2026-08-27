@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>{{TITLE}}</title>
+  <link rel="stylesheet" href="assets/runtime/deck.css">
+</head>
+<body data-lang="{{LANG}}">
+  <main id="viewport"><div id="deck">{{SLIDES}}</div></main>
+  <nav id="nav" aria-label="Presentation controls">
+    <button type="button" data-action="prev" aria-label="Previous slide">←</button>
+    <span id="page-count">1 / 1</span>
+    <span id="dots"></span>
+    <button type="button" data-action="next" aria-label="Next slide">→</button>
+    <button type="button" data-action="overview">Grid</button>
+    <button type="button" data-action="presenter">P</button>
+  </nav>
+  <section id="overview" aria-label="Slide overview"><div class="overview-grid"></div></section>
+  <section id="presenter" aria-label="Presenter view">
+    <header class="presenter-top"><strong>Presenter</strong><div class="controls"><span class="sync-state">Audience · disconnected</span><button data-p="reopen">Open audience</button><button data-p="exit">Exit</button></div></header>
+    <div class="presenter-main">
+      <div class="presenter-previews"><div class="presenter-frame"><span class="presenter-frame-label">Current</span><iframe id="current-frame"></iframe></div><div class="presenter-frame"><span class="presenter-frame-label">Next</span><iframe id="next-frame"></iframe></div></div>
+      <aside class="presenter-notes"><h2 id="note-title"></h2><div class="purpose" id="note-purpose"></div><ul id="note-talk"></ul><div class="transition" id="note-transition"></div></aside>
+    </div>
+    <footer class="presenter-bottom"><div class="controls"><button data-p="first">First</button><button data-p="prev">Previous</button><button data-p="next">Next</button><button data-p="last">Last</button></div><div class="timer" id="timer">00:00</div><div class="controls"><button data-p="timer">Start</button><button data-p="black">Black</button><button data-p="white">White</button><button data-p="freeze">Freeze</button></div></footer>
+  </section>
+  <div id="screen-cover"></div>
+  <script>window.AIDENT_DECK={{DECK_JSON}};</script>
+  <script src="assets/runtime/deck.js"></script>
+</body>
+</html>

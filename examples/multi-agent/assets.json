@@ -1,0 +1,23 @@
+{
+  "_status": "complete",
+  "meta": {
+    "role": "asset-curator",
+    "assumptions": [
+      "Packaged theme-aware marks and icons are acceptable for this generic example."
+    ],
+    "missingAssets": []
+  },
+  "brand": {
+    "logo": null,
+    "rightText": "example.com"
+  },
+  "slides": {
+    "two-principles": {
+      "items": {
+        "0": { "icon": "integration" },
+        "1": { "icon": "action" }
+      }
+    }
+  }
+}
+
