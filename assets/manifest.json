@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-28T02:56:27.194Z",
+  "generatedAt": "2026-08-28T03:20:49.553Z",
   "fileCount": 70,
-  "totalBytes": 64815387,
+  "totalBytes": 64815005,
   "files": [
     {
       "path": "assets/asset-sources.json",
@@ -306,8 +306,8 @@
     },
     {
       "path": "assets/previews/aident-ppt-system.webp",
-      "bytes": 92902,
-      "sha256": "55cd7f65c8dbcf2fbd31ae6d77d75f4b59e6be9736fa9d4d519cb03e377d55c6"
+      "bytes": 92520,
+      "sha256": "0b0a13b9678b89b8c1812902234b4e6150ebc73a12881386f1f8ff9cd4b75b9d"
     },
     {
       "path": "assets/previews/manifest.json",

@@ -98,23 +98,30 @@ export async function renderSystemPreview({canvasModule,sharp,root,tokens,compon
     drawText(ctx,x+18,272,label,12,{fill:'#626668',weight:600,family:'Noto Sans',spacing:.45});
   });
 
-  roundedRect(ctx,84,320,1026,648,'#FFFFFF',22);
+  const colorPanel={x:84,y:320,width:1026,height:648};
+  roundedRect(ctx,colorPanel.x,colorPanel.y,colorPanel.width,colorPanel.height,'#FFFFFF',22);
   drawText(ctx,112,366,'Color tokens',27,{weight:600,family:'Outfit'});
   drawText(ctx,1082,366,`${colors.length} base · ${gradients.length} gradients`,13,{fill:'#008089',weight:600,family:'Noto Sans',align:'right'});
 
-  const swatchW=178,swatchGap=10;
+  const swatchW=178,swatchGap=10,colorTop=408,colorRowStep=88;
   colors.forEach(([name,value],index)=>{
-    const column=index%5,row=Math.floor(index/5),x=112+column*(swatchW+swatchGap),y=408+row*88;
+    const column=index%5,row=Math.floor(index/5),x=112+column*(swatchW+swatchGap),y=colorTop+row*colorRowStep;
     roundedRect(ctx,x,y,swatchW,42,value,9);
     drawText(ctx,x,y+60,title(name),12,{weight:700,family:'Noto Sans'});
     drawText(ctx,x,y+76,String(value).toUpperCase(),9,{fill:'#777B7D',weight:500,family:'Noto Sans'});
   });
 
-  const gradientW=296;
+  const gradientW=296,gradientTop=768,gradientRowStep=64,gradientLabelOffset=59;
+  const colorRows=Math.ceil(colors.length/5),gradientRows=Math.ceil(gradients.length/3);
+  const colorContentBottom=colorRows?colorTop+(colorRows-1)*colorRowStep+80:colorTop;
+  const gradientContentBottom=gradientRows?gradientTop+(gradientRows-1)*gradientRowStep+64:gradientTop;
+  const colorPanelSafeBottom=colorPanel.y+colorPanel.height-8;
+  if(colorContentBottom+16>gradientTop)throw new Error(`Foundation Color tokens overlap: color content ends at ${colorContentBottom}px and gradients start at ${gradientTop}px.`);
+  if(gradientContentBottom>colorPanelSafeBottom)throw new Error(`Foundation Color tokens overflow: gradient content ends at ${gradientContentBottom}px but the panel safe edge is ${colorPanelSafeBottom}px.`);
   gradients.forEach(([name,value],index)=>{
-    const column=index%3,row=Math.floor(index/3),x=112+column*(gradientW+12),y=774+row*72;
+    const column=index%3,row=Math.floor(index/3),x=112+column*(gradientW+12),y=gradientTop+row*gradientRowStep;
     roundedRect(ctx,x,y,gradientW,42,gradientFill(ctx,x,gradientW,value),9);
-    drawText(ctx,x,y+60,title(name),11,{fill:'#4D5153',weight:700,family:'Noto Sans'});
+    drawText(ctx,x,y+gradientLabelOffset,title(name),11,{fill:'#4D5153',weight:700,family:'Noto Sans'});
   });
 
   roundedRect(ctx,1134,320,702,648,'#FFFFFF',22);

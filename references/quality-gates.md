@@ -278,6 +278,7 @@ Verify:
 - 8 registered Lossless WebP background variants and no committed compiled PPTX duplicates;
 - 3 Lossless WebP texture/source images;
 - 4 Lossless WebP README/Hero/Showcase previews;
+- Foundation preview keeps every base-color and gradient swatch plus its label inside the white Color tokens panel; the preview renderer's overlap/overflow guard passes;
 - 4 logos;
 - 10 icons × 2 themes;
 - `node scripts/normalize-icons.mjs --check` passes for all 20 component-only SVGs and finds no Figma canvas/background nodes;

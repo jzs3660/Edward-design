@@ -19,7 +19,7 @@ async function walk(directory){
   return files;
 }
 
-const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema,backgrounds,textures,previews,fontManifest,iconManifest,iconNormalizer]=await Promise.all([
+const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema,backgrounds,textures,previews,fontManifest,iconManifest,iconNormalizer,systemPreview]=await Promise.all([
   read('assets/tokens/tokens.json').then(JSON.parse),
   read('assets/components/registry.json').then(JSON.parse),
   read('assets/runtime/deck.css'),
@@ -34,6 +34,7 @@ const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema,backgrounds
   read('assets/fonts/manifest.json').then(JSON.parse),
   read('assets/icons/manifest.json').then(JSON.parse),
   read('scripts/normalize-icons.mjs'),
+  read('scripts/lib/render-system-preview.mjs'),
 ]);
 
 const callout=registry.components?.callout||{};
@@ -63,6 +64,8 @@ check(iconManifest.boxPx===60&&iconManifest.glyphPx===32,'Icon manifest size con
 check(iconManifest.radiiPx?.light===10&&iconManifest.radiiPx?.dark===12&&iconManifest.overflow==='clip','Icon manifest radius/clip contract drifted.');
 check(iconManifest.icons?.length===10&&iconManifest.themes?.length===2,'Icon manifest must register 10 icons across two themes.');
 check(iconNormalizer.includes('component-only 60×60 SVG')&&iconNormalizer.includes('Figma canvas artifact'),'Icon normalizer must reject unclean Figma canvas exports.');
+check(systemPreview.includes('gradientTop=768,gradientRowStep=64,gradientLabelOffset=59'),'Foundation preview gradient spacing contract drifted.');
+check(systemPreview.includes('Foundation Color tokens overflow:')&&systemPreview.includes('Foundation Color tokens overlap:'),'Foundation preview must reject Color-token content that leaves or overlaps its panel.');
 
 const compactCss=css.replace(/\s+/g,'').toLowerCase();
 const compactRuntimeJs=runtimeJs.replace(/\s+/g,'');
