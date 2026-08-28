@@ -57,7 +57,6 @@ function broadcast(type,payload={}){
 function show(next,{emit=true}={}){
   if(!slides.length)return;
   index=Math.max(0,Math.min(slides.length-1,next));
-  deck.style.transform='scale(var(--scale))';
   slides.forEach((slide,i)=>{
     const active=i===index;
     slide.classList.toggle('is-active',active);

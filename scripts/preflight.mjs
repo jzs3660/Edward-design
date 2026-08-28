@@ -127,6 +127,23 @@ async function browserChecks(htmlPath,args,slideCount){
     if(args.screenshots)await page.screenshot({path:path.join(path.resolve(args.screenshots),`slide-${String(i+1).padStart(2,'0')}.png`),fullPage:false});
     results.push(audit);
   }
+  for(const viewport of [{width:1280,height:720},{width:1366,height:768},{width:1440,height:900},{width:1024,height:768}]){
+    await page.setViewportSize(viewport);
+    const url=new URL(pathToFileURL(htmlPath));url.searchParams.set('embed','1');url.searchParams.set('slide','0');
+    await page.goto(url.href,{waitUntil:'load'});await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(240);
+    const audit=await page.evaluate(({width,height})=>{
+      const deck=document.getElementById('deck'),slide=document.querySelector('.slide.is-active'),errors=[],warnings=[];
+      if(!deck||!slide)return {id:`responsive-${width}x${height}`,type:'runtime',errors:['Responsive preview is missing the deck or active slide.'],warnings:[]};
+      const dr=deck.getBoundingClientRect(),sr=slide.getBoundingClientRect(),expectedScale=Math.min(width/1920,height/1080),tolerance=1.5;
+      const expectedWidth=1920*expectedScale,expectedHeight=1080*expectedScale;
+      if(dr.left<-tolerance||dr.top<-tolerance||dr.right>width+tolerance||dr.bottom>height+tolerance)errors.push(`Scaled deck is clipped at ${width}×${height}: ${dr.left.toFixed(1)},${dr.top.toFixed(1)} → ${dr.right.toFixed(1)},${dr.bottom.toFixed(1)}.`);
+      if(Math.abs(dr.width-expectedWidth)>tolerance||Math.abs(dr.height-expectedHeight)>tolerance)errors.push(`Scaled deck size is incorrect at ${width}×${height}: ${dr.width.toFixed(1)}×${dr.height.toFixed(1)}, expected ${expectedWidth.toFixed(1)}×${expectedHeight.toFixed(1)}.`);
+      if(Math.abs((dr.left+dr.right)/2-width/2)>tolerance||Math.abs((dr.top+dr.bottom)/2-height/2)>tolerance)errors.push(`Scaled deck is not centered at ${width}×${height}.`);
+      if(Math.abs(sr.left-dr.left)>tolerance||Math.abs(sr.top-dr.top)>tolerance||Math.abs(sr.right-dr.right)>tolerance||Math.abs(sr.bottom-dr.bottom)>tolerance)errors.push(`Active slide does not match the scaled deck bounds at ${width}×${height}.`);
+      return {id:`responsive-${width}x${height}`,type:'runtime',errors,warnings,geometry:{viewport:{width,height},deck:{left:dr.left,top:dr.top,right:dr.right,bottom:dr.bottom,width:dr.width,height:dr.height},slide:{left:sr.left,top:sr.top,right:sr.right,bottom:sr.bottom,width:sr.width,height:sr.height}}};
+    },viewport);
+    results.push(audit);
+  }
   await browser.close();return results;
 }
 

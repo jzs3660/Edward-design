@@ -45,6 +45,8 @@ deck/
 
 Open `index.html` directly or serve the folder with a static server. It does not require Figma or a build step.
 
+The authored slide remains exactly 1920×1080. Audience and ordinary browser views position the deck at the viewport center with `translate(-50%,-50%)` and then apply the calculated uniform scale. Do not center the unscaled 1920×1080 deck as an implicit Grid track: a smaller viewport can let that track overflow from the top-left and crop the scaled right/bottom edges. Overview and presenter iframes retain their registered top-left transform origin inside bounded preview frames.
+
 ## Single-file HTML
 
 ```bash

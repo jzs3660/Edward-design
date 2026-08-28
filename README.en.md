@@ -96,6 +96,7 @@ Open `output/example-en/index.html`; press `P` for presenter mode.
 - All slide copy is data-driven and editable: kickers, titles, subtitles, every Point/Card/Metric/Step/Comparison field, values, lists, callouts, sources, and speaker notes.
 - Replaceable logos, header text/URL, content images, crop positions, and sources.
 - Folder HTML as the default deliverable; single-file HTML, PDF, editable PPTX, and static web delivery on request.
+- Responsive ordinary, audience, and embed views keep the full 1920×1080 canvas centered and visible without cropping the right or bottom edge.
 - Navigation, overview, restrained animation, low-power mode, and presenter view.
 - Static validation, browser overlap/overflow checks, and rendered PDF/PPTX review.
 - Both a single-Agent workflow and an executable multi-Agent workflow with ownership, handoffs, deterministic assembly, and parallel QA.

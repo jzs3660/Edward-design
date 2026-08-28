@@ -110,6 +110,7 @@ The package includes bilingual typography, reusable 1920×1080 layouts, Light/Da
 - 所有页面文案都由 JSON 填充并可编辑：kicker、标题、副标题、Point/Card/Metric/Step/Comparison 的各级文字、数值、列表、Callout、来源与演讲备注。
 - 可替换 logo、右上角文字/网址、内容图片、裁切位置与来源。
 - 文件夹 HTML 为默认主产物；单文件 HTML、PDF、可编辑 PPTX 与网页托管按需输出。
+- 普通、Audience 与 Embed 模式会在不同浏览器窗口中完整居中缩放 1920×1080 画布，不裁切右侧或底部。
 - 键盘导航、概览、低功耗模式、动画和演讲者视图。
 - 静态校验、浏览器重叠/越界检查、PDF/PPTX 渲染检查。
 - 单 Agent 流程和具备文件所有权、handoff、并行 QA 的真实多 Agent 流程。

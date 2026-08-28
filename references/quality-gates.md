@@ -101,6 +101,7 @@ Checks include:
 - brand header, slide heading, content zone, and source stay within slide;
 - no overlap among major regions;
 - slide scroll dimensions remain 1920×1080;
+- the scaled deck remains centered and fully contained at 1280×720, 1366×768, 1440×900, and 1024×768, with no right/bottom clipping;
 - bundled display fonts resolve;
 - required local font files are present.
 - replacement header/cover logos retain their intrinsic aspect ratio within 1.5%.
@@ -130,6 +131,8 @@ Review montage for:
 - images placed as evidence;
 - card heights/rows aligned;
 - no abrupt density changes.
+
+Also resize the browser through the registered landscape and 4:3 QA viewports. Grid/overview mode is not a substitute for a correctly fitted single-slide view: every normal slide must remain fully visible without switching modes.
 
 Inspect at full size:
 

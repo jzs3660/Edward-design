@@ -10,6 +10,7 @@ Turn an outline into a coherent, source-faithful deck. Treat the packaged assets
 ## Non-negotiable outcomes
 
 - Build at exactly 1920×1080, 16:9.
+- Scale and center the fixed canvas responsively in ordinary, audience, and embed views. The full slide must remain visible at 1280×720, 1366×768, 1440×900, and 1024×768; never crop the right or bottom edge.
 - Center the title only on `cover`. Left-align every inner-page title.
 - Give every slide a packaged light or dark background treatment. `elements-cover` is cover-only; `elements-inner` and `atmosphere` are inner-page treatments. Never output plain unstyled white or black.
 - Use Outfit + Noto Sans + Instrument Serif for English and Smiley Sans + Noto Sans SC + Noto Serif SC for Chinese according to `references/typography.md`.
@@ -177,7 +178,7 @@ RUNTIME_NODE_MODULES="$RUNTIME_NODE_MODULES" node "$SKILL_DIR/scripts/preflight.
   --screenshots /absolute/path/output/qa/html
 ```
 
-Preflight must report 0 errors. Never waive overlap, slide overflow, broken images, missing bundled fonts, standalone callouts, emoji icons, or invalid line-height. `--allow-font-fallback` is only for an explicit user-approved fallback delivery.
+Preflight must report 0 errors. It checks every slide at the native 1920×1080 canvas and verifies responsive centering/containment at the registered smaller browser viewports. Never waive overlap, slide overflow, viewport clipping, broken images, missing bundled fonts, standalone callouts, emoji icons, or invalid line-height. `--allow-font-fallback` is only for an explicit user-approved fallback delivery.
 
 ### 7. Deliver HTML first; export optional formats only when requested
 

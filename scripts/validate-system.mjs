@@ -19,12 +19,14 @@ async function walk(directory){
   return files;
 }
 
-const [tokens,registry,css,generator,pptx,schema]=await Promise.all([
+const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema]=await Promise.all([
   read('assets/tokens/tokens.json').then(JSON.parse),
   read('assets/components/registry.json').then(JSON.parse),
   read('assets/runtime/deck.css'),
+  read('assets/runtime/deck.js'),
   read('scripts/generate-deck.mjs'),
   read('scripts/export-pptx.mjs'),
+  read('scripts/preflight.mjs'),
   read('references/deck.schema.json').then(JSON.parse),
 ]);
 
@@ -46,11 +48,18 @@ check(callout.heights?.default===70&&callout.heights?.accent===88,'Callout minim
 check(callout.bullet?.required===true&&callout.bullet?.size===12,'Callout must retain its required 12px dot.');
 
 const compactCss=css.replace(/\s+/g,'').toLowerCase();
+const compactRuntimeJs=runtimeJs.replace(/\s+/g,'');
 for(const stop of ['rgba(160,169,254,.16)','rgba(46,238,238,.16)','rgba(147,252,184,.16)'])check(compactCss.includes(stop),`Runtime CSS is missing registered Callout stop ${stop}.`);
 check(compactCss.includes('.callout{width:100%;min-height:70px;height:auto;border:0;border-radius:16px;padding:20px;'),'Runtime Callout base geometry drifted.');
 check(compactCss.includes('gap:12px;')&&compactCss.includes('backdrop-filter:blur(20px);'),'Runtime Callout spacing or blur drifted.');
 check(compactCss.includes('.callout.accent{min-height:88px;background:var(--callout-accent)}'),'Runtime Accent Callout must keep an 88px minimum and registered token.');
 check(compactCss.includes('.slide[data-theme="dark"].callout.accent{background:var(--callout-accent)}')||compactCss.includes('.slide[data-theme="dark"] .callout.accent{background:var(--callout-accent)}'),'Dark-theme specificity must not override the Accent Callout gradient.');
+check(compactCss.includes('#viewport{position:fixed;inset:0;overflow:hidden}'),'Runtime viewport must not use an oversized implicit Grid track.');
+check(compactCss.includes('#deck{position:absolute;left:50%;top:50%;width:var(--slide-w);height:var(--slide-h);transform:translate(-50%,-50%)scale(var(--scale));'),'Runtime deck must translate to the viewport center before scaling.');
+check(!compactRuntimeJs.includes("deck.style.transform='scale(var(--scale))'"),'Runtime navigation must not overwrite the deck centering translation.');
+for(const size of ['1280,height:720','1366,height:768','1440,height:900','1024,height:768'])check(preflight.includes(`width:${size}`),`HTML preflight is missing responsive viewport ${size.replace(',height:','×')}.`);
+check(preflight.includes('Scaled deck is clipped at'),'HTML preflight must fail when a responsive deck leaves the viewport.');
+check(preflight.includes('Scaled deck is not centered at'),'HTML preflight must fail when a responsive deck is off-center.');
 
 check(workflow.arrow?.renderedCount==='steps'&&workflow.arrow?.onePerStep===true&&workflow.arrow?.finalArrowVisible===true,'Workflow arrow contract must render one arrow above every Step, including the final Step.');
 check(workflow.arrow?.separateFromStep===true,'Workflow arrows must stay outside Step components.');

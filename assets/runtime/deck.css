@@ -21,8 +21,8 @@ body[data-lang="zh"]{font-family:var(--font-zh-body)}
 button,input,textarea{font:inherit}
 button{cursor:pointer}
 
-#viewport{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}
-#deck{position:relative;width:var(--slide-w);height:var(--slide-h);transform:scale(var(--scale));transform-origin:center center;transition:transform .18s ease}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#deck{position:absolute;left:50%;top:50%;width:var(--slide-w);height:var(--slide-h);transform:translate(-50%,-50%) scale(var(--scale));transform-origin:center center;transition:transform .18s ease}
 .slide{position:absolute;inset:0;width:var(--slide-w);height:var(--slide-h);overflow:hidden;isolation:isolate;background:var(--paper);color:var(--ink)}
 .slide[data-theme="dark"]{background:var(--deep);color:var(--white)}
 .slide[aria-hidden="true"]{visibility:hidden}

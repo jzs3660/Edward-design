@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-27T15:51:39.248Z",
+  "generatedAt": "2026-08-28T01:22:31.599Z",
   "fileCount": 78,
-  "totalBytes": 76118806,
+  "totalBytes": 76118766,
   "files": [
     {
       "path": "assets/asset-sources.json",
@@ -356,13 +356,13 @@
     },
     {
       "path": "assets/runtime/deck.css",
-      "bytes": 24099,
-      "sha256": "795b045248e22e751c505aa98bbf5905c9b9855a6aa396df2e22e48a3d727814"
+      "bytes": 24105,
+      "sha256": "330c371ba2056f7eb5e8c39e2e748119efb370dbd86b130ac9b2cf860f567e83"
     },
     {
       "path": "assets/runtime/deck.js",
-      "bytes": 8739,
-      "sha256": "550dc5849f07f39d7fcb3b10c32e6628fb1e0c48e5210be8dd7212bd554deb12"
+      "bytes": 8693,
+      "sha256": "32b82db457916e5c82ff89897529a96550a723d0902d670b811641a847fa30c2"
     },
     {
       "path": "assets/templates/deck-shell.html",
