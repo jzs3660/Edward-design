@@ -62,6 +62,24 @@ async function browserChecks(htmlPath,args,slideCount,expectedFonts){
       if(Math.abs(sr.width-1920)>1||Math.abs(sr.height-1080)>1)errors.push(`Rendered slide size must be 1920×1080, received ${Math.round(sr.width)}×${Math.round(sr.height)}.`);
       const visible=el=>{const s=getComputedStyle(el),r=el.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)!==0&&r.width>0&&r.height>0};
       for(const el of slide.querySelectorAll('img'))if(!el.complete||el.naturalWidth===0)errors.push(`Broken image: ${el.getAttribute('src')}`);
+      for(const box of slide.querySelectorAll('.icon-box')){
+        if(!visible(box))continue;
+        const image=box.querySelector('img'),boxRect=box.getBoundingClientRect(),style=getComputedStyle(box);
+        const dense=Boolean(box.closest('.card-grid[data-count="6"]'));
+        const dark=slide.dataset.theme==='dark';
+        const expectedSize=dense?48:60;
+        const expectedRadius=dense?(dark?9.6:8):(dark?12:10);
+        const expectedSurface=dark?'rgba(255, 255, 255, 0.08)':'rgb(255, 255, 255)';
+        if(Math.abs(boxRect.width-expectedSize)>.5||Math.abs(boxRect.height-expectedSize)>.5)errors.push(`Icon box must be ${expectedSize}×${expectedSize}px; received ${boxRect.width.toFixed(1)}×${boxRect.height.toFixed(1)}px.`);
+        if(Math.abs(parseFloat(style.borderTopLeftRadius)-expectedRadius)>.1)errors.push(`Icon box radius must be ${expectedRadius}px on ${dark?'Dark':'Light'}; received ${style.borderTopLeftRadius}.`);
+        if(!['hidden','clip'].includes(style.overflow))errors.push(`Icon box must clip overflow; received ${style.overflow}.`);
+        if(style.backgroundColor!==expectedSurface)errors.push(`Icon box surface must be ${expectedSurface}; received ${style.backgroundColor}.`);
+        if(!image){errors.push('Icon box is missing its packaged SVG image.');continue}
+        if(image.naturalWidth!==60||image.naturalHeight!==60)errors.push(`Icon SVG must have intrinsic 60×60 dimensions; received ${image.naturalWidth}×${image.naturalHeight}.`);
+        const imageRect=image.getBoundingClientRect();
+        if(Math.abs(imageRect.width-expectedSize)>.5||Math.abs(imageRect.height-expectedSize)>.5)errors.push(`Icon image must fill its ${expectedSize}px box without offset.`);
+        if(Math.abs((imageRect.left+imageRect.right-boxRect.left-boxRect.right)/2)>.5||Math.abs((imageRect.top+imageRect.bottom-boxRect.top-boxRect.bottom)/2)>.5)errors.push('Icon image is not centered inside its box.');
+      }
       for(const el of slide.querySelectorAll('.brand-logo,.cover-identity-logo')){if(!visible(el)||!el.naturalWidth||!el.naturalHeight)continue;const r=el.getBoundingClientRect(),natural=el.naturalWidth/el.naturalHeight,rendered=r.width/r.height;if(Math.abs(rendered/natural-1)>.015)errors.push(`Logo aspect ratio changed: ${natural.toFixed(3)} → ${rendered.toFixed(3)}.`);if(r.left<sr.left-1||r.right>sr.right+1)errors.push('Logo exceeds slide bounds; use a logo with tighter visible bounds.')}
       if(slide.dataset.type==='cover'&&slide.querySelector('.brand-header'))errors.push('Cover must not render the page header.');
       if(slide.dataset.type==='cover'&&slide.dataset.coverLayout==='text-only'&&slide.querySelector('.content-zone'))errors.push('Text-only cover must not reserve an empty content zone.');

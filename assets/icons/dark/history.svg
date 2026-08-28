@@ -1,11 +1,4 @@
-<svg width="60" height="56" viewBox="0 0 60 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="60" height="56" fill="#1E1E1E"/>
-<g id="Aident PPT &#194;&#183; Components &#38; Templates">
-<path d="M-4906 -8008C-4906 -8009.1 -4905.1 -8010 -4904 -8010H5592C5593.1 -8010 5594 -8009.1 5594 -8008V85988C5594 85989.1 5593.1 85990 5592 85990H-4904C-4905.1 85990 -4906 85989.1 -4906 85988V-8008Z" fill="#989898"/>
-<path d="M-4904 -8010V-8009H5592V-8010V-8011H-4904V-8010ZM5594 -8008H5593V85988H5594H5595V-8008H5594ZM5592 85990V85989H-4904V85990V85991H5592V85990ZM-4906 85988H-4905V-8008H-4906H-4907V85988H-4906ZM-4904 85990V85989C-4904.55 85989 -4905 85988.6 -4905 85988H-4906H-4907C-4907 85989.7 -4905.66 85991 -4904 85991V85990ZM5594 85988H5593C5593 85988.6 5592.55 85989 5592 85989V85990V85991C5593.66 85991 5595 85989.7 5595 85988H5594ZM5592 -8010V-8009C5592.55 -8009 5593 -8008.55 5593 -8008H5594H5595C5595 -8009.66 5593.66 -8011 5592 -8011V-8010ZM-4904 -8010V-8011C-4905.66 -8011 -4907 -8009.66 -4907 -8008H-4906H-4905C-4905 -8008.55 -4904.55 -8009 -4904 -8009V-8010Z" fill="white" fill-opacity="0.1"/>
-<g id="PPT/Icon">
-<g clip-path="url(#clip0_0_1)">
-<rect x="-106" y="-100" width="1014" height="156" rx="5" fill="url(#paint0_linear_0_1)"/>
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Name=History, Theme=Dark">
 <rect width="60" height="60" rx="12" fill="white" fill-opacity="0.08"/>
 <g id="Aident DS / History">
@@ -14,23 +7,11 @@
 </g>
 </g>
 </g>
-</g>
-</g>
-</g>
 <defs>
-<linearGradient id="paint0_linear_0_1" x1="401" y1="-100" x2="401" y2="56" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F7F8F6"/>
-<stop offset="0.499" stop-color="#F7F8F6"/>
-<stop offset="0.501" stop-color="#0F091D"/>
-<stop offset="1" stop-color="#0F091D"/>
-</linearGradient>
 <linearGradient id="paint1_linear_0_1" x1="18.7992" y1="30" x2="41.1992" y2="30" gradientUnits="userSpaceOnUse">
 <stop stop-color="#F3B6FF"/>
 <stop offset="0.509615" stop-color="#6DE4F9"/>
 <stop offset="1" stop-color="#77FAB4"/>
 </linearGradient>
-<clipPath id="clip0_0_1">
-<rect x="-106" y="-100" width="1014" height="156" rx="5" fill="white"/>
-</clipPath>
 </defs>
 </svg>

@@ -226,6 +226,7 @@ These rules are enforced by runtime validation or QA. / 以下关键规则会被
 - Split image/text is fixed to left text + right image with an 80px gap; it must never be mirrored. / 单图左右分栏固定为左文右图，间距 80px，禁止镜像成左图右文。
 - 6-card 与 Team 页的大标题必须单行，英文不超过 30 字符、中文不超过 12 字符。
 - 只使用包内设计系统 icon，不临摹、不使用 emoji 代替。
+- Icon SVG 必须是干净的 60×60 组件导出，不包含 Figma 画板底色；Light 为白色 10px 圆角底板，Dark 为 8% 白色、12px 圆角底板，HTML 容器强制按圆角裁切。六卡片中的 48px 紧凑版本按比例使用 8px / 9.6px 圆角。
 - 未经用户提供和批准，不写入商业敏感名称、客户、指标或效果声明。
 - 维护或发布 Skill 前运行 `node scripts/validate-system.mjs`；正式演讲稿运行 `node scripts/validate-presenter.mjs --html <index.html> --require-notes`。
 

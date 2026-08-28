@@ -1,10 +1,4 @@
 <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="60" height="60" fill="#1E1E1E"/>
-<g id="Aident PPT &#194;&#183; Components &#38; Templates">
-<path d="M-5436 -7908C-5436 -7909.1 -5435.1 -7910 -5434 -7910H5062C5063.1 -7910 5064 -7909.1 5064 -7908V86088C5064 86089.1 5063.1 86090 5062 86090H-5434C-5435.1 86090 -5436 86089.1 -5436 86088V-7908Z" fill="#989898"/>
-<path d="M-5434 -7910V-7909H5062V-7910V-7911H-5434V-7910ZM5064 -7908H5063V86088H5064H5065V-7908H5064ZM5062 86090V86089H-5434V86090V86091H5062V86090ZM-5436 86088H-5435V-7908H-5436H-5437V86088H-5436ZM-5434 86090V86089C-5434.55 86089 -5435 86088.6 -5435 86088H-5436H-5437C-5437 86089.7 -5435.66 86091 -5434 86091V86090ZM5064 86088H5063C5063 86088.6 5062.55 86089 5062 86089V86090V86091C5063.66 86091 5065 86089.7 5065 86088H5064ZM5062 -7910V-7909C5062.55 -7909 5063 -7908.55 5063 -7908H5064H5065C5065 -7909.66 5063.66 -7911 5062 -7911V-7910ZM-5434 -7910V-7911C-5435.66 -7911 -5437 -7909.66 -5437 -7908H-5436H-5435C-5435 -7908.55 -5434.55 -7909 -5434 -7909V-7910Z" fill="white" fill-opacity="0.1"/>
-<g id="PPT/Icon">
-<rect x="-636" width="1014" height="156" rx="5" fill="url(#paint0_linear_0_1)"/>
 <g id="Name=Key, Theme=Light">
 <rect width="60" height="60" rx="10" fill="white"/>
 <g id="Aident DS / Key">
@@ -13,14 +7,4 @@
 </g>
 </g>
 </g>
-</g>
-</g>
-<defs>
-<linearGradient id="paint0_linear_0_1" x1="-129" y1="0" x2="-129" y2="156" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F7F8F6"/>
-<stop offset="0.499" stop-color="#F7F8F6"/>
-<stop offset="0.501" stop-color="#0F091D"/>
-<stop offset="1" stop-color="#0F091D"/>
-</linearGradient>
-</defs>
 </svg>

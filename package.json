@@ -9,6 +9,8 @@
     "url": "https://github.com/jzs3660/aident-ppt-skill.git"
   },
   "scripts": {
+    "icons:normalize": "node scripts/normalize-icons.mjs",
+    "icons:check": "node scripts/normalize-icons.mjs --check",
     "fonts": "node scripts/check-fonts.mjs",
     "generate:en": "node scripts/generate-deck.mjs --input examples/deck.example.en.json --out output/example-en",
     "generate:zh": "node scripts/generate-deck.mjs --input examples/deck.example.zh.json --out output/example-zh",
@@ -28,7 +30,7 @@
     "preview:readme": "node scripts/build-readme-visuals.mjs",
     "preview": "npm run preview:readme",
     "assets": "node scripts/validate-assets.mjs",
-    "validate": "node scripts/validate-assets.mjs && node scripts/validate-system.mjs && node scripts/check-fonts.mjs",
+    "validate": "node scripts/normalize-icons.mjs --check && node scripts/validate-assets.mjs && node scripts/validate-system.mjs && node scripts/check-fonts.mjs",
     "run:init": "node scripts/init-multi-agent-run.mjs",
     "run:assemble": "node scripts/assemble-agent-run.mjs",
     "run:validate": "node scripts/validate-agent-run.mjs"

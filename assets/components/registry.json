@@ -26,9 +26,14 @@
     },
     "labelsOptional": true,
     "iconBox": 60,
-    "iconGlyph": 32
+    "iconGlyph": 32,
+    "iconBoxRadii": { "light": 10, "dark": 12 },
+    "iconBoxOverflow": "clip",
+    "denseIconBox": 48,
+    "denseIconBoxRadii": { "light": 8, "dark": 9.6 }
   },
   "components": {
+    "icon": { "themes": ["light", "dark"], "box": 60, "glyph": 32, "radii": { "light": 10, "dark": 12 }, "surfaces": { "light": "#FFFFFF", "dark": "rgba(255,255,255,0.08)" }, "overflow": "clip", "fit": "contain", "dense": { "box": 48, "scale": 0.8, "radii": { "light": 8, "dark": 9.6 } }, "sourceGeometry": "packaged-design-system-svg", "redraw": false },
     "header": { "usage": "inner-only", "themes": ["light", "dark"], "width": 1700, "height": 45, "logo": { "optional": true, "replaceable": true, "userSupplied": true, "acceptedFormats": ["png", "jpg", "jpeg", "webp", "svg"], "maxHeight": 40, "width": "source-aspect-ratio", "fit": "contain", "stretch": false }, "properties": ["showLogo", "logoLight", "logoDark", "showRightText", "rightText"] },
     "source": { "themes": ["light", "dark"], "width": 1700, "height": 30, "optional": true, "colors": { "light": "#919596", "dark": "rgba(255,255,255,0.55)" } },
     "point": { "themes": ["light", "dark"], "columns": [2, 3, 4], "layoutCounts": [2, 3, 4, 6], "widths": { "2": 760, "3": 486.6667, "4": 335 }, "showLabel": "optional", "showIcon": "optional", "alignment": "left", "height": "hug-with-budget" },

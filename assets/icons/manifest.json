@@ -1,9 +1,14 @@
 {
-  "version": 1,
+  "version": 2,
   "sourceNode": "129:271",
   "policy": "Curated existing Aident design-system icons; no geometry was redrawn.",
   "boxPx": 60,
   "glyphPx": 32,
+  "radiiPx": { "light": 10, "dark": 12 },
+  "surfaces": { "light": "#FFFFFF", "dark": "rgba(255,255,255,0.08)" },
+  "overflow": "clip",
+  "dense": { "boxPx": 48, "scale": 0.8, "radiiPx": { "light": 8, "dark": 9.6 } },
+  "svgContract": "Component-only 60×60 SVG; transparent outside the rounded surface; no Figma canvas/background export nodes.",
   "themes": ["light", "dark"],
   "icons": [
     { "name": "integration", "meaning": ["connect", "inputs", "systems"], "light": "light/integration.svg", "dark": "dark/integration.svg" },

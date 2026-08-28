@@ -24,6 +24,7 @@ Quality is a release gate, not a final glance. Validate content, structure, brow
 - point/card/step/metric title wraps;
 - dense six-card or Team page title wraps or exceeds EN 30 / ZH 12 characters;
 - icon glyph is not true standardized size/centering;
+- icon surface is square, unclipped, has the wrong theme radius/surface, or the SVG contains an exported Figma canvas background;
 - wrong light/dark icon variant;
 - header/logo/right text not replaceable;
 - source shown when it should be absent or missing for a material claim;
@@ -96,6 +97,7 @@ Checks include:
 - no emoji;
 - no fixed 150px line-height;
 - all images load;
+- every visible icon is a centered 60×60 component (48×48 only in dense six-card layouts), uses its registered theme radius/surface, clips overflow, and loads from a clean intrinsic 60×60 SVG;
 - every `data-one-line` element fits and remains one line;
 - six-card, Team, and split-image-text-with-Callout page titles carry `data-one-line` and remain one line;
 - brand header, slide heading, content zone, and source stay within slide;
@@ -221,6 +223,7 @@ Points/cards/steps/metrics:
 - labels optional;
 - description uses Noto Sans/Noto Sans SC;
 - icons true size and centered;
+- Light icon boxes use a white 10px-radius clipped surface; Dark icon boxes use white at 8% opacity with a 12px-radius clipped surface; dense 48px variants use 8px/9.6px radii;
 - equal visual height within a row.
 
 Callout:
@@ -277,6 +280,7 @@ Verify:
 - 4 Lossless WebP README/Hero/Showcase previews;
 - 4 logos;
 - 10 icons × 2 themes;
+- `node scripts/normalize-icons.mjs --check` passes for all 20 component-only SVGs and finds no Figma canvas/background nodes;
 - bundled font files and licenses;
 - token/component/source manifests;
 - runtime CSS/JS/template.

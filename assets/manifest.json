@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-28T02:28:43.650Z",
+  "generatedAt": "2026-08-28T02:56:27.194Z",
   "fileCount": 70,
-  "totalBytes": 64844506,
+  "totalBytes": 64815387,
   "files": [
     {
       "path": "assets/asset-sources.json",
@@ -56,8 +56,8 @@
     },
     {
       "path": "assets/components/registry.json",
-      "bytes": 5698,
-      "sha256": "2a83e7e9c401e1f4c4627c69a7e738fb3df195c403c5b2230e4dd6f03c73cb51"
+      "bytes": 6212,
+      "sha256": "509bab405697fdc734457cac1ea7140f3bce29fd8d379a9978f1c361d804be3c"
     },
     {
       "path": "assets/fonts/SmileySans-v2.0.1.zip",
@@ -161,108 +161,108 @@
     },
     {
       "path": "assets/icons/dark/action.svg",
-      "bytes": 3204,
-      "sha256": "0f3247c6debabaffaae3899fc518a40ef1a04456dcd7a5c07523a63e86279bba"
+      "bytes": 1636,
+      "sha256": "2162f58e7f420e1f7589368cdf841e55fc84e5a2dd4bc5ed7bd4ef16ed0ce2e1"
     },
     {
       "path": "assets/icons/dark/capabilities.svg",
-      "bytes": 3992,
-      "sha256": "85ec7be7a6a777cdbbf5497bfd06cd5d34fa8237818b5606a421df997b3d2fd3"
+      "bytes": 2424,
+      "sha256": "f4b8089200d93836133566e25a95896c2fe15d10f3eefc125b00045dd5063f29"
     },
     {
       "path": "assets/icons/dark/copy.svg",
-      "bytes": 2626,
-      "sha256": "643e5107157460bf5007abb7a79ea1fd229ab98601cc001bc53e71931ce0bc9b"
+      "bytes": 1060,
+      "sha256": "b6b044cff547730168f61e6f15d6f8d6ba1320c0eb663e714d72ff57221eb6b6"
     },
     {
       "path": "assets/icons/dark/download.svg",
-      "bytes": 2505,
-      "sha256": "8a5d9d1da15bfe954f711e71d850142f9cc8dd200b7db73b53b002c3611e49fa"
+      "bytes": 941,
+      "sha256": "46a552c463d706130a6ad1a9b5e801aaa38108aeaec9c5bbec781bd0aa816e48"
     },
     {
       "path": "assets/icons/dark/help.svg",
-      "bytes": 2644,
-      "sha256": "b849d34e510745a45ed5a1842df2eb1d5af7923e632751134aaeb08d12f1899e"
+      "bytes": 1076,
+      "sha256": "7e6fec2f73cfc9cd44384530a0c8bb84a8fdc2a50c7cd6b2eb847182d9d085f0"
     },
     {
       "path": "assets/icons/dark/history.svg",
-      "bytes": 2556,
-      "sha256": "3039ae10b3dccbb5a26c781c60cde36e39fb798b6d90933717b9e3572dc5731b"
+      "bytes": 990,
+      "sha256": "837d47ff6b7a59763ed6833979bf5381efb243cbe71ef974a5c7e82117fcd3aa"
     },
     {
       "path": "assets/icons/dark/integration.svg",
-      "bytes": 2601,
-      "sha256": "529bd1999f132a2df4e5d8a3167cdc6d33d9d37ab9d2f337038498ae0ce5d61e"
+      "bytes": 1053,
+      "sha256": "9c9d86ea3f9782b109bb2a37fcb2f29675701d8d4f9fb04699b961132427d995"
     },
     {
       "path": "assets/icons/dark/key.svg",
-      "bytes": 2947,
-      "sha256": "5023d719eee72bc7690bb50b903fb24c305338d9389489cb69e055749e443b5e"
+      "bytes": 1379,
+      "sha256": "e5de8eed9f82c508ff25a14b0a1ca732e4189306249524e8c42c176bb3521b91"
     },
     {
       "path": "assets/icons/dark/run-circle.svg",
-      "bytes": 2555,
-      "sha256": "4522dcc4f3a1ecb10f92f3eb6d6e8e8d8d472e237d8186c96b35edeb2b01948b"
+      "bytes": 989,
+      "sha256": "804d1bae70cb2691fc8b327050a29e5ae08b3713bf8c7838b2112689eb0b6977"
     },
     {
       "path": "assets/icons/dark/skill.svg",
-      "bytes": 3584,
-      "sha256": "19a99d19b9c8da7dbfdf4b40c0fc87e8c58ac81c2feeb9c9ede19c4f516a5ae1"
+      "bytes": 2018,
+      "sha256": "801dd399f38235f8417df29e0c3bb2323777d0ca7d871a78fb20ad668e41bff8"
     },
     {
       "path": "assets/icons/light/action.svg",
-      "bytes": 2774,
-      "sha256": "53d9b8435c542c86aa64f970e9a5423b619e43599786e49288202f71176de45c"
+      "bytes": 1349,
+      "sha256": "2ee315a3b36752cf91d228f7166d2a89ca0269515d49e6686d4297b9170d033f"
     },
     {
       "path": "assets/icons/light/capabilities.svg",
-      "bytes": 2803,
-      "sha256": "75d04a17df737ec6a485b1df118e45d990f4d665e6f926d3b039bf6dac9391b0"
+      "bytes": 1378,
+      "sha256": "06e7480c703551605262fb248044b07734e34d3fe9f53fb92c4bafac95a35a5a"
     },
     {
       "path": "assets/icons/light/copy.svg",
-      "bytes": 2196,
-      "sha256": "1f3b7c7f80d7bbdd97706aa32a4ebe006cac4c5093616d48bf087a370d7b6f76"
+      "bytes": 773,
+      "sha256": "98ad38ff01a6755b06d2659af4a2d55203d6f6b64f9ce0a6184b927d2a0015cb"
     },
     {
       "path": "assets/icons/light/download.svg",
-      "bytes": 2065,
-      "sha256": "3d197c8d31817bc0d61b5754bc08ecbd7fb38a1a4dba6881fda3b30efb6e30c6"
+      "bytes": 644,
+      "sha256": "53aacbe96a38c53cf8e22a23adfc4fa732071e4ead5de38684cb1c6c16f310f4"
     },
     {
       "path": "assets/icons/light/help.svg",
-      "bytes": 2204,
-      "sha256": "8bfda342c87e5c3d1aac3f34fa93fcd34c4745574c76e9438616a58186f71954"
+      "bytes": 779,
+      "sha256": "017d8299df9d7ea6e48626665db202e26d68a24a974b0ccdb1f5b087ca44778f"
     },
     {
       "path": "assets/icons/light/history.svg",
-      "bytes": 2116,
-      "sha256": "08cb40d9a086cea7521759ac6d0dacbdd0d5ec40376e1802fa384370ec545c81"
+      "bytes": 693,
+      "sha256": "be346e5b871eb92ca382a553b1e04321e95fd83f2e254f0832c11a985ffff36f"
     },
     {
       "path": "assets/icons/light/integration.svg",
-      "bytes": 2170,
-      "sha256": "3f06155526e3d162bb949b45b0cfe66d1e9e1fbd9b3cc42e8f865918074e98a7"
+      "bytes": 756,
+      "sha256": "c03d23699bda22e7484b4b6001ac3edb1c4cf0e2c01a79f058d95b0f806f2ccb"
     },
     {
       "path": "assets/icons/light/key.svg",
-      "bytes": 2497,
-      "sha256": "11d68abc11774d1d44302355f3d695f925a02baed87c282594deb855fbe672af"
+      "bytes": 1072,
+      "sha256": "dad411a359a23099851f7bacc7f308cb4db8c86ded016bdcf95bb99e279cd3bb"
     },
     {
       "path": "assets/icons/light/run-circle.svg",
-      "bytes": 2115,
-      "sha256": "6e88feca9b3a684ede8a39c04886421e53e966dff8d5f80a44ab1277a4ef92b9"
+      "bytes": 692,
+      "sha256": "9cef910c148c5803604ec9c4c1d87fc4e443f3232ab5a8601f30106382234e57"
     },
     {
       "path": "assets/icons/light/skill.svg",
-      "bytes": 3154,
-      "sha256": "b6b2564142b14def4ada2fc81a877039f0172bf9c3e5cb293f9e6aca2a87f27a"
+      "bytes": 1731,
+      "sha256": "9eeef0dc461c247a1201dbc3e07a5c91467921d2109312ab670e2d53608e6576"
     },
     {
       "path": "assets/icons/manifest.json",
-      "bytes": 1513,
-      "sha256": "ddbeec64a9521d8f107e8439bbb497b6d653bd011e45168840a9c6528589a8da"
+      "bytes": 1860,
+      "sha256": "f1b0c2c19611f33de25564db790b01a186517c205801a3eb0e622e8e2e808836"
     },
     {
       "path": "assets/logos/manifest.json",
@@ -291,23 +291,23 @@
     },
     {
       "path": "assets/previews/aident-ppt-hero.webp",
-      "bytes": 472810,
-      "sha256": "c62e31a0b5024811b6c1058ececd86ab692f722d92e3630d3c5e236a08e63790"
+      "bytes": 473630,
+      "sha256": "317d3f203ed598c17dae60d24198e35a1076fa093753c947289384a1b84cd6bd"
     },
     {
       "path": "assets/previews/aident-ppt-showcase.webp",
-      "bytes": 828680,
-      "sha256": "b9c00b2def24750c0a0e48f07c74738f938e79432d3f4806dfc837eeb1110a2b"
+      "bytes": 827730,
+      "sha256": "6f719e9bd0232c1f94e15256459d683893d91f6a7c253e707aecbb1241041aef"
     },
     {
       "path": "assets/previews/aident-ppt-showcase.zh.webp",
-      "bytes": 788940,
-      "sha256": "652496af27c6d4fd76fc0d5c14d1e4ddc11595e035d3a9daae61d3663b575252"
+      "bytes": 788766,
+      "sha256": "da356a2f55e8d5bc6c06e82e2c5db93c3f2f9cfdf247119203c3b22fcea71971"
     },
     {
       "path": "assets/previews/aident-ppt-system.webp",
-      "bytes": 93006,
-      "sha256": "17651e32f2f6f231c37b836a7f614cef3cd220a2efe07942905d9c9ead358b9c"
+      "bytes": 92902,
+      "sha256": "55cd7f65c8dbcf2fbd31ae6d77d75f4b59e6be9736fa9d4d519cb03e377d55c6"
     },
     {
       "path": "assets/previews/manifest.json",
@@ -316,8 +316,8 @@
     },
     {
       "path": "assets/runtime/deck.css",
-      "bytes": 24105,
-      "sha256": "330c371ba2056f7eb5e8c39e2e748119efb370dbd86b130ac9b2cf860f567e83"
+      "bytes": 24408,
+      "sha256": "16edb8c386937f9cedb18aaa5b11fd1a7d5a02b53b7cb7e795617f0a86c4d5e6"
     },
     {
       "path": "assets/runtime/deck.js",

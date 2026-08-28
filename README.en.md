@@ -206,6 +206,7 @@ Release requires every requested artifact and a matching passing QA report. See 
 - Split image/text is fixed to left text and one 760×428 image on the right with an 80px gap; never mirror it.
 - Six-card and Team page titles remain one line within 30 English or 12 Chinese characters.
 - Use packaged design-system icons only. Do not redraw them or substitute emoji.
+- Icon SVGs are clean component-only 60×60 exports with no Figma canvas background. Light uses a white 10px-radius surface; Dark uses white at 8% opacity with a 12px radius; HTML clips the box to that radius. Dense 48px six-card icons scale to 8px / 9.6px radii.
 - Do not invent sensitive commercial names, customers, metrics, or performance claims.
 - Before maintaining or publishing the Skill, run `node scripts/validate-system.mjs`; validate formal presenter decks with `node scripts/validate-presenter.mjs --html <index.html> --require-notes`.
 

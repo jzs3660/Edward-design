@@ -26,6 +26,7 @@ Turn an outline into a coherent, source-faithful deck. Treat the packaged assets
 - Preserve every replacement logo's intrinsic aspect ratio. Limit inner-header logos by 40px height and cover-identity logos by 56px height; never stretch a logo into a fixed-width box.
 - Keep all visible copy data-driven and editable: slide headings; point/card/metric/step/comparison fields; values; bullets; callouts; sources; and speaker notes. Never bake copy into background images.
 - Use only packaged design-system icons. Do not draw replacement icons and do not use emoji as icons.
+- Render icons from clean component-only 60×60 SVGs with a true 32px design-system glyph. The Light surface is white with a 10px radius; the Dark surface is white at 8% opacity with a 12px radius. Clip the icon box to its radius. Dense 48px cards scale the radii to 8px Light / 9.6px Dark. Reject SVGs containing exported Figma canvas backgrounds.
 - Keep canonical packaged raster assets as Lossless WebP. README previews, Showcase/Hero images, Atmosphere backgrounds, Elements backgrounds, and texture overlays must never use lossy WebP quality settings. SVG remains canonical for logos and icons.
 - Use generic placeholders unless the user provides approved commercial copy, claims, customer names, metrics, or screenshots.
 - Run the complete QA gate before delivery.
@@ -181,7 +182,7 @@ RUNTIME_NODE_MODULES="$RUNTIME_NODE_MODULES" node "$SKILL_DIR/scripts/preflight.
   --screenshots /absolute/path/output/qa/html
 ```
 
-Preflight must report 0 errors. It checks every slide at the native 1920×1080 canvas and verifies responsive centering/containment at the registered smaller browser viewports. Never waive overlap, slide overflow, viewport clipping, broken images, missing bundled fonts, standalone callouts, emoji icons, or invalid line-height. `--allow-font-fallback` is only for an explicit user-approved fallback delivery.
+Preflight must report 0 errors. It checks every slide at the native 1920×1080 canvas and verifies responsive centering/containment at the registered smaller browser viewports. Never waive overlap, slide overflow, viewport clipping, broken images, missing bundled fonts, standalone callouts, emoji icons, malformed icon boxes, or invalid line-height. `--allow-font-fallback` is only for an explicit user-approved fallback delivery.
 
 ### 7. Deliver HTML first; export optional formats only when requested
 
@@ -234,13 +235,14 @@ When changing the skill itself:
 
 1. Update the canonical JSON token or component registry first.
 2. Update CSS, HTML renderer, and PPTX adapter together.
-3. If a background, texture, or README preview changes, encode it as Lossless WebP and verify identical dimensions and decoded RGBA pixels. Never commit a duplicate `assets/backgrounds/compiled/` directory.
-4. Update asset provenance manifests.
-5. Run `scripts/validate-assets.mjs` to enforce Lossless WebP policy, reject compiled duplicates, and regenerate hashes.
-6. Generate both English and Chinese examples.
-7. Run HTML QA; run PDF/PPTX QA only when those adapters changed or those formats are part of the release.
-8. Run `scripts/validate-system.mjs`, then the Skill validator before publishing.
-9. Run the multi-Agent smoke example through initialized, planning, assembled, and release validation.
-10. Keep `README.md`, `README.en.md`, role prompts, and machine-readable contracts synchronized with behavior.
+3. For icon updates, run `scripts/normalize-icons.mjs`, which preserves the packaged design-system glyph paths while removing Figma canvas export nodes; then run it again with `--check`.
+4. If a background, texture, or README preview changes, encode it as Lossless WebP and verify identical dimensions and decoded RGBA pixels. Never commit a duplicate `assets/backgrounds/compiled/` directory.
+5. Update asset provenance manifests.
+6. Run `scripts/validate-assets.mjs` to enforce Lossless WebP policy, reject compiled duplicates, and regenerate hashes.
+7. Generate both English and Chinese examples.
+8. Run HTML QA; run PDF/PPTX QA only when those adapters changed or those formats are part of the release.
+9. Run `scripts/validate-system.mjs`, then the Skill validator before publishing.
+10. Run the multi-Agent smoke example through initialized, planning, assembled, and release validation.
+11. Keep `README.md`, `README.en.md`, role prompts, and machine-readable contracts synchronized with behavior.
 
 Never patch a single rendered sample as the only fix. Encode the rule in the reusable component or generator.

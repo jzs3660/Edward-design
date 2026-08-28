@@ -89,6 +89,9 @@ Rules:
 - do not use emoji;
 - do not paste tiny glyphs into the top-left of a 60px frame;
 - render the glyph at true 32px visual size in the standardized 60×60 box;
+- use a component-only 60×60 SVG with no Figma canvas, selection background, or oversized frame nodes;
+- Light icon surface: `#FFFFFF`, 10px radius; Dark icon surface: white at 8% opacity, 12px radius;
+- clip the HTML icon box to the registered radius. Dense 48px cards scale the radius proportionally to 8px Light / 9.6px Dark;
 - use the matching light/dark variant;
 - decorative icons use empty alt text; meaningful icons require adjacent text, not redundant alt labels.
 
@@ -174,7 +177,7 @@ PPTX does not read committed duplicate PNG backgrounds. `export-pptx.mjs` resolv
 ## Asset update procedure
 
 1. Export the exact source node at its configured size.
-2. Encode packaged raster assets as Lossless WebP while preserving dimensions and decoded pixels; keep logos/icons as SVG.
+2. Encode packaged raster assets as Lossless WebP while preserving dimensions and decoded pixels; keep logos/icons as SVG. For icons, run `node scripts/normalize-icons.mjs` to remove Figma canvas nodes without changing the design-system path, then run `node scripts/normalize-icons.mjs --check`.
 3. Update the category manifest and `assets/asset-sources.json`.
 4. Confirm HTML references the canonical WebP and PPTX converts that same file to PNG in memory; do not create committed compiled copies.
 5. Run `scripts/validate-assets.mjs` to enforce the lossless format rule, reject duplicate compiled assets, and regenerate SHA-256 hashes.

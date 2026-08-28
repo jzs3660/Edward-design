@@ -84,7 +84,7 @@ Variants:
 
 Anatomy:
 
-1. optional 60×60 icon box containing an exact 32px design-system glyph;
+1. optional 60×60 icon box containing an exact 32px design-system glyph; Light uses a white 10px-radius surface and Dark uses white at 8% opacity with a 12px radius; both are clipped to the surface radius;
 2. optional 18px label;
 3. one-line Outfit/Noto Sans SC title;
 4. Noto Sans/Noto Sans SC description.
@@ -172,6 +172,8 @@ Use a 24px radius and 1px semantic hairline. The surface is 2–2.5% opacity, no
 For a 6-card slide, the page title must remain one line. The packaged generator enforces a cross-format budget of 30 English characters or 12 Chinese characters and browser preflight treats wrapping as a release error.
 
 Do not mix image and no-image cards randomly unless the visual difference carries meaning.
+
+The dense 6-card icon box scales to 48×48 without changing the source glyph geometry: Light radius 8px, Dark radius 9.6px. Do not crop, offset, or replace the registered SVG path.
 
 ## Image mask
 
