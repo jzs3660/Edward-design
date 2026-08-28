@@ -19,7 +19,7 @@ async function walk(directory){
   return files;
 }
 
-const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema,backgrounds,textures,previews,fontManifest,iconManifest,iconNormalizer,systemPreview]=await Promise.all([
+const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema,backgrounds,textures,previews,fontManifest,iconManifest,iconNormalizer,systemPreview,readmeVisuals,readmePublic,readmeEnglish]=await Promise.all([
   read('assets/tokens/tokens.json').then(JSON.parse),
   read('assets/components/registry.json').then(JSON.parse),
   read('assets/runtime/deck.css'),
@@ -35,6 +35,9 @@ const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema,backgrounds
   read('assets/icons/manifest.json').then(JSON.parse),
   read('scripts/normalize-icons.mjs'),
   read('scripts/lib/render-system-preview.mjs'),
+  read('scripts/build-readme-visuals.mjs'),
+  read('README.md'),
+  read('README.en.md'),
 ]);
 
 const callout=registry.components?.callout||{};
@@ -66,6 +69,10 @@ check(iconManifest.icons?.length===10&&iconManifest.themes?.length===2,'Icon man
 check(iconNormalizer.includes('component-only 60×60 SVG')&&iconNormalizer.includes('Figma canvas artifact'),'Icon normalizer must reject unclean Figma canvas exports.');
 check(systemPreview.includes('gradientTop=768,gradientRowStep=64,gradientLabelOffset=59'),'Foundation preview gradient spacing contract drifted.');
 check(systemPreview.includes('Foundation Color tokens overflow:')&&systemPreview.includes('Foundation Color tokens overlap:'),'Foundation preview must reject Color-token content that leaves or overlaps its panel.');
+check(readmeVisuals.includes('<span>Editable content</span>')&&!readmeVisuals.includes('No Figma runtime'),'Public Hero must emphasize editable output rather than internal design-tool provenance.');
+check(readmeVisuals.includes('.hero-copy{width:800px}.hero h1 em{display:inline-block;white-space:nowrap}'),'Public Hero must keep “Keep the system.” on one line inside its measured 800px title region.');
+check(readmePublic.includes('A self-contained, publicly installable bilingual presentation Skill.')&&readmePublic.includes('一套可离线运行、可公开安装的中英文演示文稿 Skill。'),'Public README introduction must include both English and Chinese copy.');
+check(!/figma(?:\.com)?/i.test(readmePublic)&&!/figma(?:\.com)?/i.test(readmeEnglish),'Public README files must not expose or emphasize internal Figma provenance.');
 
 const compactCss=css.replace(/\s+/g,'').toLowerCase();
 const compactRuntimeJs=runtimeJs.replace(/\s+/g,'');

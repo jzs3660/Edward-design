@@ -8,4 +8,4 @@ Bundled font files are governed by the individual SIL Open Font License files un
 
 User-supplied logos, images, screenshots, data, and copy remain the user's responsibility. Generated presentations should include only material the user is authorized to use and publish.
 
-No private Figma file key, private node identifier, local filesystem path, user source PDF, or temporary deck output is distributed in this public package.
+No private design-file key, private node identifier, local filesystem path, user source document, or temporary deck output is distributed in this public package.

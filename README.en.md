@@ -8,8 +8,6 @@ A self-contained bilingual presentation Skill that turns an audience, objective,
 
 Bring your own brand: replace the cover and upper-left slide mark with your own PNG, JPG/JPEG, WebP, or SVG. Use one logo for both themes or provide separate Light/Dark files; the source aspect ratio is always preserved.
 
-Figma and the source PDFs are design provenance and QA references only. They are not runtime dependencies.
-
 ## The system at a glance / 一眼看懂这套系统
 
 The preview is generated from packaged registries and bundled fonts. / 下图由包内 registry 与字体文件生成。
@@ -206,7 +204,7 @@ Release requires every requested artifact and a matching passing QA report. See 
 - Split image/text is fixed to left text and one 760×428 image on the right with an 80px gap; never mirror it.
 - Six-card and Team page titles remain one line within 30 English or 12 Chinese characters.
 - Use packaged design-system icons only. Do not redraw them or substitute emoji.
-- Icon SVGs are clean component-only 60×60 exports with no Figma canvas background. Light uses a white 10px-radius surface; Dark uses white at 8% opacity with a 12px radius; HTML clips the box to that radius. Dense 48px six-card icons scale to 8px / 9.6px radii.
+- Icon SVGs are clean component-only 60×60 exports with no source-canvas background. Light uses a white 10px-radius surface; Dark uses white at 8% opacity with a 12px radius; HTML clips the box to that radius. Dense 48px six-card icons scale to 8px / 9.6px radii.
 - Do not invent sensitive commercial names, customers, metrics, or performance claims.
 - Before maintaining or publishing the Skill, run `node scripts/validate-system.mjs`; validate formal presenter decks with `node scripts/validate-presenter.mjs --html <index.html> --require-notes`.
 
@@ -300,9 +298,9 @@ aident-ppt-skill/
   scripts/                     init, assemble, generate, export, validate
 ```
 
-## Provenance and runtime independence
+## Packaged runtime
 
-The internal design file, user-supplied PDFs, and reference repository were used to build and verify the system. Component coverage and asset provenance are recorded in [source-index.md](./references/source-index.md) and `assets/asset-sources.json`; private file identifiers and local paths are not published. Generation reads only packaged files, so the distributed Skill does not depend on Figma.
+Everything required for generation is packaged in this repository: tokens, components, fonts, icons, backgrounds, templates, scripts, and validation rules. No external design service or live asset extraction is required.
 
 Coverage against [`op7418/guizang-ppt-skill`](https://github.com/op7418/guizang-ppt-skill) is documented in [reference-gap-matrix.md](./references/reference-gap-matrix.md). In addition to cross-platform Agent compatibility, this Skill supplies executable multi-Agent handoffs, single-writer ownership, deterministic assembly, and release validation.
 

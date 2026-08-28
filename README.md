@@ -4,11 +4,13 @@
 
 [Full English README / 完整英文文档](./README.en.md) · [Skill instructions](./SKILL.md) · [Layout catalog / 页面版式目录](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
+A self-contained, publicly installable bilingual presentation Skill. Provide the audience, goal, and content outline; the Agent uses packaged layouts, components, font roles, icons, backgrounds, and quality gates to generate a consistent HTML presentation by default. Portable single-file HTML, PDF, and editable PPTX are optional. Public visibility does not mean every branded asset is open-source; read [NOTICE.md](./NOTICE.md) before use or redistribution.
+
 一套可离线运行、可公开安装的中英文演示文稿 Skill。用户只需提供受众、目标和内容框架，Agent 即可使用包内的版式、组件、字体策略、图标、背景和质量规则，默认生成统一风格的 HTML 演示；单文件网页、PDF 与可编辑 PPTX 均为按需选项。公开可见不等于所有品牌素材都采用开源许可，使用和再分发前请阅读 [NOTICE.md](./NOTICE.md)。
 
-自定义品牌：可用自己的 PNG、JPG/JPEG、WebP 或 SVG 替换封面和内页左上角 Logo；支持单一 Logo 或 Light/Dark 两套文件，始终保持原始比例。
+Bring your own brand: replace the cover and upper-left slide mark with your own PNG, JPG/JPEG, WebP, or SVG. Use one logo for both themes or provide separate Light/Dark files; the source aspect ratio is always preserved.
 
-Figma 和原始 PDF 只用于设计校验与溯源，生成时不需要登录 Figma，也不需要实时提取节点。
+自定义品牌：可用自己的 PNG、JPG/JPEG、WebP 或 SVG 替换封面和内页左上角 Logo；支持单一 Logo 或 Light/Dark 两套文件，始终保持原始比例。
 
 ## Design system at a glance / 一眼看懂这套系统
 
@@ -226,7 +228,7 @@ These rules are enforced by runtime validation or QA. / 以下关键规则会被
 - Split image/text is fixed to left text + right image with an 80px gap; it must never be mirrored. / 单图左右分栏固定为左文右图，间距 80px，禁止镜像成左图右文。
 - 6-card 与 Team 页的大标题必须单行，英文不超过 30 字符、中文不超过 12 字符。
 - 只使用包内设计系统 icon，不临摹、不使用 emoji 代替。
-- Icon SVG 必须是干净的 60×60 组件导出，不包含 Figma 画板底色；Light 为白色 10px 圆角底板，Dark 为 8% 白色、12px 圆角底板，HTML 容器强制按圆角裁切。六卡片中的 48px 紧凑版本按比例使用 8px / 9.6px 圆角。
+- Icon SVG 必须是干净的 60×60 组件导出，不包含源设计画板底色；Light 为白色 10px 圆角底板，Dark 为 8% 白色、12px 圆角底板，HTML 容器强制按圆角裁切。六卡片中的 48px 紧凑版本按比例使用 8px / 9.6px 圆角。
 - 未经用户提供和批准，不写入商业敏感名称、客户、指标或效果声明。
 - 维护或发布 Skill 前运行 `node scripts/validate-system.mjs`；正式演讲稿运行 `node scripts/validate-presenter.mjs --html <index.html> --require-notes`。
 
@@ -322,9 +324,9 @@ aident-ppt-skill/
   scripts/                     初始化、组装、生成、导出、验证
 ```
 
-## Provenance and runtime independence / 来源与运行独立性
+## Packaged runtime / 打包运行时
 
-Figma, source PDFs, and the reference repository are provenance and QA inputs only; the distributed Skill runs entirely from packaged files. / 内部设计稿、用户提供的 PDF 和参考仓库是构建与校验来源。组件范围和素材来源记录在 [source-index.md](./references/source-index.md) 与 `assets/asset-sources.json`；私有文件标识和本机路径不会公开。运行时只读取当前目录内的 token、组件、素材和文档，因此打包后的 Skill 不依赖原始 Figma 文件。
+Everything required for generation is packaged in this repository: tokens, components, fonts, icons, backgrounds, templates, scripts, and validation rules. No external design service or live asset extraction is required. / 生成所需的 token、组件、字体、图标、背景、模板、脚本和验证规则均已打包在仓库中，不需要连接外部设计服务或实时提取素材。
 
 相对于 [`op7418/guizang-ppt-skill`](https://github.com/op7418/guizang-ppt-skill) 的能力覆盖记录在 [reference-gap-matrix.md](./references/reference-gap-matrix.md)。本 Skill 在多平台 Agent 兼容之外，额外提供了可执行的多 Agent handoff、单写者和发布验证协议。
 
