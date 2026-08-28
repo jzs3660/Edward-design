@@ -104,6 +104,7 @@ Checks include:
 - the scaled deck remains centered and fully contained at 1280×720, 1366×768, 1440×900, and 1024×768, with no right/bottom clipping;
 - bundled display fonts resolve;
 - required local font files are present.
+- folder output contains only referenced visual assets and required language/component font faces; README previews, font source archives, and unused backgrounds/icons must not leak into the generated deck.
 - replacement header/cover logos retain their intrinsic aspect ratio within 1.5%.
 - Accent Callout uses the registered three-stop gradient at 16% fill alpha, 20px blur, no stroke, full-opacity content, and an 88px minimum.
 - Workflow renders arrows only between adjacent steps and honors `showDividers: false`.
@@ -185,7 +186,7 @@ node "$SKILL_DIR/scripts/validate-pptx-layout.mjs" \
 
 It rejects shapes outside the slide and wrapped Point/Card/Metric/Step titles, Step labels/numbers, Callout leads, and Sources.
 5. Inspect montage and full-size dense slides.
-6. Confirm dark backgrounds remain dark; an opaque texture over the background is a P0 export bug.
+6. Confirm dark backgrounds remain dark and the dynamic WebP→PNG background matches the canonical source; a duplicated/opaque texture over the background is a P0 export bug.
 7. Confirm text remains editable and speaker notes exist.
 8. Confirm logos/icons/images are present and not stretched. Browser preflight compares every header/cover logo's rendered aspect ratio with its intrinsic ratio; any change above 1.5% is an error.
    For PPTX, inspect the package or a non-SVG-aware viewer to confirm the logo is backed by a real PNG rather than a transparent fallback.
@@ -271,13 +272,16 @@ This regenerates SHA-256/size metadata. Review unexpected changes. Missing/zero-
 
 Verify:
 
-- 8 registered background variants + 8 compiled PPTX backgrounds;
-- 3 texture/source images;
+- 8 registered Lossless WebP background variants and no committed compiled PPTX duplicates;
+- 3 Lossless WebP texture/source images;
+- 4 Lossless WebP README/Hero/Showcase previews;
 - 4 logos;
 - 10 icons × 2 themes;
 - bundled font files and licenses;
 - token/component/source manifests;
 - runtime CSS/JS/template.
+
+`validate-assets.mjs` rejects PNG files in the canonical background, texture, and preview directories, rejects lossy WebP bitstreams, and rejects a populated `assets/backgrounds/compiled/` directory.
 
 ## Skill package gate
 

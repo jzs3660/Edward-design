@@ -75,6 +75,8 @@ Bundled with the skill under licenses that permit redistribution:
 
 The source Figma/PDF reference used SF Pro and MiSans in some roles. They are not required at runtime. Noto Sans and Noto Sans SC are the documented open-license packaging substitutions. Run `scripts/check-fonts.mjs` before output; a missing bundled file is a release error.
 
+The Skill repository retains the complete licensed font source set, but a generated folder HTML does not copy it wholesale. `generate-deck.mjs` reads the font manifest and materializes only the web faces/licenses needed by the selected language and components. English decks omit Chinese faces; Chinese decks omit Instrument Serif because their numerals use Smiley Sans. Chinese Callout pages include Noto Serif SC; decks without that component omit the large serif file. The generated `assets/fonts/manifest.json` is filtered to the copied families.
+
 ## Runtime fallbacks
 
 English body fallback order:

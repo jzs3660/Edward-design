@@ -103,7 +103,7 @@ Every slide requires one theme-compatible treatment.
 
 Do not swap `elements-cover` and `elements-inner`. The generator and preflight treat that as an error. Atmosphere is intentionally an inner-page option in both themes.
 
-HTML layers the source background, texture PNG, and theme wash at runtime. PPTX uses `assets/backgrounds/compiled/` because PowerPoint does not reproduce CSS blend modes reliably. Rebuild those files with `scripts/compile-backgrounds.mjs` after any source change.
+HTML layers the canonical Lossless WebP background, Lossless WebP texture, and theme wash at runtime. PPTX resolves the same canonical background and converts it to a cached PNG buffer in memory. No duplicate compiled background tree is stored in the Skill.
 
 ## Texture rules
 
@@ -111,7 +111,7 @@ HTML layers the source background, texture PNG, and theme wash at runtime. PPTX 
 - Light texture: multiply blend at 34% opacity.
 - Keep texture beneath all content.
 - Never replace the texture with random noise or a generic stock grain.
-- Do not add the opaque texture PNG directly on top of a PPTX background; use the compiled background.
+- Do not add the texture WebP as an extra opaque PPTX layer. The PPTX adapter uses the canonical background exactly once and approximates unsupported HTML effects with native slide shapes only where documented.
 
 ## Radius, border, and blur
 

@@ -1,6 +1,6 @@
 # Aident PPT Skill
 
-![Aident PPT Skill — from content outline to polished presentation / 从内容框架到高质量演示](./assets/previews/aident-ppt-hero.png)
+![Aident PPT Skill — from content outline to polished presentation / 从内容框架到高质量演示](./assets/previews/aident-ppt-hero.webp)
 
 [Full English README / 完整英文文档](./README.en.md) · [Skill instructions](./SKILL.md) · [Layout catalog / 页面版式目录](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
@@ -14,13 +14,14 @@ Figma 和原始 PDF 只用于设计校验与溯源，生成时不需要登录 Fi
 
 The preview below is generated from the packaged registries and bundled font files, so its inventory stays synchronized with the Skill. / 下图直接读取包内 registry 与字体文件生成，能力数量和字体角色会与 Skill 保持同步。
 
-![Aident PPT Skill color, typography, and layout system / 颜色、字体和版式系统](./assets/previews/aident-ppt-system.png)
+![Aident PPT Skill color, typography, and layout system / 颜色、字体和版式系统](./assets/previews/aident-ppt-system.webp)
 
 | Packaged capability / 已打包能力 | Count / 数量 | Includes / 包含内容 |
 |---|---:|---|
 | Page layouts / 页面版式 | 10 | Cover、Point、Card、Metric、Workflow、Comparison、Image Cards、Team、Split、Full-bleed |
 | Component types / 组件类型 | 10 | Header、Source、Point、Step、Metric、Callout、Card、Workflow、Comparison、Image Mask |
 | Background treatments / 背景处理 | 8 | Light / Dark × Base、Elements Cover、Elements Inner、Atmosphere |
+| Raster asset policy / 位图策略 | Lossless WebP | Backgrounds、textures、Hero and Showcase preserve decoded pixels; PPTX converts to PNG in memory / 背景、纹理与预览均为无损 WebP，PPTX 内存转 PNG |
 | Color system / 颜色系统 | 19 base + 9 gradients | Semantic colors、title gradients、emphasis and Callout gradients / 语义色、标题与强调渐变 |
 | Bundled fonts / 字体 | 6 families | 3 English + 3 Chinese families with licenses and role index / 英文 3 套 + 中文 3 套 |
 | Curated icons / 图标 | 10 × Light / Dark | Selected from the existing design system; no redrawn glyphs / 来自现有设计系统，不自行描画 |
@@ -32,13 +33,13 @@ The preview below is generated from the packaged registries and bundled font fil
 
 Nine real layouts covering cover, points, workflow, metrics, comparison, dense cards, image cards, Team, and split image/text.
 
-![Aident PPT Skill nine-slide English example / 英文 9 页示例](./assets/previews/aident-ppt-showcase.png)
+![Aident PPT Skill nine-slide English example / 英文 9 页示例](./assets/previews/aident-ppt-showcase.webp)
 
 ### Chinese example / 中文示例
 
 The matching Chinese deck validates its own display, body, label, numeral, line-height, and tracking tokens. / 对应的中文示例使用独立的标题、正文、标签、数字、行高与字距 token。
 
-![Aident PPT Skill nine-slide Chinese example / 中文 9 页示例](./assets/previews/aident-ppt-showcase.zh.png)
+![Aident PPT Skill nine-slide Chinese example / 中文 9 页示例](./assets/previews/aident-ppt-showcase.zh.webp)
 
 ## Quick start / 快速开始
 
@@ -110,6 +111,8 @@ The package includes bilingual typography, reusable 1920×1080 layouts, Light/Da
 - 所有页面文案都由 JSON 填充并可编辑：kicker、标题、副标题、Point/Card/Metric/Step/Comparison 的各级文字、数值、列表、Callout、来源与演讲备注。
 - 可替换 logo、右上角文字/网址、内容图片、裁切位置与来源。
 - 文件夹 HTML 为默认主产物；单文件 HTML、PDF、可编辑 PPTX 与网页托管按需输出。
+- 文件夹 HTML 只复制当前 deck 实际引用的背景、纹理、图标、Logo、用户图片和所需语言/组件字体，不再把整套 `assets` 塞进每份输出。
+- 包内背景、纹理、Hero 与 Showcase 使用 Lossless WebP；Logo/Icon 保留 SVG；PPTX 在导出时把引用的 WebP 动态转成缓存 PNG，不保存重复 compiled 背景。
 - 普通、Audience 与 Embed 模式会在不同浏览器窗口中完整居中缩放 1920×1080 画布，不裁切右侧或底部。
 - 键盘导航、概览、低功耗模式、动画和演讲者视图。
 - 静态校验、浏览器重叠/越界检查、PDF/PPTX 渲染检查。
@@ -308,7 +311,8 @@ aident-ppt-skill/
     run.schema.json            运行清单 schema
     prompts/                   专业 Agent 分派提示词
   assets/
-    backgrounds/ textures/     Light/Dark 背景与纹理
+    backgrounds/ textures/     Lossless WebP Light/Dark 背景与纹理
+    previews/                  Lossless WebP README、Hero、Showcase
     fonts/ icons/ logos/       字体、设计系统图标、可替换标志
     components/ tokens/        组件注册表与设计 token
     runtime/ templates/        HTML 运行时与页面壳

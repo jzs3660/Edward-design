@@ -4,19 +4,21 @@
   "sourceNode": "306:4504",
   "defaultByUsage": { "cover": "elements-cover", "inner": "elements-inner" },
   "treatments": [
-    { "theme": "light", "name": "base", "usage": "all", "source": "light-paper.png", "compiledPptx": "compiled/light-base.png", "use": "quiet dense content" },
-    { "theme": "light", "name": "elements-cover", "usage": "cover", "source": "light-elements-cover.png", "figmaNode": "446:14655", "compiledPptx": "compiled/light-elements-cover.png", "use": "centered light cover; full composition" },
-    { "theme": "light", "name": "elements-inner", "usage": "inner", "source": "light-elements-inner.png", "figmaNode": "306:4020", "compiledPptx": "compiled/light-elements-inner.png", "use": "light inner slide; decorative elements stay visually on the right" },
-    { "theme": "light", "name": "atmosphere", "usage": "inner", "source": "light-motion.png", "figmaNode": "306:4250", "compiledPptx": "compiled/light-atmosphere.png", "use": "light inner metric, transition, comparison, or image/text slide" },
-    { "theme": "dark", "name": "base", "usage": "all", "source": "dark-ink.png", "compiledPptx": "compiled/dark-base.png", "use": "quiet dense content" },
-    { "theme": "dark", "name": "elements-cover", "usage": "cover", "source": "dark-elements-cover.png", "figmaNode": "306:4261", "compiledPptx": "compiled/dark-elements-cover.png", "use": "centered dark cover; full composition" },
-    { "theme": "dark", "name": "elements-inner", "usage": "inner", "source": "dark-elements-inner.png", "figmaNode": "446:14997", "compiledPptx": "compiled/dark-elements-inner.png", "use": "dark inner slide; decorative elements stay visually on the right" },
-    { "theme": "dark", "name": "atmosphere", "usage": "inner", "source": "dark-aurora.png", "figmaNode": "306:4497", "compiledPptx": "compiled/dark-atmosphere.png", "use": "dark inner metric, transition, comparison, or image/text slide" }
+    { "theme": "light", "name": "base", "usage": "all", "source": "light-paper.webp", "use": "quiet dense content" },
+    { "theme": "light", "name": "elements-cover", "usage": "cover", "source": "light-elements-cover.webp", "figmaNode": "446:14655", "use": "centered light cover; full composition" },
+    { "theme": "light", "name": "elements-inner", "usage": "inner", "source": "light-elements-inner.webp", "figmaNode": "306:4020", "use": "light inner slide; decorative elements stay visually on the right" },
+    { "theme": "light", "name": "atmosphere", "usage": "inner", "source": "light-motion.webp", "figmaNode": "306:4250", "use": "light inner metric, transition, comparison, or image/text slide" },
+    { "theme": "dark", "name": "base", "usage": "all", "source": "dark-ink.webp", "use": "quiet dense content" },
+    { "theme": "dark", "name": "elements-cover", "usage": "cover", "source": "dark-elements-cover.webp", "figmaNode": "306:4261", "use": "centered dark cover; full composition" },
+    { "theme": "dark", "name": "elements-inner", "usage": "inner", "source": "dark-elements-inner.webp", "figmaNode": "446:14997", "use": "dark inner slide; decorative elements stay visually on the right" },
+    { "theme": "dark", "name": "atmosphere", "usage": "inner", "source": "dark-aurora.webp", "figmaNode": "306:4497", "use": "dark inner metric, transition, comparison, or image/text slide" }
   ],
   "legacyAliases": { "paper": "base", "ink": "base", "motion": "atmosphere", "aurora": "atmosphere", "elements": "contextual: cover -> elements-cover; inner -> elements-inner" },
-  "compile": {
-    "script": "../../scripts/compile-backgrounds.mjs",
-    "lightTexture": { "file": "../textures/light-overlay.png", "blend": "multiply", "opacity": 0.34 },
-    "darkTexture": { "file": "../textures/dark-overlay.png", "blend": "soft-light", "opacity": 0.55 }
+  "format": { "type": "webp", "lossless": true },
+  "pptxRasterization": {
+    "strategy": "convert referenced WebP to PNG in memory during export",
+    "width": 1920,
+    "height": 1080,
+    "committedCompiledCopies": false
   }
 }

@@ -1,9 +1,10 @@
 {
-  "version": 2,
+  "version": 3,
+  "format": { "type": "webp", "lossless": true },
   "items": [
     {
       "id": "aident-ppt-hero",
-      "path": "assets/previews/aident-ppt-hero.png",
+      "path": "assets/previews/aident-ppt-hero.webp",
       "width": 1920,
       "height": 1080,
       "purpose": "README hero showing the HTML-first bilingual presentation system",
@@ -12,7 +13,7 @@
     },
     {
       "id": "aident-ppt-system",
-      "path": "assets/previews/aident-ppt-system.png",
+      "path": "assets/previews/aident-ppt-system.webp",
       "width": 1920,
       "height": 1760,
       "purpose": "README visualization of layout, color, gradient, font, background, icon, and language inventory",
@@ -21,7 +22,7 @@
     },
     {
       "id": "aident-ppt-showcase",
-      "path": "assets/previews/aident-ppt-showcase.png",
+      "path": "assets/previews/aident-ppt-showcase.webp",
       "width": 2048,
       "height": 1340,
       "purpose": "README overview of all nine generated English example slides",
@@ -30,7 +31,7 @@
     },
     {
       "id": "aident-ppt-showcase-zh",
-      "path": "assets/previews/aident-ppt-showcase.zh.png",
+      "path": "assets/previews/aident-ppt-showcase.zh.webp",
       "width": 2048,
       "height": 1340,
       "purpose": "README overview of all nine generated Chinese example slides",

@@ -23,7 +23,14 @@ const coverIdentity=s=>s.type==='cover'?(s.coverIdentity||(String(s.kicker||'').
 function backgroundTreatment(s){const requested=s.background||(s.type==='cover'?'elements-cover':'elements-inner');if(requested==='elements')return s.type==='cover'?'elements-cover':'elements-inner';if(requested==='paper'||requested==='ink')return 'base';if(requested==='motion'||requested==='aurora')return 'atmosphere';return requested}
 
 function mime(file){const ext=path.extname(file).toLowerCase();return ext==='.svg'?'image/svg+xml':ext==='.jpg'||ext==='.jpeg'?'image/jpeg':ext==='.webp'?'image/webp':'image/png'}
-async function imageBytes(rel){if(!rel||/^(https?:|data:)/i.test(rel))return null;const file=path.resolve(assetRoot,rel);const bytes=await fs.readFile(file);return {blob:bytes,contentType:mime(file)}}
+const pngCache=new Map();
+async function imageBytes(rel){
+  if(!rel||/^(https?:|data:)/i.test(rel))return null;
+  const file=path.resolve(assetRoot,rel),ext=path.extname(file).toLowerCase();
+  if(ext!=='.webp')return {blob:await fs.readFile(file),contentType:mime(file)};
+  if(!pngCache.has(file))pngCache.set(file,sharp(file).png({compressionLevel:9,adaptiveFiltering:true}).toBuffer());
+  return {blob:await pngCache.get(file),contentType:'image/png'};
+}
 async function imageDimensions(rel){if(!rel||/^(https?:|data:)/i.test(rel))return null;const metadata=await sharp(path.resolve(assetRoot,rel)).metadata();return metadata.width&&metadata.height?{width:metadata.width,height:metadata.height}:null}
 function addText(slide,value,pos,style={}){const shape=slide.shapes.add({geometry:'textbox',name:style.name||'text',position:pos,fill:'none',line:{style:'solid',fill:'none',width:0}});shape.text=String(value??'');shape.text.style={fontFamily:style.fontFamily||fonts.body,fontSize:style.fontSize||22,color:style.color||'#111114',bold:Boolean(style.bold),italic:Boolean(style.italic),alignment:style.alignment||'left'};return shape}
 function addBox(slide,pos,fill,line='none',radius=24,name='box'){return slide.shapes.add({geometry:radius?'roundRect':'rect',name,position:pos,fill,line:line==='none'?{style:'solid',fill:'none',width:0}:line,borderRadius:radius})}
@@ -31,7 +38,7 @@ function approximateTextWidth(value,fontSize){let units=0;for(const char of Arra
 function fitOneLineFontSize(value,width,preferred,min){const measured=approximateTextWidth(value,preferred)*1.08;return measured<=width?preferred:Math.max(min,Math.floor(preferred*width/measured))}
 async function addImage(slide,rel,pos,{fit='cover',radius=0,alt=''}={}){const data=await imageBytes(rel);if(!data)return addBox(slide,pos,'linear(135deg,#039987/18 0%,#4B56F8/18 100%)',{style:'solid',fill:'#111114/14',width:1},radius,'image-placeholder');return slide.images.add({...data,alt,fit,position:pos,geometry:radius?'roundRect':'rect',borderRadius:radius})}
 async function addLogo(slide,rel,{left,top,maxWidth,maxHeight,align='left'},alt){const dimensions=await imageDimensions(rel).catch(()=>null);if(!dimensions)return addImage(slide,rel,{left,top,width:maxWidth,height:maxHeight},{fit:'contain',alt});const ratio=dimensions.width/dimensions.height;let height=maxHeight,width=height*ratio;if(width>maxWidth){width=maxWidth;height=width/ratio}const x=align==='center'?left+(maxWidth-width)/2:left;const y=top+(maxHeight-height)/2;const ext=path.extname(rel).toLowerCase();if(ext==='.svg'||ext==='.webp'){const rasterScale=4,png=await sharp(path.resolve(assetRoot,rel),{density:384}).resize({width:Math.max(1,Math.round(width*rasterScale)),height:Math.max(1,Math.round(height*rasterScale)),fit:'fill'}).png().toBuffer();return slide.images.add({blob:png,contentType:'image/png',alt,fit:'contain',position:{left:x,top:y,width,height},geometry:'rect',borderRadius:0})}return addImage(slide,rel,{left:x,top:y,width,height},{fit:'contain',alt})}
-function backgroundRel(s){return `assets/backgrounds/compiled/${s.theme}-${backgroundTreatment(s)}.png`}
+function backgroundRel(s){const treatment=backgroundTreatment(s);const file=treatment==='base'?(s.theme==='light'?'light-paper.webp':'dark-ink.webp'):treatment==='atmosphere'?(s.theme==='light'?'light-motion.webp':'dark-aurora.webp'):`${s.theme}-${treatment}.webp`;return `assets/backgrounds/${file}`}
 async function addPageHeader(slide,s){
   if(s.type==='cover')return;
   const header={show:true,showLogo:true,showRightText:true,...deck.meta.header,...s.header};

@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const title=value=>String(value)
@@ -59,7 +58,7 @@ function gradientFill(ctx,x,width,value){
   return gradient;
 }
 
-export async function renderSystemPreview({canvasModule,root,tokens,components,fontManifest,iconManifest,backgroundManifest,outPath}){
+export async function renderSystemPreview({canvasModule,sharp,root,tokens,components,fontManifest,iconManifest,backgroundManifest,outPath}){
   const {createCanvas,GlobalFonts}=canvasModule;
   registerBundledFonts(GlobalFonts,root);
 
@@ -163,6 +162,6 @@ export async function renderSystemPreview({canvasModule,root,tokens,components,f
   ctx.beginPath();ctx.arc(135,1627,5,0,Math.PI*2);ctx.fillStyle='#008089';ctx.fill();
   drawText(ctx,154,1633,'Only cover titles are centered. Inner titles stay left-aligned, content budgets are enforced, and browser preflight checks overlap and overflow.',15,{weight:600,family:'Outfit'});
 
-  await fs.writeFile(outPath,canvas.toBuffer('image/png'));
+  await sharp(canvas.toBuffer('image/png')).webp({lossless:true,effort:6}).toFile(outPath);
   return {width,height,fonts:['Outfit','Instrument Serif','Noto Sans','Smiley Sans','Noto Sans SC','Noto Serif SC']};
 }

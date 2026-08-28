@@ -26,6 +26,7 @@ Turn an outline into a coherent, source-faithful deck. Treat the packaged assets
 - Preserve every replacement logo's intrinsic aspect ratio. Limit inner-header logos by 40px height and cover-identity logos by 56px height; never stretch a logo into a fixed-width box.
 - Keep all visible copy data-driven and editable: slide headings; point/card/metric/step/comparison fields; values; bullets; callouts; sources; and speaker notes. Never bake copy into background images.
 - Use only packaged design-system icons. Do not draw replacement icons and do not use emoji as icons.
+- Keep canonical packaged raster assets as Lossless WebP. README previews, Showcase/Hero images, Atmosphere backgrounds, Elements backgrounds, and texture overlays must never use lossy WebP quality settings. SVG remains canonical for logos and icons.
 - Use generic placeholders unless the user provides approved commercial copy, claims, customer names, metrics, or screenshots.
 - Run the complete QA gate before delivery.
 - Run `scripts/validate-system.mjs` when maintaining or publishing the Skill; it blocks token/registry/CSS/exporter drift in fragile contracts such as Callout opacity and Workflow arrows.
@@ -145,6 +146,8 @@ node "$SKILL_DIR/scripts/check-fonts.mjs"
 
 All default fonts are bundled under open licenses, including Noto Sans and Noto Sans SC as distributable replacements for the SF Pro and MiSans references. Generated HTML therefore does not depend on local system fonts. See `references/typography.md`.
 
+Folder generation copies only the font faces/licenses required by the deck language and used components. It also copies only backgrounds, textures, icons, logos, and user images referenced by that deck. Do not restore whole-directory `assets/` copying.
+
 Use relative local image paths in the JSON. The generator copies them into `assets/user/` and rewrites references. Remote HTTPS and data URLs are accepted for HTML, but local verified files are preferred for durable PPTX/PDF output.
 
 When imagery or screenshots are part of the request, read `references/image-direction-and-screenshots.md`. Generate new imagery only when the user requests it; never invent product UI, customer evidence, claims, or embedded slide text inside an image.
@@ -190,7 +193,7 @@ Folder HTML is the default and primary deliverable. Generate it first, run HTML 
 - Optional editable PPTX, only on explicit request: `scripts/export-pptx.mjs`.
 - Web hosting: serve the generated folder with any static server.
 
-The PPTX exporter uses editable native text and shapes, packaged images/icons, speaker notes, and precomposed background texture assets. The HTML version remains the most faithful animation/presentation target.
+The PPTX exporter uses editable native text and shapes, packaged images/icons, speaker notes, and canonical lossless WebP backgrounds. It converts referenced WebP files to cached PNG buffers in memory during export; duplicate compiled PNG backgrounds are not stored in the Skill. The HTML version remains the most faithful animation/presentation target.
 
 Treat validated HTML as the visual source of truth. Do not weaken or distort the HTML layout to compensate for PowerPoint font substitution. PPTX is an optional editable convenience format: apply the packaged fitter and layout checks, but if the target PowerPoint installation cannot recognize a bundled font or uses different font metrics, disclose that limitation and allow final manual adjustment in PowerPoint.
 
@@ -223,7 +226,7 @@ deck.json
       -> editable PPTX
 ```
 
-Figma is not in this runtime path. Updating the design system is a separate maintenance workflow: inspect the source file, update packaged tokens/assets/components, rebuild compiled backgrounds, regenerate hashes, and rerun all QA.
+Figma is not in this runtime path. Updating the design system is a separate maintenance workflow: inspect the source file, update packaged tokens/assets/components, encode canonical raster assets as Lossless WebP, verify decoded pixels against the source export, regenerate hashes, and rerun all QA.
 
 ## Maintenance workflow
 
@@ -231,9 +234,9 @@ When changing the skill itself:
 
 1. Update the canonical JSON token or component registry first.
 2. Update CSS, HTML renderer, and PPTX adapter together.
-3. If background or texture sources change, run `scripts/compile-backgrounds.mjs`.
+3. If a background, texture, or README preview changes, encode it as Lossless WebP and verify identical dimensions and decoded RGBA pixels. Never commit a duplicate `assets/backgrounds/compiled/` directory.
 4. Update asset provenance manifests.
-5. Run `scripts/validate-assets.mjs` to regenerate hashes.
+5. Run `scripts/validate-assets.mjs` to enforce Lossless WebP policy, reject compiled duplicates, and regenerate hashes.
 6. Generate both English and Chinese examples.
 7. Run HTML QA; run PDF/PPTX QA only when those adapters changed or those formats are part of the release.
 8. Run `scripts/validate-system.mjs`, then the Skill validator before publishing.

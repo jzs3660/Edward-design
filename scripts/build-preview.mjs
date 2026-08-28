@@ -8,7 +8,7 @@ function parseArgs(argv){const args={};for(let i=2;i<argv.length;i++){if(argv[i]
 async function importPackage(name){const require=createRequire(import.meta.url);const resolved=require.resolve(name,{paths:[process.env.RUNTIME_NODE_MODULES,path.resolve('node_modules')].filter(Boolean)});return import(pathToFileURL(resolved).href)}
 
 const args=parseArgs(process.argv);
-if(!args.screenshots||!args.out)throw new Error('Usage: node scripts/build-preview.mjs --screenshots output/<example>/qa --out assets/previews/<showcase>.png');
+if(!args.screenshots||!args.out)throw new Error('Usage: node scripts/build-preview.mjs --screenshots output/<example>/qa --out assets/previews/<showcase>.webp');
 const sharpModule=await importPackage('sharp');
 const sharp=sharpModule.default||sharpModule;
 const dir=path.resolve(args.screenshots);
@@ -28,5 +28,7 @@ for(const [index,file] of files.entries()){
   composites.push({input,left:padding+rowOffset+column*(thumbWidth+gap),top:padding+row*(thumbHeight+gap)});
 }
 await fs.mkdir(path.dirname(path.resolve(args.out)),{recursive:true});
-await sharp({create:{width,height,channels:4,background:'#09080d'}}).composite(composites).png().toFile(path.resolve(args.out));
+const pipeline=sharp({create:{width,height,channels:4,background:'#09080d'}}).composite(composites);
+if(path.extname(args.out).toLowerCase()==='.webp')await pipeline.webp({lossless:true,effort:6}).toFile(path.resolve(args.out));
+else await pipeline.png({compressionLevel:9,adaptiveFiltering:true}).toFile(path.resolve(args.out));
 console.log(`Preview montage: ${files.length} slides, ${width}×${height}, ${path.resolve(args.out)}`);

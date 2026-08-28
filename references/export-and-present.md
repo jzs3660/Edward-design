@@ -31,16 +31,13 @@ deck/
   index.html
   deck.resolved.json
   assets/
-    backgrounds/
-    components/
-    fonts/
-    icons/
-    logos/
-    runtime/
-    templates/
-    textures/
-    tokens/
-    user/
+    backgrounds/    referenced Lossless WebP files only
+    fonts/          language/component-required web faces + licenses only
+    icons/          referenced theme variants only
+    logos/          referenced packaged marks only
+    runtime/        deck CSS and JavaScript
+    textures/       referenced theme overlays only
+    user/           copied user images/logos only
 ```
 
 Open `index.html` directly or serve the folder with a static server. It does not require Figma or a build step.
@@ -56,7 +53,7 @@ node "$SKILL_DIR/scripts/generate-deck.mjs" \
   --single-file
 ```
 
-Output: `deck.single.html` plus the resolved JSON/assets directory used during generation. The HTML file itself embeds CSS, JavaScript, bundled fonts, backgrounds, logos, icons, and local user assets.
+Output: `deck.single.html` plus the resolved JSON/minimal assets directory used during generation. The HTML file itself embeds CSS, JavaScript, selected bundled fonts, referenced Lossless WebP backgrounds/textures, logos, icons, and local user assets.
 
 Use for portable review, email/file delivery, offline playback, and web embedding. Large images/fonts increase file size; use folder output when hosting or versioning.
 
@@ -128,7 +125,7 @@ Do not animate every sub-line independently. Preserve reading order and keep mot
 Folder output is static. Serve it from any HTTPS static host. Confirm:
 
 - asset URLs remain relative;
-- the server serves SVG, PNG, TTF, OTF, CSS, JS, and HTML MIME types correctly;
+- the server serves SVG, WebP, PNG/JPEG user images, WOFF2, TTF, OTF, CSS, JS, and HTML MIME types correctly;
 - popups are permitted for presenter mode;
 - the host’s content security policy allows local fonts and data URLs if single-file output is used;
 - sensitive slides are not uploaded to a public URL.
@@ -149,7 +146,7 @@ Always render the PDF to PNGs with Poppler and inspect every page. Do not trust 
 
 ## Optional editable PPTX export
 
-Generate folder HTML/resolved JSON first. Ensure compiled backgrounds exist; they are packaged by default.
+Generate folder HTML/resolved JSON first. The minimal folder already contains every background/image required by the resolved deck; no compiled background directory is required.
 
 ```bash
 RUNTIME_NODE="$RUNTIME_NODE" \
@@ -173,8 +170,8 @@ PPTX behavior:
 
 - native editable text boxes for headings, labels, body, callouts, and sources;
 - native editable card/divider/callout shapes;
-- SVG/PNG logo and icons;
-- packaged precomposed texture backgrounds;
+- SVG logos/icons and PNG/JPEG/WebP user images;
+- packaged canonical Lossless WebP backgrounds, converted to PNG buffers in memory for PowerPoint compatibility;
 - replaceable user images;
 - speaker notes from `notes`;
 - slide names from stable IDs;
@@ -186,7 +183,7 @@ Some HTML-specific features are flattened or approximated in PPTX:
 - PPTX is an optional editable adapter, not the reference renderer.
 - A target PowerPoint installation may substitute fonts or calculate different glyph metrics even when the font files are bundled. Keep the text editable, run the packaged checks, and document any remaining application-specific adjustment instead of changing the HTML design to match a fallback renderer.
 
-- CSS blend modes -> compiled background PNG;
+- packaged WebP backgrounds -> cached in-memory PNG buffers;
 - backdrop blur -> translucent shape approximation;
 - gradient text -> theme accent solid where native gradient text is unreliable;
 - CSS radial image mask -> image crop approximation unless a PowerPoint mask is added manually;
@@ -208,19 +205,11 @@ Inspect every slide. Pay special attention to font substitution, title wrapping,
 
 Chrome/Skia may serialize CSS `background-clip:text` gradients as vector clipping boundaries that some PDF renderers expose as hairlines. The packaged print stylesheet therefore uses theme-matched solid text colors for gradient text in PDF while HTML retains the full gradients. Treat any visible clipping rectangle or hairline as a PDF release error.
 
-## Background compilation for PPTX
+## Dynamic WebP rasterization for PPTX
 
-PowerPoint cannot reproduce the HTML texture blend stack reliably. Rebuild the compiled backgrounds after any source/texture change:
+PowerPoint compatibility is handled during export. `export-pptx.mjs` reads each referenced canonical Lossless WebP, decodes it with Sharp, encodes a lossless PNG buffer, and caches that buffer by source path for the duration of the run. The exporter does not write these intermediate PNGs to the Skill or generated deck folder.
 
-```bash
-RUNTIME_NODE_MODULES="$RUNTIME_NODE_MODULES" node "$SKILL_DIR/scripts/compile-backgrounds.mjs"
-```
-
-The script uses Sharp to combine:
-
-- background source;
-- theme texture with the registered blend/opacity;
-- left-to-right readability wash.
+This conversion must preserve the canonical 1920×1080 pixels and must not add a second texture, wash, or background layer. After an adapter change, generate the English and Chinese PPTX previews and compare the background/style against the validated HTML examples.
 
 ## Output selection
 

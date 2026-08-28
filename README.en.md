@@ -1,6 +1,6 @@
 # Aident PPT Skill
 
-![Aident PPT Skill — from content outline to polished presentation / 从内容框架到高质量演示](./assets/previews/aident-ppt-hero.png)
+![Aident PPT Skill — from content outline to polished presentation / 从内容框架到高质量演示](./assets/previews/aident-ppt-hero.webp)
 
 [中文](./README.md) · [Skill instructions](./SKILL.md) · [Page layout catalog](./references/layout-catalog.md) · [Multi-Agent workflow](./references/multi-agent-workflow.md)
 
@@ -14,13 +14,14 @@ Figma and the source PDFs are design provenance and QA references only. They are
 
 The preview is generated from packaged registries and bundled fonts. / 下图由包内 registry 与字体文件生成。
 
-![Aident PPT Skill color, typography, and layout system / 颜色、字体和版式系统](./assets/previews/aident-ppt-system.png)
+![Aident PPT Skill color, typography, and layout system / 颜色、字体和版式系统](./assets/previews/aident-ppt-system.webp)
 
 | Packaged capability / 已打包能力 | Count / 数量 | Includes / 包含内容 |
 |---|---:|---|
 | Page layouts / 页面版式 | 10 | Cover、Points、Cards、Metrics、Workflow、Comparison、Image Cards、Team、Split、Full-bleed |
 | Component types / 组件类型 | 10 | Header、Source、Point、Step、Metric、Callout、Card、Workflow、Comparison、Image Mask |
 | Background treatments / 背景处理 | 8 | Light / Dark × Base、Elements Cover、Elements Inner、Atmosphere |
+| Raster asset policy / 位图策略 | Lossless WebP | Backgrounds, textures, Hero, and Showcase preserve decoded pixels; PPTX converts to PNG in memory / 背景、纹理与预览均为无损 WebP，PPTX 内存转 PNG |
 | Color system / 颜色系统 | 19 base + 9 gradients | Semantic colors、title gradients、emphasis gradients、Callout gradient / 语义色、标题、强调与 Callout 渐变 |
 | Fonts / 字体 | 6 bundled families / 6 套 | 3 English + 3 Chinese families with licenses and role index / 英文 3 套 + 中文 3 套，包含许可与角色索引 |
 | Icons / 图标 | 10 × Light / Dark | Curated from the existing design system; no redrawn glyphs / 来自现有设计系统，不自行描画 |
@@ -32,13 +33,13 @@ The preview is generated from packaged registries and bundled fonts. / 下图由
 
 Nine real layouts covering cover, points, workflow, metrics, comparison, dense cards, image cards, Team, and split image/text. / 九种真实版式覆盖封面、要点、流程、指标、对比、密集卡片、图片卡片、团队与左文右图。
 
-![Aident PPT Skill nine-slide English example](./assets/previews/aident-ppt-showcase.png)
+![Aident PPT Skill nine-slide English example](./assets/previews/aident-ppt-showcase.webp)
 
 ### Chinese example / 中文示例
 
 The Chinese deck validates its own typography and spacing tokens. / 中文示例使用独立的字体层级与间距 token。
 
-![Aident PPT Skill nine-slide Chinese example](./assets/previews/aident-ppt-showcase.zh.png)
+![Aident PPT Skill nine-slide Chinese example](./assets/previews/aident-ppt-showcase.zh.webp)
 
 ## Quick start
 
@@ -96,6 +97,8 @@ Open `output/example-en/index.html`; press `P` for presenter mode.
 - All slide copy is data-driven and editable: kickers, titles, subtitles, every Point/Card/Metric/Step/Comparison field, values, lists, callouts, sources, and speaker notes.
 - Replaceable logos, header text/URL, content images, crop positions, and sources.
 - Folder HTML as the default deliverable; single-file HTML, PDF, editable PPTX, and static web delivery on request.
+- Folder HTML copies only assets referenced by the current deck plus the font faces/licenses required by its language and used components; it never copies the entire packaged `assets` tree.
+- Packaged backgrounds, textures, Hero, and Showcase images are Lossless WebP; logos/icons remain SVG; PPTX converts referenced WebP files to cached PNG buffers without storing duplicate compiled backgrounds.
 - Responsive ordinary, audience, and embed views keep the full 1920×1080 canvas centered and visible without cropping the right or bottom edge.
 - Navigation, overview, restrained animation, low-power mode, and presenter view.
 - Static validation, browser overlap/overflow checks, and rendered PDF/PPTX review.
@@ -286,7 +289,8 @@ aident-ppt-skill/
     run.schema.json            run manifest schema
     prompts/                   assignment-ready specialist prompts
   assets/
-    backgrounds/ textures/     light/dark backgrounds and overlays
+    backgrounds/ textures/     Lossless WebP light/dark backgrounds and overlays
+    previews/                  Lossless WebP README, Hero, and Showcase images
     fonts/ icons/ logos/       fonts, design-system icons, replaceable marks
     components/ tokens/        component registry and design tokens
     runtime/ templates/        HTML runtime and deck shell

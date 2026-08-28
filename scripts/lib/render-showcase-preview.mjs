@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises';
 import {registerBundledFonts} from './render-system-preview.mjs';
 
 function drawText(ctx,x,y,value,size,{fill='#FFFFFF',weight=400,family='Noto Sans',align='left',spacing=0,maxWidth}={}){
@@ -20,7 +19,7 @@ function roundRect(ctx,x,y,width,height,radius,fill,stroke){
   if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}
 }
 
-export async function renderShowcasePreview({canvasModule,root,language,slidePaths,outPath}){
+export async function renderShowcasePreview({canvasModule,sharp,root,language,slidePaths,outPath}){
   if(slidePaths.length!==9)throw new Error(`Showcase needs 9 slides; received ${slidePaths.length}`);
   const {createCanvas,GlobalFonts,loadImage}=canvasModule;
   registerBundledFonts(GlobalFonts,root);
@@ -56,6 +55,6 @@ export async function renderShowcasePreview({canvasModule,root,language,slidePat
     drawText(ctx,x+cardW-31,y+31,String(index+1).padStart(2,'0'),12,{fill:'#9FFFF7',weight:600,family:'Outfit',align:'center'});
   }
 
-  await fs.writeFile(outPath,canvas.toBuffer('image/png'));
+  await sharp(canvas.toBuffer('image/png')).webp({lossless:true,effort:6}).toFile(outPath);
   return {width,height};
 }

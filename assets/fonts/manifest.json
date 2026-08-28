@@ -7,6 +7,9 @@
       "roles": ["English cover", "English slide title", "point/card/metric title", "callout"],
       "bundled": true,
       "files": ["outfit/Outfit-VariableFont_wght.ttf"],
+      "web": [
+        { "file": "outfit/Outfit-VariableFont_wght.ttf", "format": "truetype", "style": "normal", "weight": "100 900" }
+      ],
       "license": "SIL OFL 1.1",
       "licenseFile": "licenses/Outfit-OFL.txt",
       "source": "https://github.com/Outfitio/Outfit-Fonts"
@@ -16,6 +19,9 @@
       "roles": ["English step numerals"],
       "bundled": true,
       "files": ["instrument-serif/InstrumentSerif-Regular.ttf", "instrument-serif/InstrumentSerif-Italic.ttf"],
+      "web": [
+        { "file": "instrument-serif/InstrumentSerif-Italic.ttf", "format": "truetype", "style": "italic", "weight": "400" }
+      ],
       "license": "SIL OFL 1.1",
       "licenseFile": "licenses/InstrumentSerif-OFL.txt",
       "source": "https://github.com/Instrument/instrument-serif"
@@ -25,6 +31,9 @@
       "roles": ["English body", "English kicker", "English label", "source"],
       "bundled": true,
       "files": ["noto-sans/NotoSans-Variable.ttf"],
+      "web": [
+        { "file": "noto-sans/NotoSans-Variable.ttf", "format": "truetype", "style": "normal", "weight": "100 900" }
+      ],
       "license": "SIL OFL 1.1",
       "licenseFile": "licenses/NotoSans-OFL.txt",
       "source": "https://github.com/google/fonts/tree/main/ofl/notosans",
@@ -35,6 +44,9 @@
       "roles": ["Chinese point/card/metric title", "Chinese body", "Chinese labels", "source"],
       "bundled": true,
       "files": ["noto-sans-sc/NotoSansSC-Variable.ttf"],
+      "web": [
+        { "file": "noto-sans-sc/NotoSansSC-Variable.ttf", "format": "truetype", "style": "normal", "weight": "100 900" }
+      ],
       "license": "SIL OFL 1.1",
       "licenseFile": "licenses/NotoSansSC-OFL.txt",
       "source": "https://github.com/google/fonts/tree/main/ofl/notosanssc",
@@ -45,6 +57,9 @@
       "roles": ["Chinese cover", "Chinese large display", "Chinese step numerals"],
       "bundled": true,
       "files": ["smiley-sans/SmileySans-Oblique.ttf"],
+      "web": [
+        { "file": "smiley-sans/SmileySans-Oblique.ttf.woff2", "format": "woff2", "style": "oblique", "weight": "400" }
+      ],
       "license": "SIL OFL 1.1",
       "licenseFile": "licenses/SmileySans-OFL.txt",
       "source": "https://github.com/atelier-anchor/smiley-sans"
@@ -54,6 +69,9 @@
       "roles": ["Chinese emphasized callout"],
       "bundled": true,
       "files": ["noto-serif-sc/NotoSerifCJKsc-Bold.otf"],
+      "web": [
+        { "file": "noto-serif-sc/NotoSerifCJKsc-Bold.otf", "format": "opentype", "style": "normal", "weight": "700" }
+      ],
       "license": "SIL OFL 1.1",
       "licenseFile": "licenses/NotoSerifCJK-OFL.txt",
       "source": "https://github.com/notofonts/noto-cjk"

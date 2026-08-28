@@ -15,17 +15,17 @@ async function importPackage(name){
 }
 async function browserExecutable(){for(const candidate of [process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome','/Applications/Chromium.app/Contents/MacOS/Chromium'].filter(Boolean)){if(await fs.access(candidate).then(()=>true).catch(()=>false))return candidate}return undefined}
 
-async function localFontChecks(html,args,htmlPath){
-  const lang=html.match(/<body[^>]*data-lang="([^"]+)"/)?.[1]||'en';
-  const required=lang==='zh'?
-    [{family:'Smiley Sans',file:'smiley-sans/SmileySans-Oblique.ttf'},{family:'Noto Sans SC',file:'noto-sans-sc/NotoSansSC-Variable.ttf'},{family:'Noto Serif SC',file:'noto-serif-sc/NotoSerifCJKsc-Bold.otf'}]:
-    [{family:'Outfit',file:'outfit/Outfit-VariableFont_wght.ttf'},{family:'Noto Sans',file:'noto-sans/NotoSans-Variable.ttf'},{family:'Instrument Serif',file:'instrument-serif/InstrumentSerif-Regular.ttf'}];
+async function localFontChecks(args,htmlPath){
   const fontRoot=path.join(path.dirname(htmlPath),'assets/fonts');
+  const manifest=await fs.readFile(path.join(fontRoot,'manifest.json'),'utf8').then(JSON.parse).catch(()=>null);
+  if(!manifest?.families?.length)return {errors:['Generated font manifest is missing or empty.'],warnings:[],families:[]};
+  const required=manifest.families.flatMap(family=>(family.web||[]).map(face=>({family:family.family,file:face.file})));
   const missing=[];
   for(const font of required)if(!await fs.access(path.join(fontRoot,font.file)).then(()=>true).catch(()=>false))missing.push(font.family);
-  if(!missing.length)return {errors:[],warnings:[]};
+  const families=[...new Set(manifest.families.map(family=>family.family))];
+  if(!missing.length)return {errors:[],warnings:[],families};
   const message=`Required bundled font files not found: ${missing.join(', ')}`;
-  return args.allowFontFallback?{errors:[],warnings:[message]}:{errors:[message],warnings:[]};
+  return args.allowFontFallback?{errors:[],warnings:[message],families}:{errors:[message],warnings:[],families};
 }
 
 function staticChecks(html){
@@ -44,7 +44,7 @@ function staticChecks(html){
   return {slideCount:slideTags.length,errors,warnings};
 }
 
-async function browserChecks(htmlPath,args,slideCount){
+async function browserChecks(htmlPath,args,slideCount,expectedFonts){
   const playwrightModule=await importPackage('playwright');
   const {chromium}=playwrightModule.default||playwrightModule;
   const browser=await chromium.launch({headless:true,executablePath:await browserExecutable()});
@@ -54,7 +54,7 @@ async function browserChecks(htmlPath,args,slideCount){
   for(let i=0;i<slideCount;i++){
     const url=new URL(pathToFileURL(htmlPath));url.searchParams.set('embed','1');url.searchParams.set('slide',String(i));
     await page.goto(url.href,{waitUntil:'load'});await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(120);
-    const audit=await page.evaluate(async({allowFontFallback})=>{
+    const audit=await page.evaluate(async({allowFontFallback,expectedFonts})=>{
       const slide=document.querySelector('.slide.is-active');
       const errors=[],warnings=[];
       if(!slide)return {errors:['No active slide.'],warnings:[]};
@@ -116,14 +116,12 @@ async function browserChecks(htmlPath,args,slideCount){
         if(ox>1&&oy>1)errors.push(`Overlap: ${x.className} ↔ ${y.className} (${Math.round(ox)}×${Math.round(oy)}px)`);
       }
       if(slide.scrollWidth>1920+1||slide.scrollHeight>1080+1)errors.push(`Slide overflow: ${slide.scrollWidth}×${slide.scrollHeight}.`);
-      const lang=document.body.dataset.lang;
-      const expected=lang==='zh'?['Smiley Sans','Noto Sans SC','Noto Serif SC']:['Outfit','Noto Sans','Instrument Serif'];
       const missing=[];
-      for(const font of expected){await document.fonts.load(`20px "${font}"`);if(!document.fonts.check(`20px "${font}"`))missing.push(font)}
+      for(const font of expectedFonts){await document.fonts.load(`20px "${font}"`);if(!document.fonts.check(`20px "${font}"`))missing.push(font)}
       if(missing.length){const message=`Unresolved fonts: ${missing.join(', ')}`;(allowFontFallback?warnings:errors).push(message)}
       const debugRect=el=>{if(!el)return null;const r=el.getBoundingClientRect(),s=getComputedStyle(el);return {left:r.left,top:r.top,width:r.width,height:r.height,right:r.right,bottom:r.bottom,fontSize:s.fontSize,lineHeight:s.lineHeight,display:s.display,position:s.position,transform:s.transform}};
       return {id:slide.dataset.id,type:slide.dataset.type,errors,warnings,geometry:{slide:debugRect(slide),shell:debugRect(slide.querySelector('.slide-shell')),heading:debugRect(slide.querySelector('.slide-heading')),title:debugRect(slide.querySelector('.slide-title')),identity:debugRect(slide.querySelector('.cover-identity-logo,.cover-identity-kicker')),content:debugRect(slide.querySelector('.content-zone'))}};
-    },{allowFontFallback:Boolean(args.allowFontFallback)});
+    },{allowFontFallback:Boolean(args.allowFontFallback),expectedFonts});
     if(args.screenshots)await page.screenshot({path:path.join(path.resolve(args.screenshots),`slide-${String(i+1).padStart(2,'0')}.png`),fullPage:false});
     results.push(audit);
   }
@@ -150,8 +148,8 @@ async function browserChecks(htmlPath,args,slideCount){
 async function main(){
   const args=parseArgs(process.argv);if(args.help){process.stdout.write(usage);return}if(!args.html)throw new Error(usage.trim());
   const htmlPath=path.resolve(args.html),html=await fs.readFile(htmlPath,'utf8');
-  const stat=staticChecks(html);const localFonts=await localFontChecks(html,args,htmlPath);let browser=[];
-  if(!args.staticOnly)browser=await browserChecks(htmlPath,args,stat.slideCount);
+  const stat=staticChecks(html);const localFonts=await localFontChecks(args,htmlPath);let browser=[];
+  if(!args.staticOnly)browser=await browserChecks(htmlPath,args,stat.slideCount,localFonts.families);
   const errors=[...stat.errors,...localFonts.errors,...browser.flatMap(s=>s.errors.map(e=>`${s.id}: ${e}`))];
   const warnings=[...stat.warnings,...localFonts.warnings,...browser.flatMap(s=>s.warnings.map(e=>`${s.id}: ${e}`))];
   if(process.env.AIDENT_DEBUG_LAYOUT==='1')console.log(JSON.stringify(browser,null,2));

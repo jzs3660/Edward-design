@@ -67,28 +67,29 @@
   },
   "buildArtifacts": {
     "compiledBackgrounds": {
-      "source": "Packaged 1920×1080 Figma-exported background variant",
-      "script": "scripts/compile-backgrounds.mjs",
-      "purpose": "Reliable PowerPoint rendering without CSS blend modes"
+      "source": "Packaged 1920×1080 lossless WebP background variant",
+      "stored": false,
+      "strategy": "The PPTX exporter converts each referenced WebP to a lossless PNG buffer in memory and caches it for the export run.",
+      "purpose": "Reliable PowerPoint rendering without committing duplicate PNG copies"
     },
     "readmePreviews": [
       {
-        "path": "assets/previews/aident-ppt-hero.png",
+        "path": "assets/previews/aident-ppt-hero.webp",
         "source": "Generated from packaged registry counts and English/Chinese HTML preflight screenshots",
         "runtimeRequired": false
       },
       {
-        "path": "assets/previews/aident-ppt-system.png",
+        "path": "assets/previews/aident-ppt-system.webp",
         "source": "Generated from packaged tokens, component, font, icon, and background registries",
         "runtimeRequired": false
       },
       {
-        "path": "assets/previews/aident-ppt-showcase.png",
+        "path": "assets/previews/aident-ppt-showcase.webp",
         "source": "Generated English example HTML preflight montage",
         "runtimeRequired": false
       },
       {
-        "path": "assets/previews/aident-ppt-showcase.zh.png",
+        "path": "assets/previews/aident-ppt-showcase.zh.webp",
         "source": "Generated Chinese example HTML preflight montage",
         "runtimeRequired": false
       }

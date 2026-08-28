@@ -150,6 +150,8 @@ Inspect the final rendered crop, not just the source image.
 
 Folder HTML shares assets. Single-file HTML inlines packaged and copied assets as data URLs. PPTX reads the copied files from the generated deck directory.
 
+The folder generator is reference-aware: it copies only the packaged files actually referenced by the rendered deck, plus the font faces and licenses required by the deck language/components. It must not copy README previews, alternate backgrounds, unused icons, unused language fonts, font source archives, or maintenance manifests into every deck.
+
 ## Background and texture assets
 
 Source backgrounds:
@@ -165,15 +167,17 @@ Textures:
 - dark overlay;
 - source texture reference.
 
-PPTX compiled backgrounds normalize each packaged source to 1920×1080. Exact Figma-exported Elements variants must not receive an extra wash or duplicate texture overlay. Never add the opaque texture PNG by itself over a PPTX slide.
+All canonical backgrounds, textures, Hero, Showcase, and README previews use Lossless WebP. “Lossless” is a packaging invariant, not a visual-quality suggestion: do not use `quality: 95`, `quality: 100`, or another lossy WebP setting for these files. Preserve the original pixel dimensions and verify decoded RGBA equality when migrating from PNG.
+
+PPTX does not read committed duplicate PNG backgrounds. `export-pptx.mjs` resolves the same canonical WebP selected by HTML, converts it to a PNG buffer with Sharp in memory, and caches that buffer for the export run. This preserves the current background pixels and avoids storing an additional `assets/backgrounds/compiled/` tree. Exact Figma-exported Elements variants must not receive an extra texture or wash during this conversion.
 
 ## Asset update procedure
 
 1. Export the exact source node at its configured size.
-2. Preserve the original file format when practical.
+2. Encode packaged raster assets as Lossless WebP while preserving dimensions and decoded pixels; keep logos/icons as SVG.
 3. Update the category manifest and `assets/asset-sources.json`.
-4. Rebuild compiled backgrounds if a background/texture changed.
-5. Run `scripts/validate-assets.mjs` to regenerate SHA-256 hashes.
+4. Confirm HTML references the canonical WebP and PPTX converts that same file to PNG in memory; do not create committed compiled copies.
+5. Run `scripts/validate-assets.mjs` to enforce the lossless format rule, reject duplicate compiled assets, and regenerate SHA-256 hashes.
 6. Regenerate examples and run visual QA.
 
 Do not make silent visual substitutions. If the source asset cannot be redistributed, record it as local-required and provide a documented replacement mechanism.

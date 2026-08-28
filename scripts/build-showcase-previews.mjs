@@ -10,6 +10,9 @@ const languageArg=process.argv.includes('--language')?process.argv[process.argv.
 if(languageArg&&!['en','zh'].includes(languageArg))throw new Error('--language must be en or zh');
 const resolved=require.resolve('@napi-rs/canvas',{paths:[process.env.RUNTIME_NODE_MODULES,path.resolve('node_modules')].filter(Boolean)});
 const canvasModule=await import(pathToFileURL(resolved).href);
+const sharpResolved=require.resolve('sharp',{paths:[process.env.RUNTIME_NODE_MODULES,path.resolve('node_modules')].filter(Boolean)});
+const sharpModule=await import(pathToFileURL(sharpResolved).href);
+const sharp=sharpModule.default||sharpModule;
 
 async function slides(relative){
   const directory=path.join(root,relative);
@@ -21,10 +24,10 @@ async function slides(relative){
 const previewDir=path.join(root,'assets/previews');
 await fs.mkdir(previewDir,{recursive:true});
 for(const [language,source,file] of [
-  ['en','output/example-en/qa','aident-ppt-showcase.png'],
-  ['zh','output/example-zh/qa','aident-ppt-showcase.zh.png']
+  ['en','output/example-en/qa','aident-ppt-showcase.webp'],
+  ['zh','output/example-zh/qa','aident-ppt-showcase.zh.webp']
 ]){
   if(languageArg&&language!==languageArg)continue;
-  const size=await renderShowcasePreview({canvasModule,root,language,slidePaths:await slides(source),outPath:path.join(previewDir,file)});
+  const size=await renderShowcasePreview({canvasModule,sharp,root,language,slidePaths:await slides(source),outPath:path.join(previewDir,file)});
   console.log(`${file}: ${size.width}×${size.height} · direct bundled-font canvas renderer`);
 }

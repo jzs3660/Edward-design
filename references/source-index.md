@@ -47,7 +47,7 @@ License files live under `assets/fonts/licenses/`. `assets/fonts/manifest.json` 
 - Backgrounds, textures, logos, and icons were exported from the primary Figma file/Stage 2 system.
 - Icons are curated existing Aident design-system symbols, not redrawn approximations.
 - Gradients are transcribed from final Figma style/component values.
-- Compiled PPTX backgrounds are derivative build artifacts generated locally from the packaged source background + texture + wash.
+- Packaged raster assets are canonical Lossless WebP files. The PPTX exporter converts only referenced WebP backgrounds/images to cached PNG buffers in memory; derivative PNG backgrounds are not committed.
 - User images/logos are never included in the source manifests; they are copied into each generated output’s `assets/user/` directory.
 
 Machine-readable details: `assets/asset-sources.json` plus category manifests.
@@ -60,8 +60,8 @@ Machine-readable details: `assets/asset-sources.json` plus category manifests.
 4. Update the relevant machine-readable tokens/registry first.
 5. Update HTML and PPTX adapters.
 6. Update this index and the packaged asset provenance without publishing private design-file identifiers.
-7. Recompile backgrounds if required.
-8. Regenerate SHA-256 manifest.
+7. Encode changed raster sources as Lossless WebP and verify identical dimensions/decoded RGBA pixels; do not create a compiled duplicate tree.
+8. Regenerate the SHA-256 manifest and run the lossless asset validator.
 9. Run EN/ZH HTML preflight, PDF render, PPTX render, and slide overflow tests.
 
 Do not add a live Figma API call to the generation path. The maintenance process should end by packaging stable local files.

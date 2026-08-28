@@ -144,6 +144,57 @@ async function materializeAssets(deck,inputDir,outDir){
   return clone;
 }
 
+const runtimeFontFamilies={
+  en:new Set(['Outfit','Noto Sans']),
+  zh:new Set(['Outfit','Noto Sans','Smiley Sans','Noto Sans SC'])
+};
+
+function requiredFontFamilies(deck){
+  const required=new Set(runtimeFontFamilies[deck.meta.language]);
+  if(deck.meta.language==='en'&&deck.slides.some(slide=>slide.type==='workflow'))required.add('Instrument Serif');
+  if(deck.meta.language==='zh'&&deck.slides.some(slide=>slide.callout))required.add('Noto Serif SC');
+  return required;
+}
+
+async function copyPackagedAsset(relative,outDir){
+  const normalized=path.posix.normalize(relative.replaceAll('\\','/'));
+  if(!normalized.startsWith('assets/')||normalized.includes('../'))throw new Error(`Unsafe packaged asset path: ${relative}`);
+  if(normalized.startsWith('assets/user/'))return;
+  const source=path.join(skillRoot,...normalized.split('/'));
+  const stat=await fs.stat(source).catch(()=>null);
+  if(!stat?.isFile())throw new Error(`Missing packaged asset: ${normalized}`);
+  const destination=path.join(outDir,...normalized.split('/'));
+  await fs.mkdir(path.dirname(destination),{recursive:true});
+  await fs.copyFile(source,destination);
+}
+
+async function writeRuntimeFonts(deck,outDir){
+  const manifest=JSON.parse(await fs.readFile(path.join(skillRoot,'assets/fonts/manifest.json'),'utf8'));
+  const required=requiredFontFamilies(deck);
+  const families=manifest.families.filter(family=>required.has(family.family));
+  if(families.length!==required.size)throw new Error(`Font manifest is missing a runtime family: ${[...required].filter(name=>!families.some(family=>family.family===name)).join(', ')}`);
+  const css=[];
+  for(const family of families){
+    if(!Array.isArray(family.web)||family.web.length===0)throw new Error(`Font ${family.family} has no web face in assets/fonts/manifest.json.`);
+    for(const face of family.web){
+      await copyPackagedAsset(`assets/fonts/${face.file}`,outDir);
+      css.push(`@font-face{font-family:${JSON.stringify(family.family)};src:url("./${face.file}") format("${face.format}");font-style:${face.style};font-weight:${face.weight};font-display:swap}`);
+    }
+    await copyPackagedAsset(`assets/fonts/${family.licenseFile}`,outDir);
+  }
+  css.push(':root{--font-en-display:"Outfit",Arial,sans-serif;--font-en-body:"Noto Sans",Arial,sans-serif;--font-en-number:"Instrument Serif",Georgia,serif;--font-zh-display:"Smiley Sans","Noto Sans SC",sans-serif;--font-zh-body:"Noto Sans SC",sans-serif;--font-zh-callout:"Noto Serif SC","Songti SC","SimSun",serif}');
+  const fontDir=path.join(outDir,'assets/fonts');
+  await fs.mkdir(fontDir,{recursive:true});
+  await fs.writeFile(path.join(fontDir,'fonts.css'),css.join('\n')+'\n');
+  await fs.writeFile(path.join(fontDir,'manifest.json'),JSON.stringify({...manifest,families},null,2)+'\n');
+}
+
+async function copyRuntimeAssets(deck,html,outDir){
+  const refs=[...html.matchAll(/(?:src|href)="(assets\/[^"#?]+)"/g)].map(match=>match[1]);
+  for(const relative of new Set(refs))await copyPackagedAsset(relative,outDir);
+  await writeRuntimeFonts(deck,outDir);
+}
+
 function backgroundTreatment(slide){
   const isCover=slide.type==='cover';
   const requested=slide.background||(isCover?'elements-cover':'elements-inner');
@@ -154,7 +205,7 @@ function backgroundTreatment(slide){
 }
 function backgroundPath(slide){
   const treatment=backgroundTreatment(slide);
-  const file=treatment==='base'?(slide.theme==='light'?'light-paper.png':'dark-ink.png'):treatment==='atmosphere'?(slide.theme==='light'?'light-motion.png':'dark-aurora.png'):`${slide.theme}-${treatment}.png`;
+  const file=treatment==='base'?(slide.theme==='light'?'light-paper.webp':'dark-ink.webp'):treatment==='atmosphere'?(slide.theme==='light'?'light-motion.webp':'dark-aurora.webp'):`${slide.theme}-${treatment}.webp`;
   return `assets/backgrounds/${file}`;
 }
 function imageHtml(value,className){
@@ -257,7 +308,7 @@ function renderSlide(deck,slide,index){
   const classes=['slide',slide.type,full?'full-bleed':'',coverMode==='media-bottom'?'cover-with-image':'',coverFull?'cover-full-bleed':'',slide.callout?'has-callout':'',`background-${treatment}`,slide.type==='cover'?`cover-identity-mode-${coverIdentity(slide)}`:''].filter(Boolean).join(' ');
   const suppressMain=full||coverFull||coverMode==='text-only';
   const backgroundAlt=coverFull?escapeHtml(image?.alt||''):'';
-  return `<section class="${classes}" data-id="${escapeHtml(slide.id)}" data-type="${slide.type}" data-theme="${slide.theme}" data-background="${escapeHtml(treatment)}"${slide.type==='cover'?` data-cover-layout="${escapeHtml(coverMode)}"`:''} data-index="${index}" aria-hidden="true"><img class="background" src="${escapeHtml(background)}" alt="${backgroundAlt}"><img class="texture" src="assets/textures/${slide.theme}-overlay.png" alt=""><div class="wash"></div><div class="slide-shell">${renderHeader(deck,slide)}${renderHeading(deck,slide)}${suppressMain?'':`<div class="content-zone"><div class="content-main">${main}</div>${calloutHtml(slide.callout)}</div>`}${full&&slide.callout?`<div class="content-zone">${calloutHtml(slide.callout)}</div>`:''}${source}</div></section>`;
+  return `<section class="${classes}" data-id="${escapeHtml(slide.id)}" data-type="${slide.type}" data-theme="${slide.theme}" data-background="${escapeHtml(treatment)}"${slide.type==='cover'?` data-cover-layout="${escapeHtml(coverMode)}"`:''} data-index="${index}" aria-hidden="true"><img class="background" src="${escapeHtml(background)}" alt="${backgroundAlt}"><img class="texture" src="assets/textures/${slide.theme}-overlay.webp" alt=""><div class="wash"></div><div class="slide-shell">${renderHeader(deck,slide)}${renderHeading(deck,slide)}${suppressMain?'':`<div class="content-zone"><div class="content-main">${main}</div>${calloutHtml(slide.callout)}</div>`}${full&&slide.callout?`<div class="content-zone">${calloutHtml(slide.callout)}</div>`:''}${source}</div></section>`;
 }
 
 async function inlineHtml(html,outDir){
@@ -288,12 +339,14 @@ async function main(){
   const deckRaw=JSON.parse(await fs.readFile(input,'utf8'));
   const errors=validate(deckRaw);if(errors.length)throw new Error(`Content validation failed:\n- ${errors.join('\n- ')}`);
   await fs.mkdir(outDir,{recursive:true});
-  await fs.cp(path.join(skillRoot,'assets'),path.join(outDir,'assets'),{recursive:true});
+  if(outDir===skillRoot||outDir===path.parse(outDir).root)throw new Error('Output directory must be a dedicated deck folder.');
+  await fs.rm(path.join(outDir,'assets'),{recursive:true,force:true});
   const deck=await materializeAssets(deckRaw,inputDir,outDir);
   const shell=await fs.readFile(path.join(skillRoot,'assets/templates/deck-shell.html'),'utf8');
   const slideHtml=deck.slides.map((slide,i)=>renderSlide(deck,slide,i)).join('\n');
   const runtimeData={meta:deck.meta,slides:deck.slides.map(s=>({id:s.id,type:s.type,theme:s.theme,title:s.title,notes:s.notes||{}}))};
   let html=shell.replaceAll('{{LANG}}',escapeHtml(deck.meta.language)).replace('{{TITLE}}',escapeHtml(deck.meta.title||deck.slides[0].title)).replace('{{SLIDES}}',slideHtml).replace('{{DECK_JSON}}',JSON.stringify(runtimeData).replace(/</g,'\\u003c'));
+  await copyRuntimeAssets(deck,html,outDir);
   if(args.singleFile)html=await inlineHtml(html,outDir);
   await fs.writeFile(path.join(outDir,args.singleFile?'deck.single.html':'index.html'),html);
   await fs.writeFile(path.join(outDir,'deck.resolved.json'),JSON.stringify(deck,null,2));

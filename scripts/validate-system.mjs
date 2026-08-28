@@ -19,7 +19,7 @@ async function walk(directory){
   return files;
 }
 
-const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema]=await Promise.all([
+const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema,backgrounds,textures,previews,fontManifest]=await Promise.all([
   read('assets/tokens/tokens.json').then(JSON.parse),
   read('assets/components/registry.json').then(JSON.parse),
   read('assets/runtime/deck.css'),
@@ -28,6 +28,10 @@ const [tokens,registry,css,runtimeJs,generator,pptx,preflight,schema]=await Prom
   read('scripts/export-pptx.mjs'),
   read('scripts/preflight.mjs'),
   read('references/deck.schema.json').then(JSON.parse),
+  read('assets/backgrounds/manifest.json').then(JSON.parse),
+  read('assets/textures/manifest.json').then(JSON.parse),
+  read('assets/previews/manifest.json').then(JSON.parse),
+  read('assets/fonts/manifest.json').then(JSON.parse),
 ]);
 
 const callout=registry.components?.callout||{};
@@ -107,6 +111,17 @@ check(coverIdentity.userSuppliedLogo===true&&JSON.stringify(coverIdentity.accept
 check(generator.includes("'.jpg':'image/jpeg'")&&generator.includes("'.jpeg':'image/jpeg'")&&generator.includes("'.webp':'image/webp'"),'Single-file HTML must inline user logo image formats with correct MIME types.');
 check(pptx.includes("ext==='.webp'?'image/webp'"),'PPTX image adapter must identify WebP correctly.');
 check(pptx.includes("if(ext==='.svg'||ext==='.webp')"),'PPTX logo adapter must rasterize SVG and WebP logo inputs safely.');
+
+check(backgrounds.format?.type==='webp'&&backgrounds.format?.lossless===true,'Background manifest must require Lossless WebP.');
+check(backgrounds.treatments?.length===8&&backgrounds.treatments.every(entry=>entry.source.endsWith('.webp')),'All eight canonical backgrounds must be WebP.');
+check(backgrounds.pptxRasterization?.committedCompiledCopies===false,'Background manifest must reject committed compiled PPTX copies.');
+check(textures.format?.type==='webp'&&textures.format?.lossless===true&&textures.textures.every(entry=>entry.file.endsWith('.webp')),'All canonical textures must be Lossless WebP.');
+check(previews.format?.type==='webp'&&previews.format?.lossless===true&&previews.items?.length===4&&previews.items.every(entry=>entry.path.endsWith('.webp')),'README/Hero/Showcase previews must be Lossless WebP.');
+check(fontManifest.families.every(family=>Array.isArray(family.web)&&family.web.length>0),'Every bundled family must declare at least one runtime web face.');
+check(!generator.includes("fs.cp(path.join(skillRoot,'assets')"),'Generator must not copy the entire packaged assets tree into each deck.');
+check(generator.includes('copyRuntimeAssets(deck,html,outDir)')&&generator.includes('requiredFontFamilies(deck)'),'Generator must materialize only referenced assets and required runtime fonts.');
+check(pptx.includes("if(ext!=='.webp')")&&pptx.includes("contentType:'image/png'"),'PPTX image adapter must convert WebP to PNG buffers in memory.');
+check(!pptx.includes('assets/backgrounds/compiled/'),'PPTX exporter must not depend on committed compiled background copies.');
 
 check(schema.$defs?.slide?.additionalProperties===false,'Slide schema must reject unknown fields.');
 check(schema.$defs?.item?.additionalProperties===false,'Item schema must reject unknown fields.');
